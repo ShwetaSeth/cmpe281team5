@@ -28,8 +28,6 @@ public class ScrambleDAOImpl implements ScrambleDAO{
     	
 	
 	public int enterWord(Scramble scramble) {
-		int i=0;
-		String result = "";
 		String lastWord = scramble.getLastWord().toLowerCase();
 		String username = scramble.getUsername();
 		username = "abc";
@@ -47,38 +45,30 @@ public class ScrambleDAOImpl implements ScrambleDAO{
 			
 			//System.out.println("1."+ rslt.getInt(0));
 			while (rslt.next()) {
-			System.out.println("count is"+ rslt.getInt("count"));
+				System.out.println("count is"+ rslt.getInt("count"));
 		
-			if(rslt.getInt("count") > 0){
-	
-				score = score +1;
-				System.out.println("new score is "+ score);
-				//query = "INSERT INTO scramble (currScore) values("+score+") where username = '"+ username + "'";
+				if(rslt.getInt("count") > 0){
+					score = score +1;
+					System.out.println("new score is "+ score);
+					//query = "INSERT INTO scramble (currScore) values("+score+") where username = '"+ username + "'";
+					query = "UPDATE scramble SET currScore= "+score+" where username = '"+ username + "'";
 				
-				query = "UPDATE scramble SET currScore= "+score+" where username = '"+ username + "'";
-				
-				pstmt = connection.prepareStatement(query);
-				//pstmt.setInt(1,score);
-				System.out.println("query is"+ query);
-				pstmt.executeUpdate();
-				
+					pstmt = connection.prepareStatement(query);
+					//pstmt.setInt(1,score);
+					System.out.println("query is"+ query);
+					pstmt.executeUpdate();
+				}
+				connection.close();
+				return score;
 			}
-			connection.close();
-			return score;
-		}
 		}
 		catch(Exception e){
-			e.printStackTrace();
-		
+			e.printStackTrace();		
 		}
-		
 		return score;
-		
 	}
 	
 	public int getCurrentScore(Scramble scramble) {
-		int i=0;
-		String result = "";
 		String username = scramble.getUsername();
 	
 		username = "abc";

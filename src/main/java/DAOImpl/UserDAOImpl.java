@@ -3,6 +3,7 @@ package DAOImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.sql.DataSource;
@@ -146,10 +147,9 @@ public class UserDAOImpl implements UserDAO {
 	public String logOut(User user) {
 		String result = "";
 		Connection connection;
-		
     	try{
     		connection = dataSource.getConnection();
-    		String query = "Update users set active = 0 where username = ?";
+    		String query = "Update users set active=0 where username = ?";
     		pstmt = connection.prepareStatement(query);
     		pstmt.setString(1, user.getUsername());
     		pstmt.executeUpdate();
@@ -160,6 +160,32 @@ public class UserDAOImpl implements UserDAO {
     		e.printStackTrace();    		
     	}
     	return result;
+	}
+
+	@Override
+	public User getUser(String username) {
+		User user = new User();
+		Connection connection;
+		try {
+			connection = dataSource.getConnection();		
+			String query  = "SELCT * FROM users WHERE username = '" + username + "'" ;
+			pstmt = connection.prepareStatement(query);
+			ResultSet rslt = pstmt.executeQuery();
+			while(rslt.next()){
+				user.setUsername(username);
+				user.setPassword(rslt.getString("password"));
+				user.setFname(rslt.getString("fname"));
+				user.setLname(rslt.getString("lname"));
+				user.setGame1_highscore(rslt.getInt("game1_highscore"));
+				user.setGame2_highscore(rslt.getInt("game2_highscore"));
+				user.setGame3_highscore(rslt.getInt("game3_highscore"));
+				user.setGame4_highscore(rslt.getInt("game4_highscore"));
+				user.setActive(rslt.getInt("active"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 
 }

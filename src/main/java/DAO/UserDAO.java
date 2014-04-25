@@ -8,4 +8,5 @@ public interface UserDAO {
 	public String logIn(User user);
 	public String logOut(User user);	
 	
+	public User getUser(String username);
 }

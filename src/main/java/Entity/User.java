@@ -9,7 +9,7 @@ public class User {
 	int game2_highscore;
 	int game3_highscore;
 	int game4_highscore;
-	boolean active;	
+	int active;	
 
 	public String getUsername() {
 		return username;
@@ -67,10 +67,10 @@ public class User {
 		this.game4_highscore = game4_highscore;
 	}
 	
-	public boolean isActive() {
+	public int getActive() {
 		return active;
 	}
-	public void setActive(boolean active) {
+	public void setActive(int active) {
 		this.active = active;
 	}
 

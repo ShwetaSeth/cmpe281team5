@@ -7,7 +7,7 @@
 <title>CMPE Scramble</title>
 </head>
 <body>
-<form id="scrambleform" method="post" action="enterWord">
+<form id="scrambleform" method="post" action="scramble">
 <table border = '1'>
 
 <tr><td>a</td><td>m</td><td>a</td><td>z</td><td>o</td><td>n</td><td>a</td><td>a</td></tr>

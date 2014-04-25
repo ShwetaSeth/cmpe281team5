@@ -31,7 +31,6 @@ public class StateValueAspect {
 	public void logAfter() throws SQLException {
 		System.out.println("@After annotation: Home.jsp Loaded");
 		logger.info("@After annotation: Home.jsp Loaded");
-		createTable();		
 	}
 	
 	@After("execution(* ScrambleController.getJSP(..))")
@@ -40,53 +39,6 @@ public class StateValueAspect {
 		logger.info("@After annotation: scramble.jsp Loaded");
 		createScrambleTables();		
 	}
-	
-	
-	
-//	@Before("execution(* TestController.formImpl(..))")
-//	public void logBefore() {
-//		log.info("@Before annotation: Processing Request...");
-//	}
-//	
-//	@After("execution(* TestController.getForm(..))")
-//	public void logAfterTest() {
-//		log.info("@After annotation: Greetings!");
-//	}	
-
-	public void createTable() throws SQLException{
-		Connection conn;
-
-		conn = dataSource.getConnection();
-		
-		DatabaseMetaData meta = conn.getMetaData();
-		ResultSet res = meta.getTables(null, null, "users", null);
-		if(res.next()){
-			System.out.println("Table 'users' already exists.");
-			logger.info("Table 'users' already exists.");
-		}
-		else{
-			Statement stmt = conn.createStatement();
-			
-			String query = " CREATE TABLE IF NOT EXISTS users ( " +
-					 	"username VARCHAR(45) NOT NULL ," + 
-					 	"password VARCHAR(45) NOT NULL ," +
-					 	"fname VARCHAR(45) NOT NULL ," +
-					 	"lname VARCHAR(45) NOT NULL ," +
-					 	"game1_highscore INT NULL DEFAULT 0 ," +					  
-					 	"game2_highscore INT NULL DEFAULT 0 ," +
-					 	"game3_highscore INT NULL DEFAULT 0 ," +
-					 	"game4_highscore INT NULL DEFAULT 0 ," +
-					 	"active BIT NOT NULL DEFAULT 0 ," +
-					 	"PRIMARY KEY (username) ," +
-					 	"UNIQUE INDEX username_UNIQUE (username ASC) )";
-			stmt.executeUpdate(query);
-			logger.info("Table 'users' created.");
-			System.out.println("Table 'users' created.");
-		}
-		conn.close();			
-	}		
-	
-	
 	
 	public void createScrambleTables() throws SQLException{
 		Connection conn;
@@ -115,9 +67,6 @@ public class StateValueAspect {
 			logger.info("Table 'scramblewords' created.");
 			System.out.println("Table 'scramblewords' created.");
 			
-			
-			
-
 		}
 
 		Statement stmt = conn.createStatement();
@@ -130,10 +79,6 @@ public class StateValueAspect {
 		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('dynamo')";
 		stmt.executeUpdate(query);
 
-		
-		
-		
-		
 		logger.info("Table scrablewords inserted with values");
 		System.out.println("Table scramblewords inserted with values");
 				

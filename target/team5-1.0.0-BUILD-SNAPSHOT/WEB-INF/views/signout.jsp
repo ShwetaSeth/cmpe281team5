@@ -15,6 +15,7 @@ setTimeout(function (){document.forms.form.submit();}, 2000);
 <body onload="load()">
 <p><font size = "4">Please wait...</font></p><br>
 <form id="form" action="signout" method="post">
+<input type="hidden" name="username" id="username" value="${username}"/>
 </form>
 </body>
 </html>

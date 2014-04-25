@@ -31,7 +31,4 @@ public class Scramble {
 	public void setCurrScore(int currScore) {
 		this.currScore = currScore;
 	}
-	
-	
-	
 }

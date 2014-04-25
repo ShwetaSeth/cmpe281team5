@@ -16,17 +16,31 @@
 		<property name="jndiName" value="java:comp/env/jdbc/team5db"/>
 	</bean>
 	
+
+	
 	<bean id="appContext" class="com.sample.team5.AppContext" />
 	
-	<bean id="homeController" class="com.sample.team5.HomeController" />	
+	<bean id="homeController" class="com.sample.team5.HomeController" >
+		<property name="dataSource" ref="dbDataSource"/>
+	</bean>	
 	
-	<bean id="cmpescrambleController" class="com.sample.team5.CmpescrambleController" />		
+	<bean id="WhatsYourTech" class="com.sample.team5.WhatsYourTechController" >
+		<property name="dataSource" ref="dbDataSource"/>
+	</bean>	
+	
+	<bean id="scrambleController" class="com.sample.team5.ScrambleController" >
+		<property name="dataSource" ref="dbDataSource"/>
+	</bean>		
 			
 	<bean id="stateValue" class="com.sample.team5.StateValueAspect" >
 		<property name="dataSource" ref="dbDataSource"/>
 	</bean>
 	
 	<bean id="userDAOImpl" class="DAOImpl.UserDAOImpl">
+		<property name="dataSource" ref="dbDataSource" />
+	</bean>
+	
+	<bean id="scrambleDAOImpl" class="DAOImpl.ScrambleDAOImpl">
 		<property name="dataSource" ref="dbDataSource" />
 	</bean>
 	

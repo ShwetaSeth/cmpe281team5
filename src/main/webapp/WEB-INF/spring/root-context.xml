@@ -20,9 +20,17 @@
 	
 	<bean id="appContext" class="com.sample.team5.AppContext" />
 	
-	<bean id="homeController" class="com.sample.team5.HomeController" />	
+	<bean id="homeController" class="com.sample.team5.HomeController" >
+		<property name="dataSource" ref="dbDataSource"/>
+	</bean>	
 	
-	<bean id="scrambleController" class="com.sample.team5.ScrambleController" />		
+	<bean id="WhatsYourTech" class="com.sample.team5.WhatsYourTechController" >
+		<property name="dataSource" ref="dbDataSource"/>
+	</bean>	
+	
+	<bean id="scrambleController" class="com.sample.team5.ScrambleController" >
+		<property name="dataSource" ref="dbDataSource"/>
+	</bean>		
 			
 	<bean id="stateValue" class="com.sample.team5.StateValueAspect" >
 		<property name="dataSource" ref="dbDataSource"/>
