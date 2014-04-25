@@ -21,6 +21,7 @@
 
 </table>
 <label>Enter the words</label><input type="text" name = "word"><button name="Submit" value="Submit">Submit</button>
+<label>Score</label><input type="text" value = ${score} name = "word">
 
 
 </form>

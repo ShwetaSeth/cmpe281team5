@@ -25,6 +25,8 @@ public class ScrambleController {
 	public String scramble(Model model) {		
 		ScrambleController con = (ScrambleController)appContext.getBean("scrambleController");		
 		String message = con.getJSP();
+		
+		model.addAttribute("score", "0");
 		//model.addAttribute("message", message);
 		return "scramble";
 	}
@@ -37,29 +39,32 @@ public class ScrambleController {
 	@RequestMapping(value = "scramble/enterWord", method = RequestMethod.POST)
 	public String enterWord(HttpServletRequest request, HttpSession session, Model model) {		
 		ScrambleController con = (ScrambleController)appContext.getBean("scrambleController");		
-		boolean message = con.enterWord(request);	
+		int score = con.enterWord(request);	
 		
-		System.out.println(message);
+		//System.out.println(message);
 		
-		if(message)
-		{
-			System.out.println(message);
-			//increment score by 1
-		}
+		
 		//String message = con.getJSP();
-		//model.addAttribute("message", message);
+		model.addAttribute("score", score);
 		return "scramble";
 	}
 	
-	public Boolean enterWord(HttpServletRequest request) {		
+	public int enterWord(HttpServletRequest request) {		
 		ScrambleDAO scrambleDAO = (ScrambleDAO)appContext.getBean("scrambleDAOImpl");
 		Scramble scramble = new Scramble();
 		System.out.println(request.getParameter("word"));
 		scramble.setLastWord(request.getParameter("word"));
+		int currScore = scrambleDAO.getCurrentScore(scramble);
 		
-		boolean result = scrambleDAO.enterWord(scramble);
-		return result;
+		scramble.setCurrScore(currScore);
+		int score = scrambleDAO.enterWord(scramble);
+		
+		
+		System.out.println("after increment"+scramble.getCurrScore());
+		return score;
 	}
+	
+	
 	
 	
 	/*@RequestMapping(value = "signin", method = RequestMethod.POST)

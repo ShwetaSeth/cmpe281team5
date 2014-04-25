@@ -27,14 +27,16 @@ public class ScrambleDAOImpl implements ScrambleDAO{
     ResultSet rslt = null;
     	
 	
-	public boolean enterWord(Scramble scramble) {
+	public int enterWord(Scramble scramble) {
 		int i=0;
 		String result = "";
 		String lastWord = scramble.getLastWord().toLowerCase();
+		String username = scramble.getUsername();
+		username = "abc";
 	
 		System.out.println(lastWord);
 		Connection connection;
-		
+		int score = scramble.getCurrScore();
 		try{
 			connection = dataSource.getConnection();
 			stmt = connection.createStatement();
@@ -46,21 +48,68 @@ public class ScrambleDAOImpl implements ScrambleDAO{
 			//System.out.println("1."+ rslt.getInt(0));
 			while (rslt.next()) {
 			System.out.println("count is"+ rslt.getInt("count"));
-			connection.close();
+		
 			if(rslt.getInt("count") > 0){
-				    return true;
-				}
-			
-			
-			else
-				return false;
+	
+				score = score +1;
+				System.out.println("new score is "+ score);
+				//query = "INSERT INTO scramble (currScore) values("+score+") where username = '"+ username + "'";
+				
+				query = "UPDATE scramble SET currScore= "+score+" where username = '"+ username + "'";
+				
+				pstmt = connection.prepareStatement(query);
+				//pstmt.setInt(1,score);
+				System.out.println("query is"+ query);
+				pstmt.executeUpdate();
+				
 			}
+			connection.close();
+			return score;
+		}
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		
 		}
-		return false;
+		
+		return score;
+		
+	}
+	
+	public int getCurrentScore(Scramble scramble) {
+		int i=0;
+		String result = "";
+		String username = scramble.getUsername();
+	
+		username = "abc";
+		Connection connection;
+		int score = scramble.getCurrScore();
+		try{
+			connection = dataSource.getConnection();
+			stmt = connection.createStatement();
+			
+			String query = "Select currScore from scramble where username = '" + username +"'";
+			System.out.println(query);
+			rslt = stmt.executeQuery(query);
+			
+			//System.out.println("1."+ rslt.getInt(0));
+			while (rslt.next()) {
+			System.out.println("currScore is"+ rslt.getInt("currScore"));
+	
+			connection.close();
+			if(rslt.getInt("currScore") > 0){
+			
+			  return rslt.getInt("currScore");
+				
+			}
+		}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		
+		}
+		
+		return score;
 		
 	}
 
