@@ -86,7 +86,7 @@ public class HomeController {
 		String message = con.signIn(request);	
 		if(message.substring(0, 7).equals("Success")){
 			model.addAttribute("username", request.getParameter("username"));
-			uname = request.getParameter("username");
+			uname = request.getParameter("username");			
 			return "profile";
 		}
 		else{
@@ -170,5 +170,5 @@ public class HomeController {
 		model.addAttribute("username",uname);
 		return "profile";
 	}
-					
+
 }

@@ -36,44 +36,36 @@ public class WhatsYourTechController {
 	@RequestMapping(value = "WhatsYourTech", method = RequestMethod.GET)
 	public String home(Model model) throws SQLException{		
 		WhatsYourTechController controller = (WhatsYourTechController)appContext.getBean("WhatsYourTech");		
-		controller.createTableGames();
-		controller.createTableTeams();
+		controller.createTablePlayers();
 		controller.createTableHints();
 		return "home";
 	}
 	
-	public void createTableTeams() throws SQLException{
+	public void createTablePlayers() throws SQLException{
 		Connection conn;
 
 		conn = dataSource.getConnection();
 		
 		DatabaseMetaData meta = conn.getMetaData();
-		ResultSet res = meta.getTables(null, null, "teams", null);
+		ResultSet res = meta.getTables(null, null, "players", null);
 		if(res.next()){
-			System.out.println("Table 'teams' already exists.");
-			logger.info("Table 'teams' already exists.");
+			System.out.println("Table 'players' already exists.");
+			logger.info("Table 'players' already exists.");
 		}
 		else{
 			Statement stmt = conn.createStatement();
 			
-			String query = " CREATE TABLE IF NOT EXISTS teams (  " +
-							"team_id int(11) NOT NULL AUTO_INCREMENT, " +
-							"player1 varchar(45) DEFAULT NULL, " +
-							"player2 varchar(45) DEFAULT NULL, " +
-							"player3 varchar(45) DEFAULT NULL, " +
-							"round1 int(11) DEFAULT NULL, " +
-							"round2 int(11) DEFAULT NULL, " +
-							"round3 int(11) DEFAULT NULL, " +
-							"total_score int(11) DEFAULT NULL, " +
-							"ready int(11) NOT NULL DEFAULT 0, " +
-							"PRIMARY KEY (team_id), " +
-							"UNIQUE KEY team_id_UNIQUE (team_id), " +
-							"KEY player1_fk_idx (player1), " +
-							"KEY player2_fk_idx (player2), " +
-							"KEY player3_fk_idx (player3), " +
-							"CONSTRAINT player1_fk FOREIGN KEY (player1) REFERENCES users (username) ON DELETE NO ACTION ON UPDATE NO ACTION, " +
-							"CONSTRAINT player2_fk FOREIGN KEY (player2) REFERENCES users (username) ON DELETE NO ACTION ON UPDATE NO ACTION, " +
-							"CONSTRAINT player3_fk FOREIGN KEY (player3) REFERENCES users (username) ON DELETE NO ACTION ON UPDATE NO ACTION )";
+			String query =  "CREATE TABLE IF NOT EXISTS players (  " +
+							"game_id int(11) NOT NULL AUTO_INCREMENT, " +
+							"player varchar(45) DEFAULT NULL, " +
+							"round1 int(11) NOT NULL DEFAULT 0, " +
+							"round2 int(11) NOT NULL DEFAULT 0, " +
+							"round3 int(11) NOT NULL DEFAULT 0, " +
+							"total_score int(11) NOT NULL DEFAULT 0, " +
+							"PRIMARY KEY (game_id), " +
+							"UNIQUE KEY game_id_UNIQUE (game_id), " +
+							"KEY player_fk_idx (player), " +
+							"CONSTRAINT player_fk FOREIGN KEY (player) REFERENCES users (username) ON DELETE NO ACTION ON UPDATE NO ACTION )";
 			stmt.executeUpdate(query);
 			logger.info("Table 'teams' created.");
 			System.out.println("Table 'games' created.");
@@ -81,38 +73,33 @@ public class WhatsYourTechController {
 		conn.close();			
 	}
 	
-	public void createTableGames() throws SQLException {
+	public void createTableHints() throws SQLException {
 		Connection conn;
 
 		conn = dataSource.getConnection();
 		
 		DatabaseMetaData meta = conn.getMetaData();
-		ResultSet res = meta.getTables(null, null, "games", null);
+		ResultSet res = meta.getTables(null, null, "hints", null);
 		if(res.next()){
-			System.out.println("Table 'games' already exists.");
-			logger.info("Table 'games' already exists.");
+			System.out.println("Table 'hints' already exists.");
+			logger.info("Table 'hints' already exists.");
 		}
 		else{
 			Statement stmt = conn.createStatement();
 			
-			String query = " CREATE TABLE IF NOT EXISTS games (  " +
-							"game_id int(11) NOT NULL AUTO_INCREMENT, " +
-							"team1 int(11) DEFAULT NULL, " +
-							"team2 int(11) DEFAULT NULL, " +
-							"PRIMARY KEY (game_id), " +
-							"UNIQUE KEY game_id_UNIQUE (game_id), " +
-							"KEY team1_fk_idx (team1), " +
-							"KEY team2_fk_idx (team2), " +
-							"CONSTRAINT team1_fk FOREIGN KEY (team1) REFERENCES teams (team_id) ON DELETE NO ACTION ON UPDATE NO ACTION, " +
-							"CONSTRAINT team2_fk FOREIGN KEY (team2) REFERENCES teams (team_id) ON DELETE NO ACTION ON UPDATE NO ACTION )";
+			String query = " CREATE TABLE IF NOT EXISTS hints (  " +
+							"hints_id int(11) NOT NULL AUTO_INCREMENT, " +
+							"answer varchar(45) DEFAULT NULL, " +
+							"hint1 int(11) DEFAULT NULL, " +
+							"hint2 int(11) DEFAULT NULL, " +
+							"hint3 int(11) DEFAULT NULL, " +
+							"difficulty varchar(10) DEFAULT NULL, " +
+							"PRIMARY KEY (hints_id), " +
+							"UNIQUE KEY hints_id_UNIQUE (h_id) )";
 			stmt.executeUpdate(query);
-			logger.info("Table 'games' created.");
-			System.out.println("Table 'games' created.");
+			logger.info("Table 'hints' created.");
+			System.out.println("Table 'hints' created.");
 		}
 		conn.close();			
-	}
-	
-	public void createTableHints() throws SQLException {
-		
 	}
 }
