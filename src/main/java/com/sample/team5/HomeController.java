@@ -68,8 +68,6 @@ public class HomeController {
 						 	"game2_highscore INT NULL DEFAULT 0 ," +
 						 	"game3_highscore INT NULL DEFAULT 0 ," +
 						 	"game4_highscore INT NULL DEFAULT 0 ," +
-						 	"active INT NOT NULL DEFAULT 0 ," +
-						 	"team INT NOT NULL DEFAULT 0 ," +
 						 	"PRIMARY KEY (username) ," +
 						 	"UNIQUE INDEX username_UNIQUE (username ASC) )";
 				stmt.executeUpdate(query);
@@ -150,19 +148,9 @@ public class HomeController {
 	@RequestMapping(value = "signout", method = RequestMethod.POST)
 	public String getSignOut(HttpServletRequest request, HttpSession session, Model model) {		
 		session.setMaxInactiveInterval(300);
-		HomeController con = (HomeController)appContext.getBean("homeController");
-		String message = con.signOut(request.getParameter("username"), session);				
+		String message = "Logged out successfully";				
 		model.addAttribute("message", message);
 			return "home";				
-	}
-	
-	public String signOut(String username, HttpSession session) {		
-		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
-		User user = new User();
-		user.setUsername(username);		
-		String result = userDAO.logOut(user);
-		session.invalidate();
-		return result;
 	}
 	
 	@RequestMapping(value = "profile", method = RequestMethod.GET)
