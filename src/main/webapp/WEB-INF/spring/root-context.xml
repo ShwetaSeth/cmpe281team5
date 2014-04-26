@@ -42,4 +42,13 @@
 		<property name="dataSource" ref="dbDataSource" />
 	</bean>
 	
+	<bean id="playersDAOImpl" class="DAOImpl.PlayersDAOImpl">
+		<property name="dataSource" ref="dbDataSource" />
+	</bean>
+	
+	<bean id="hintsDAOImpl" class="DAOImpl.HintsDAOImpl">
+		<property name="dataSource" ref="dbDataSource" />
+	</bean>
+	
+	
 </beans>

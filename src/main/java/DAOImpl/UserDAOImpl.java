@@ -13,7 +13,8 @@ import Entity.User;
 
 public class UserDAOImpl implements UserDAO {
 
-	public DataSource dataSource;
+	private Connection connection;
+	private DataSource dataSource;
 
 	public DataSource getDataSource() {
 		return dataSource;
@@ -28,12 +29,11 @@ public class UserDAOImpl implements UserDAO {
     ResultSet rslt = null;
     	
 	@Override
-	public String register(User user) {
+	public String register(User user) throws SQLException {
 		int i=0;
 		String result = "";
 		String user_name = user.getUsername();
-		String username = user_name.toLowerCase();
-		Connection connection;
+		String username = user_name.toLowerCase();		
 		
 		try{
 			connection = dataSource.getConnection();
@@ -59,17 +59,18 @@ public class UserDAOImpl implements UserDAO {
 			else{
 				result="Error:::Username '" + username + "' already taken.";
 			}
-			connection.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		
+		}
+		finally{
+			connection.close();
 		}
 		return result;
 	}
 
 	@Override
-	public String logIn(User user) {
-		Connection connection;
+	public String logIn(User user) throws SQLException{
 		String result = "";
     	String username = (user.getUsername()).toLowerCase();
     	String password = user.getPassword();
@@ -118,18 +119,19 @@ public class UserDAOImpl implements UserDAO {
 				else{
 					result = "Error:::User does not exist";
 				}
-				connection.close();
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+		}
+		finally{
+			connection.close();
 		}
     	return result;
 	}
 
 	@Override
-	public User getUser(String username) {
+	public User getUser(String username) throws SQLException{
 		User user = new User();
-		Connection connection;
 		try {
 			connection = dataSource.getConnection();		
 			String query  = "SELCT * FROM users WHERE username = '" + username + "'" ;
@@ -147,6 +149,9 @@ public class UserDAOImpl implements UserDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		finally{
+			connection.close();
 		}
 		return user;
 	}

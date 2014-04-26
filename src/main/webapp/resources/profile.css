@@ -3,21 +3,7 @@
 body
 {
 	background-color: lightblue;
-	color: black;
-}
-h1
-{
-	color:crimson;
-}
-p
-{
-	font-size: 18pt;
-	color: black;
-}
-b
-{
-	font-size: 18pt;
-	color: black;
+	font-family: Cambria;
 }
 .image{
 	width:200px;

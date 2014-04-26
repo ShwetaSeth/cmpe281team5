@@ -74,7 +74,7 @@ margin:1px;
 </div >
 
 
-<a href= "/game">Back to Game</a> <br>
+<a href= "Puzzler">Back to Game</a> <br>
 <div>
 <p>The Puzzler has a grid of numbers(3*3).</p>
 <p>Click on ""START to shuffle the numbers.</p>

@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<font size=3 style="position: absolute; right:50px; top:50px"> Welcome ${username}  <a href = "signout"> Sign out</a> <br> </font>
+<font size=3 style="position: absolute; right:50px; top:30px"> Welcome ${username}  <a href = "signout"> Sign out</a> <br> </font>
 
 <form id="form" method="get" action="play">
 	<input type="hidden" name="username" id="username" value="${username}"/>	
@@ -24,7 +24,7 @@
 		<tr>
 			<td width="250px" height="250px"> <div class="image"> <a href="scramble"> <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
 			<td width="250px" height="250px"> <div class="image"> <a href="WhatsYourTech"> <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
-			<td width="250px" height="250px"> <div class="image"> <a href="profile"> <img src="<c:url value="/resources/game3.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
+			<td width="250px" height="250px"> <div class="image"> <a href="Puzzler"> <img src="<c:url value="/resources/puzzler.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
 			<td width="250px" height="250px"> <div class="image"> <a href="profile"> <img src="<c:url value="/resources/game4.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>		
 		</tr>	
 	</table>

@@ -18,6 +18,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import DAO.HintsDAO;
+import Entity.Hints;
+
 @Controller
 public class WhatsYourTechController{
 	
@@ -89,17 +92,64 @@ public class WhatsYourTechController{
 			String query = " CREATE TABLE IF NOT EXISTS hints (  " +
 							"hints_id int(11) NOT NULL AUTO_INCREMENT, " +
 							"answer varchar(45) DEFAULT NULL, " +
-							"hint1 int(11) DEFAULT NULL, " +
-							"hint2 int(11) DEFAULT NULL, " +
-							"hint3 int(11) DEFAULT NULL, " +
+							"hint1 varchar(300) DEFAULT NULL, " +
+							"hint2 varchar(300) DEFAULT NULL, " +
+							"hint3 varchar(300) DEFAULT NULL, " +
 							"difficulty varchar(10) DEFAULT NULL, " +
 							"PRIMARY KEY (hints_id), " +
 							"UNIQUE KEY hints_id_UNIQUE (hints_id) )";
 			stmt.executeUpdate(query);
 			logger.info("Table 'hints' created.");
 			System.out.println("Table 'hints' created.");
+			populateTable();
 		}
 		conn.close();			
 	}
 
+	public void populateTable() throws SQLException{
+		
+		HintsDAO hintsDAO = (HintsDAO)appContext.getBean("hintsDAOImpl"); 
+		Hints hint = new Hints();
+		
+		String[] answer = {"Spring", "Groovy", "AspectJ", "JSON", "Grails", "force.com", "MongoDB", "PostgreSQL"};
+		
+		String[] hint1 = {"Framework developed by GoPivotal under Apache License", 
+						  "An object oriented programming language designed by James Strachan under Apache License and developed by founders of the company g2one", 
+						  "AOP Extension developed by Eclipse Foundation", 
+						  "An open standard format extended from JavaScript that uses human readable text when transmiting data objects.", 						  
+						  "An open source web application framework developed by Graeme Rocher under Apache License", 
+						  "A cloud computing PaaS usedby developers to build multi tenant applications", 
+						  "A cross platform Document-oriented database system",
+						  "A cross platform object-relational database management system (ORDBMS)"};
+		
+		String[] hint2 = {	"Modules: IoC Container, Aspect oriented Programming, Transaction Management, Convention over Configuration (Roo)", 
+						  	"Can also be used as scripting language for Java platform ", 
+							"Developers need extra build process with the compiler and have to setup LTW (Load Time Weaving)", 
+							"The data objects consist of attribute-value pairs.", 
+							"A high productivity framework following 'coding by convention' paradigm and hides a lot of config details from developer", 
+							"The applications are built using Apex and the UI is created using and an XML-like syntax in HTML or Flex", 
+							"Uses Binary Coded JSON like documents", 
+							"Provides features like views, foreign key references, triggers, stored procedures,geographical data,unions, joins etc. Also allows developers to do nested subqueries of subselects" };
+		
+		String[] hint3 = {  "Has HTTP- and servlet-based framework providing hooks for extension and customization for web applications and RESTful web services", 
+							"Features (Not available in JAVA): static and dynamic typing, closures, operator overloading etc.", 
+							"Keywords: PointCut, JoinPoint, Advice", 
+							"Primarily used to transmit data between a server and web application  as an alternative to XML", 
+							"Uses Groovy Programming Language", 
+							"Developed by Salesforce", 
+							"Classified as NoSQL database", 
+							"Evolved from the 'Ingres' project at the University of California, Berkley" };
+		
+		String[] difficulty = { "Moderate", "Moderate", "Hard", "Hard", "Easy", "Easy", "Easy", "Easy" };
+		
+		for(int i=0; i< answer.length; i++){
+			hint.setAnswer(answer[i]);
+			hint.setHint1(hint1[i]);
+			hint.setHint2(hint2[i]);
+			hint.setHint3(hint3[i]);
+			hint.setDifficulty(difficulty[i]);
+			hintsDAO.addHints(hint);
+		}
+	}
+	
 }
