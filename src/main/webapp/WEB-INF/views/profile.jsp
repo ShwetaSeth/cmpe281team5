@@ -24,7 +24,7 @@
 			<td> <a href="scramble"> Scramble </a> </td>
 			<td> <a href=""> <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:25px;"/> </a> </td>
 			<td> <a href="profile"> Game3 </a> </td>
-			<td> <a href="profile"> Game4 </a> </td>
+			<td> <a href="Puzzler"><img src="<c:url value="/resources/puzzler.png" />" alt="" height="200" width="200" style="border-radius:25px;"/>  </a> </td>
 		</tr>	
 	</table>
 	</center>
