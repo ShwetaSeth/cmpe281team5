@@ -109,7 +109,7 @@ public class UserDAOImpl implements UserDAO {
 						String pass = rslt.getString("password");
 						
 						if(password.equals(pass)){
-							
+							result = "Success:Logged in successfully";
 						}
 						else{
 							result = "Error:::Incorrect password";

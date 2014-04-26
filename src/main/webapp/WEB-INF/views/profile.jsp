@@ -8,23 +8,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Welcome!</title>
-<link href="<c:url value="/resources/sample.css" />"  rel="stylesheet" type="text/css"  />
+<link href="<c:url value="/resources/profile.css" />"  rel="stylesheet" type="text/css"  />
+
 </head>
 
 <body>
 <font size=3 style="position: absolute; right:50px; top:50px"> Welcome ${username}  <a href = "signout"> Sign out</a> <br> </font>
 
-<form id="form" method="post" action="profile">
+<form id="form" method="get" action="play">
 	<input type="hidden" name="username" id="username" value="${username}"/>	
 	<input type="hidden" name="game" id="game" />
 	
 	<center>
 	<table style="margin-top:200px;">
 		<tr>
-			<td> <a href="scramble"> Scramble </a> </td>
-			<td> <a href=""> <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:25px;"/> </a> </td>
-			<td> <a href="profile"> Game3 </a> </td>
-			<td> <a href="profile"> Game4 </a> </td>
+			<td width="250px" height="250px"> <div class="image"> <a href="scramble"> <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
+			<td width="250px" height="250px"> <div class="image"> <a href="WhatsYourTech"> <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
+			<td width="250px" height="250px"> <div class="image"> <a href="profile"> <img src="<c:url value="/resources/game3.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
+			<td width="250px" height="250px"> <div class="image"> <a href="profile"> <img src="<c:url value="/resources/game4.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>		
 		</tr>	
 	</table>
 	</center>

@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class WhatsYourTechController {
+public class WhatsYourTechController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	ApplicationContext appContext = AppContext.getApplicationContext();
@@ -34,11 +36,11 @@ public class WhatsYourTechController {
 	}
 	
 	@RequestMapping(value = "WhatsYourTech", method = RequestMethod.GET)
-	public String home(Model model) throws SQLException{		
+	public String getPage(HttpServletRequest request, HttpSession session, Model model) throws SQLException{		
 		WhatsYourTechController controller = (WhatsYourTechController)appContext.getBean("WhatsYourTech");		
 		controller.createTablePlayers();
 		controller.createTableHints();
-		return "home";
+		return "WhatsYourTech";
 	}
 	
 	public void createTablePlayers() throws SQLException{
@@ -58,17 +60,14 @@ public class WhatsYourTechController {
 			String query =  "CREATE TABLE IF NOT EXISTS players (  " +
 							"game_id int(11) NOT NULL AUTO_INCREMENT, " +
 							"player varchar(45) DEFAULT NULL, " +
-							"round1 int(11) NOT NULL DEFAULT 0, " +
-							"round2 int(11) NOT NULL DEFAULT 0, " +
-							"round3 int(11) NOT NULL DEFAULT 0, " +
 							"total_score int(11) NOT NULL DEFAULT 0, " +
 							"PRIMARY KEY (game_id), " +
 							"UNIQUE KEY game_id_UNIQUE (game_id), " +
 							"KEY player_fk_idx (player), " +
 							"CONSTRAINT player_fk FOREIGN KEY (player) REFERENCES users (username) ON DELETE NO ACTION ON UPDATE NO ACTION )";
 			stmt.executeUpdate(query);
-			logger.info("Table 'teams' created.");
-			System.out.println("Table 'games' created.");
+			logger.info("Table 'players' created.");
+			System.out.println("Table 'players' created.");
 		}
 		conn.close();			
 	}
@@ -86,7 +85,7 @@ public class WhatsYourTechController {
 		}
 		else{
 			Statement stmt = conn.createStatement();
-			
+
 			String query = " CREATE TABLE IF NOT EXISTS hints (  " +
 							"hints_id int(11) NOT NULL AUTO_INCREMENT, " +
 							"answer varchar(45) DEFAULT NULL, " +
@@ -95,11 +94,12 @@ public class WhatsYourTechController {
 							"hint3 int(11) DEFAULT NULL, " +
 							"difficulty varchar(10) DEFAULT NULL, " +
 							"PRIMARY KEY (hints_id), " +
-							"UNIQUE KEY hints_id_UNIQUE (h_id) )";
+							"UNIQUE KEY hints_id_UNIQUE (hints_id) )";
 			stmt.executeUpdate(query);
 			logger.info("Table 'hints' created.");
 			System.out.println("Table 'hints' created.");
 		}
 		conn.close();			
 	}
+
 }

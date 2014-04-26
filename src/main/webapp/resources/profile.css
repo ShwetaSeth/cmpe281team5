@@ -1,0 +1,30 @@
+@CHARSET "ISO-8859-1";
+
+body
+{
+	background-color: lightblue;
+	color: black;
+}
+h1
+{
+	color:crimson;
+}
+p
+{
+	font-size: 18pt;
+	color: black;
+}
+b
+{
+	font-size: 18pt;
+	color: black;
+}
+.image{
+	width:200px;
+	height:200px;
+/* 	margin-right:100px;	 */
+}
+.image:hover{
+	border:5px solid #471899;
+	border-radius:25px;
+}

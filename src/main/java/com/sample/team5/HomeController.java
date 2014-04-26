@@ -53,23 +53,23 @@ public class HomeController {
 			DatabaseMetaData meta = conn.getMetaData();
 			ResultSet res = meta.getTables(null, null, "users", null);
 			if(res.next()){
-				System.out.println("Table 'users' already exists.");
+//				System.out.println("Table 'users' already exists.");
 				logger.info("Table 'users' already exists.");
 			}
 			else{
 				Statement stmt = conn.createStatement();
 				
-				String query = " CREATE TABLE IF NOT EXISTS users ( " +
-						 	"username VARCHAR(45) NOT NULL ," + 
-						 	"password VARCHAR(45) NOT NULL ," +
-						 	"fname VARCHAR(45) NOT NULL ," +
-						 	"lname VARCHAR(45) NOT NULL ," +
-						 	"game1_highscore INT NULL DEFAULT 0 ," +					  
-						 	"game2_highscore INT NULL DEFAULT 0 ," +
-						 	"game3_highscore INT NULL DEFAULT 0 ," +
-						 	"game4_highscore INT NULL DEFAULT 0 ," +
-						 	"PRIMARY KEY (username) ," +
-						 	"UNIQUE INDEX username_UNIQUE (username ASC) )";
+				String query =  "CREATE TABLE IF NOT EXISTS users ( " +
+						 		"username VARCHAR(45) NOT NULL ," + 
+						 		"password VARCHAR(45) NOT NULL ," +
+						 		"fname VARCHAR(45) NOT NULL ," +
+						 		"lname VARCHAR(45) NOT NULL ," +
+						 		"game1_highscore INT NULL DEFAULT 0 ," +					  
+						 		"game2_highscore INT NULL DEFAULT 0 ," +
+						 		"game3_highscore INT NULL DEFAULT 0 ," +
+						 		"game4_highscore INT NULL DEFAULT 0 ," +
+						 		"PRIMARY KEY (username) ," +
+						 		"UNIQUE INDEX username_UNIQUE (username ASC) )";
 				stmt.executeUpdate(query);
 				logger.info("Table 'users' created.");
 				System.out.println("Table 'users' created.");
@@ -158,5 +158,5 @@ public class HomeController {
 		model.addAttribute("username",uname);
 		return "profile";
 	}
-
+	
 }
