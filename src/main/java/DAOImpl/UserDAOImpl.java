@@ -46,7 +46,7 @@ public class UserDAOImpl implements UserDAO {
 				}
 			}
 			if(i==0){
-				query = "INSERT INTO users (username,password,fname,lname,active) values(?,?,?,?,1)";
+				query = "INSERT INTO users (username,password,fname,lname) values(?,?,?,?)";
 				pstmt = connection.prepareStatement(query);
 				pstmt.setString(1, user.getUsername());
 				pstmt.setString(2, user.getPassword());
@@ -74,7 +74,6 @@ public class UserDAOImpl implements UserDAO {
     	String username = (user.getUsername()).toLowerCase();
     	String password = user.getPassword();
     	Boolean b = false;
-		int active = 0;
 		try{
 			connection = dataSource.getConnection();
 			String query = "Select count(*) from users";
@@ -94,12 +93,6 @@ public class UserDAOImpl implements UserDAO {
 					
 					if(username.equals(rslt.getString("username"))){
 						b=true;
-						query = "select active from users where username = ?";
-						pstmt = connection.prepareStatement(query);
-						pstmt.setString(1, username);
-						ResultSet rsltu = pstmt.executeQuery();
-						rsltu.next();
-						active = rsltu.getInt("active");
 						break whileloop;
 					}
 					else{
@@ -116,16 +109,6 @@ public class UserDAOImpl implements UserDAO {
 						String pass = rslt.getString("password");
 						
 						if(password.equals(pass)){
-							query = "Update users set active = 1 where username = ?";
-							pstmt = connection.prepareStatement(query);
-							pstmt.setString(1, username);
-							pstmt.executeUpdate();
-							if(active==1){
-								result = "Error:::User already logged in. Please close the other session and try again after sometime.";
-							}
-							else{
-								result = "Success:User logged in successfully!";								
-							}
 							
 						}
 						else{
@@ -140,25 +123,6 @@ public class UserDAOImpl implements UserDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-    	return result;
-	}
-
-	@Override
-	public String logOut(User user) {
-		String result = "";
-		Connection connection;
-    	try{
-    		connection = dataSource.getConnection();
-    		String query = "Update users set active=0 where username = ?";
-    		pstmt = connection.prepareStatement(query);
-    		pstmt.setString(1, user.getUsername());
-    		pstmt.executeUpdate();
-    		connection.close();
-			result = "Logged out successfully";
-			connection.close();
-    	}catch(Exception e){
-    		e.printStackTrace();    		
-    	}
     	return result;
 	}
 
@@ -180,7 +144,6 @@ public class UserDAOImpl implements UserDAO {
 				user.setGame2_highscore(rslt.getInt("game2_highscore"));
 				user.setGame3_highscore(rslt.getInt("game3_highscore"));
 				user.setGame4_highscore(rslt.getInt("game4_highscore"));
-				user.setActive(rslt.getInt("active"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
