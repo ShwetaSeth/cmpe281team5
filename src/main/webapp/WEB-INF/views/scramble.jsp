@@ -38,7 +38,7 @@ document.forma.secs.value = secs;
 // continue?  
 if( secs == 0 && mins == 0 ) // time over  
 {  
-document.forma.ok.disabled = true;  
+document.forma.Submit.disabled = true;  
 document.formb.results.style.display = "block";  
 }  
 else // call timer() recursively every 1000 ms == 1 sec  

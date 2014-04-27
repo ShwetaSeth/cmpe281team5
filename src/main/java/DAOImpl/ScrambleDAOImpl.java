@@ -34,9 +34,11 @@ public class ScrambleDAOImpl implements ScrambleDAO{
 			connection = dataSource.getConnection();
 			String query ="UPDATE scramble SET currScore=0";
 			pstmt = connection.prepareStatement(query);
-			//System.out.println("query is"+ query);
 			pstmt.executeUpdate();
-			
+			query ="UPDATE scramblewords SET guess=0";
+			pstmt = connection.prepareStatement(query);
+			pstmt.executeUpdate();
+			connection.close();
 		}
 		catch(Exception e){
 			e.printStackTrace();
