@@ -53,8 +53,6 @@ http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 <property name="dataSource" ref="dbDataSource" />
 </bean>
 
-	
-	
 </beans>
 
 
