@@ -88,7 +88,7 @@ public class MemoryController {
 		
 			//create gamepic table
 			Statement stmtocc = conn.createStatement();
-			String queryocc = "CREATE TABLE IF NOT EXISTS `team5`.`Gamepic`(`"+
+			String queryocc = "CREATE TABLE IF NOT EXISTS `Gamepic`(`"+
 					"Game_pic_id` INT NOT NULL AUTO_INCREMENT,"+
 					"`Occurence` INT NULL DEFAULT 0,PRIMARY KEY (`Game_pic_id`))";
 			stmtocc.executeUpdate(queryocc);
@@ -99,7 +99,7 @@ public class MemoryController {
 // create image table		
 			Statement stmt = conn.createStatement();
 
-String query="CREATE TABLE IF NOT EXISTS `team5`.`image`(`Id` INT NOT NULL AUTO_INCREMENT,`Words` VARCHAR(45) NULL,`Game_pic_id` INT NULL,PRIMARY KEY (`Id`))";
+String query="CREATE TABLE IF NOT EXISTS `image`(`Id` INT NOT NULL AUTO_INCREMENT,`Words` VARCHAR(45) NULL,`Game_pic_id` INT NULL,PRIMARY KEY (`Id`))";
 
 			stmt.executeUpdate(query);
 			logger.info("Table 'image' created.");
@@ -132,7 +132,7 @@ String query="CREATE TABLE IF NOT EXISTS `team5`.`image`(`Id` INT NOT NULL AUTO_
 			System.out.println("Records inserted in table 'image'.");
 			
 			//create score table
-			String query12 = "CREATE TABLE IF NOT EXISTS `team5`.`memscore`(`"+
+			String query12 = "CREATE TABLE IF NOT EXISTS `memscore`(`"+
 					"Game_id` INT NOT NULL AUTO_INCREMENT,"+
 					"`Player_id` VARCHAR(50) NOT NULL,"+
 					"`Score` INT NULL ,"
@@ -168,14 +168,17 @@ public String getScore(HttpServletRequest req, HttpSession session, Model model)
 		model.addAttribute("picid", req.getParameter("picid"));
 		String picnum=req.getParameter("picid");
 		int picno=Integer.parseInt(picnum);
-		System.out.println(req.getParameter("ans"));
+		//System.out.println(req.getParameter("ans"));
 		String [] words=req.getParameter("ans").split("\n");
+		String picwords="";
 		for(int j=0;j<words.length;j++)
 		{
-		System.out.println(words[j]);
+		picwords=picwords+words[j]+",";
+		
 		}
+		System.out.println(picwords);
 		try {
-			score = con.countWords(picno,words);
+			score = con.countWords(picno,picwords);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -201,7 +204,7 @@ public int getGameScore(HttpServletRequest request)
 	return result;
 }
 
-public int countWords(int picid,String [] wordlist) throws SQLException{
+public int countWords(int picid,String wordlist) throws SQLException{
 		Connection conn;
 
 		
