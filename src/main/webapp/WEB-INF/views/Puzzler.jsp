@@ -64,7 +64,7 @@ position: absolute;
 </style>
 <%  
   
-String myColor = request.getParameter("color");  
+String myColor = (String)session.getAttribute("color");  
   if (myColor == null || myColor == ""){  
 	myColor = "red";
   }

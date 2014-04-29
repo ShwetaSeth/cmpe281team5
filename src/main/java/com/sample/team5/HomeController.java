@@ -77,7 +77,7 @@ public class HomeController {
 			conn.close();			
 	}		
 	
-	@RequestMapping(value = "signin", method = RequestMethod.POST)
+	@RequestMapping(value = "home", method = RequestMethod.POST)
 	public String getSignIn(HttpServletRequest request, HttpSession session, Model model) throws SQLException{		
 		session.setMaxInactiveInterval(300);
 		HomeController con = (HomeController)appContext.getBean("homeController");
@@ -172,18 +172,5 @@ public class HomeController {
 		session.setAttribute("color",color);
 		return "redirect:"+game;
 	}
-	
-	//TODO Kirthi: Modify and put the code for these 2 methods in your controller
-	/*@RequestMapping(value = "Puzzler", method = RequestMethod.GET)
-	public String puzzler(Model model) throws SQLException{		
-		return "Puzzler";
-	}
-	
-/*	@RequestMapping(value = "instructions", method = RequestMethod.GET)
-	public String puzzlerinstructions(Model model) throws SQLException{		
-		return "instructions";
-	}*/
-	
-
-	
+		
 }

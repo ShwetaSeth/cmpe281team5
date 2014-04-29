@@ -31,13 +31,13 @@ function submitForm(cell){
 	<label>Choose your background color</label>
 	<select name="backgroundColor" id = "backgroundColor">
         <option value="blue">Blue</option>
-        <option value="green">green</option>
-        <option value="red">red</option>
+        <option value="green">Green</option>
+        <option value="red">Red</option>
    </select>
 	
 	<center>
 	
-	<table border="0">
+	<table style="margin-top:200px;">
             <tr>
                 <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('scramble');"/></div> </td>   
                 <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('WhatsYourTech');"/></div> </td>   
@@ -46,22 +46,6 @@ function submitForm(cell){
             </tr>
 	</table>
         
-        
-
-<!-- <button name="Submit" value="Submit">Submit</button> -->
-
-
-	<%-- <table style="margin-top:200px;">
-	
-		<tr>
-		
-		
-			<td width="250px" height="250px"> <div class="image"> <a href="scramble"> <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
-			<td width="250px" height="250px"> <div class="image"> <a href="WhatsYourTech"> <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
-			<td width="250px" height="250px"> <div class="image"> <a href="profile"> <img src="<c:url value="/resources/game3.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
-			<td width="250px" height="250px"> <div class="image"> <a href="Puzzler"> <img src="<c:url value="/resources/Puzzler1.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>		
-		</tr>	
-	</table> --%>
 	</center>
 </form>
 

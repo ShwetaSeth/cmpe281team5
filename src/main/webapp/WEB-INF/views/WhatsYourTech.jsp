@@ -4,7 +4,7 @@
 <%String username = (String)session.getAttribute("username"); %>
 <%  
   
-String myColor = request.getParameter("color");  
+String myColor = (String)session.getAttribute("color");  
   if (myColor == null || myColor == ""){  
 	myColor = "red";
   }
@@ -30,7 +30,7 @@ function startTimer() {
     displayTimer();
     count++;
     t = setTimeout("startTimer()", 1000);
-    if (count == 4){	
+    if (count == 32){	
 		checkRound();	    	
     }
 }
