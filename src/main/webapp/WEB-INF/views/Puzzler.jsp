@@ -62,6 +62,14 @@ position: absolute;
 	width: 135px;
 }	
 </style>
+<%  
+  
+String myColor = request.getParameter("color");  
+  if (myColor == null || myColor == ""){  
+	myColor = "red";
+  }
+  
+%>  
 
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script type="text/javascript">
@@ -200,7 +208,7 @@ function FindColumn(left) {
 </script>
 </head>
 
-<body >
+<body bgcolor="<%=myColor %>" >
 
 
 	<form id="form1" action="shuffle" method="POST">

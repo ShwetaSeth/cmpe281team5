@@ -45,11 +45,13 @@ public class ScrambleController {
 		con.createScrambleWords();
 		
 		String color = request.getParameter("color");
+		model.addAttribute("color",color);
+		
 		System.out.println(color);
 		
 		scrambleDAO.setGame();	
 		model.addAttribute("score", "0");
-		model.addAttribute("color",color);
+		
 		
 		return "scramble";
 	}

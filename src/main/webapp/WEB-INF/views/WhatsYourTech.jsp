@@ -2,6 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%String username = (String)session.getAttribute("username"); %>
+<%  
+  
+String myColor = request.getParameter("color");  
+  if (myColor == null || myColor == ""){  
+	myColor = "red";
+  }
+  
+%> 
 
 <html>
 <head>
@@ -100,7 +108,7 @@ function load(){
 </script>
 
 </head>
-<body onload="load()">
+<body bgcolor="<%=myColor%>" onload="load()">
 	
 	<font size=3 style="position: absolute; right:30px; top:30px"> Welcome <%=username %> | <a href = "signout"> Sign out</a> </font> <br>
 	<font size=3 style="position: absolute; right:30px; top:50px"> <a href = "profile" id="back"> Back </a> </font>

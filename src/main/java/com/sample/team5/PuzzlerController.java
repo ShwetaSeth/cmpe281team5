@@ -39,9 +39,11 @@ public class PuzzlerController {
 	ApplicationContext appContext = AppContext.getApplicationContext();
 	
 	@RequestMapping(value = "Puzzler", method = RequestMethod.GET)
-	public String Puzzler(Model model) throws SQLException {	
+	public String Puzzler(HttpServletRequest request,Model model) throws SQLException {	
 		PuzzlerController con = (PuzzlerController)appContext.getBean("puzzlerController");		
 		PuzzlerDAO puzzlerDAO = (PuzzlerDAO)appContext.getBean("puzzlerDAOImpl");
+		String color = request.getParameter("color");
+		model.addAttribute("color",color);
 		con.createPuzzlerTable();
 		return "Puzzler";
 		}

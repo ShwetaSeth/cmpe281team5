@@ -30,9 +30,23 @@
 	<table border="0">
             <tr>
                 <td><input type="checkbox" name="game" value="scramble" /></td>
-                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" /></div> </td>
-               
+                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" /></div> </td>   
             </tr>
+            
+             <tr>
+                <td><input type="checkbox" name="game" value="WhatsYourTech" /></td>
+                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:20px;" /></div> </td>   
+            </tr>
+             <tr>
+                <td><input type="checkbox" name="game" value="profile" /></td>
+                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/game3.png" />" alt="" height="200" width="200" style="border-radius:20px;" /></div> </td>   
+            </tr>
+            
+             <tr>
+                <td><input type="checkbox" name="game" value="Puzzler" /></td>
+                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/Puzzler1.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" /></div> </td>   
+            </tr>
+            
             
         </table>
         
@@ -41,7 +55,7 @@
 <button name="Submit" value="Submit">Submit</button>
 
 
-	<table style="margin-top:200px;">
+	<%-- <table style="margin-top:200px;">
 	
 		<tr>
 		
@@ -51,7 +65,7 @@
 			<td width="250px" height="250px"> <div class="image"> <a href="profile"> <img src="<c:url value="/resources/game3.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
 			<td width="250px" height="250px"> <div class="image"> <a href="Puzzler"> <img src="<c:url value="/resources/Puzzler1.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>		
 		</tr>	
-	</table>
+	</table> --%>
 	</center>
 </form>
 
