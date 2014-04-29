@@ -80,25 +80,7 @@ public class ScrambleController {
 			logger.info("Table 'scramble' created.");
 			System.out.println("Table 'scramble' created.");
 			
-			query = "CREATE TABLE IF NOT EXISTS scramblewords ( Word CHAR(15) NOT NULL,PRIMARY KEY (word))";
-			stmt.executeUpdate(query);
-			logger.info("Table 'scramblewords' created.");
-			System.out.println("Table 'scramblewords' created.");
-			
 		}
-
-		Statement stmt = conn.createStatement();
-		String query = "INSERT IGNORE INTO scramblewords (word) VALUES ('riak')";
-		stmt.executeUpdate(query);
-		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('amazon')";
-		stmt.executeUpdate(query);
-		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('aws')";
-		stmt.executeUpdate(query);
-		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('dynamo')";
-		stmt.executeUpdate(query);
-
-		logger.info("Table scrablewords inserted with values");
-		System.out.println("Table scramblewords inserted with values");
 				
 		conn.close();			
 	}	
