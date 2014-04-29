@@ -23,18 +23,17 @@ public class StateValueAspect {
 	}
 	
 
-//	@Pointcut("execution(* GameController.getPage(..))")
+//	@Pointcut("execution(* WhatsYourTechController.getPage(..))")
 //	public void getControllerPointcut(){
 //		
 //	}
-	
+//	
 //	@Around("getControllerPointcut()")
 //	public void selectController(ProceedingJoinPoint joinPoint) throws Throwable {		
 //		HttpServletRequest request = (HttpServletRequest) joinPoint.getArgs()[0];
 //		HttpSession session = (HttpSession) joinPoint.getArgs()[1];
 //		Model model = (Model) joinPoint.getArgs()[2];
-//		System.out.println("@Before annotation: GameController");
-//		return joinPoint.proceed();
+//		System.out.println("@Around annotation: GameController");
 //	}
-	
+//	
 }

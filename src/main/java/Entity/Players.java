@@ -2,12 +2,12 @@ package Entity;
 
 public class Players {
 	
-	int player_id;
+	int game_id;
 	String player;
 	int total_score;	
 
-	public int getPlayer_id() {return player_id;}
-	public void setPlayer_id(int player_id) {this.player_id = player_id;}
+	public int getGame_id() {return game_id;}
+	public void setGame_id(int game_id) {this.game_id = game_id;}
 	
 	public String getPlayer() {return player;}
 	public void setPlayer(String player) {this.player = player;}

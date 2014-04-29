@@ -50,21 +50,11 @@ public class HintsDAOImpl implements HintsDAO {
 	@Override
 	public Hints getEasyHints() throws SQLException {
 		Hints hint = new Hints();
-		int count = 0;
 		try{
 			connection = dataSource.getConnection();
-			stmt = connection.createStatement();
-			String query = "SELECT count(*) FROM hints WHERE difficulty = 'Easy'";
+			String query = "SELECT * FROM hints WHERE difficulty = 'Easy'";
+			stmt = connection.createStatement();			
 			rslt = stmt.executeQuery(query);
-			if(rslt.next())
-				count = rslt.getInt(1);
-			
-			int id = (int) Math.random() * count;
-			
-			query = "SELECT * FROM hints WHERE hints_id = ?";
-			pstmt = connection.prepareStatement(query);
-			pstmt.setInt(1, id);
-			rslt = pstmt.executeQuery();
 			if(rslt.next()){
 				hint.setHints_id(rslt.getInt("hints_id"));
 				hint.setAnswer(rslt.getString("answer"));
@@ -76,7 +66,6 @@ public class HintsDAOImpl implements HintsDAO {
 		}
 		finally{
 			stmt.close();
-			pstmt.close();
 			rslt.close();
 			connection.close();
 		}
@@ -86,21 +75,11 @@ public class HintsDAOImpl implements HintsDAO {
 	@Override
 	public Hints getModerateHints() throws SQLException {
 		Hints hint = new Hints();
-		int count = 0;
 		try{
 			connection = dataSource.getConnection();
-			stmt = connection.createStatement();
-			String query = "SELECT count(*) FROM hints WHERE difficulty = 'Moderate'";
+			String query = "SELECT * FROM hints WHERE difficulty = 'Moderate'";
+			stmt = connection.createStatement();			
 			rslt = stmt.executeQuery(query);
-			if(rslt.next())
-				count = rslt.getInt(1);
-			
-			int id = (int) Math.random() * count;
-			
-			query = "SELECT * FROM hints WHERE hints_id = ?";
-			pstmt = connection.prepareStatement(query);
-			pstmt.setInt(1, id);
-			rslt = pstmt.executeQuery();
 			if(rslt.next()){
 				hint.setHints_id(rslt.getInt("hints_id"));
 				hint.setAnswer(rslt.getString("answer"));
@@ -112,7 +91,6 @@ public class HintsDAOImpl implements HintsDAO {
 		}
 		finally{
 			stmt.close();
-			pstmt.close();
 			rslt.close();
 			connection.close();
 		}
@@ -121,21 +99,11 @@ public class HintsDAOImpl implements HintsDAO {
 	@Override
 	public Hints getHardHints() throws SQLException {
 		Hints hint = new Hints();
-		int count = 0;
 		try{
 			connection = dataSource.getConnection();
-			stmt = connection.createStatement();
-			String query = "SELECT count(*) FROM hints WHERE difficulty = 'Hard'";
+			String query = "SELECT * FROM hints WHERE difficulty = 'Hard'";
+			stmt = connection.createStatement();			
 			rslt = stmt.executeQuery(query);
-			if(rslt.next())
-				count = rslt.getInt(1);
-			
-			int id = (int) Math.random() * count;
-			
-			query = "SELECT * FROM hints WHERE hints_id = ?";
-			pstmt = connection.prepareStatement(query);
-			pstmt.setInt(1, id);
-			rslt = pstmt.executeQuery();
 			if(rslt.next()){
 				hint.setHints_id(rslt.getInt("hints_id"));
 				hint.setAnswer(rslt.getString("answer"));
@@ -147,7 +115,6 @@ public class HintsDAOImpl implements HintsDAO {
 		}
 		finally{
 			stmt.close();
-			pstmt.close();
 			rslt.close();
 			connection.close();
 		}

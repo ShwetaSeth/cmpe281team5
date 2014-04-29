@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import DAO.HintsDAO;
+import DAO.PlayersDAO;
 import Entity.Hints;
+import Entity.Players;
 
 @Controller
 public class WhatsYourTechController{
@@ -40,12 +42,94 @@ public class WhatsYourTechController{
 	
 	@RequestMapping(value = "WhatsYourTech", method = RequestMethod.GET)
 	public String getPage(HttpServletRequest request, HttpSession session, Model model) throws SQLException{		
+		String username = (String)session.getAttribute("username");
+		
 		WhatsYourTechController controller = (WhatsYourTechController)appContext.getBean("WhatsYourTech");		
 		controller.createTablePlayers();
 		controller.createTableHints();
+		
+		model.addAttribute("username", username);
+		model.addAttribute("round", "none");
+		model.addAttribute("score", 0);
+		model.addAttribute("difficulty","none");
+		model.addAttribute("game_id",0);
 		return "WhatsYourTech";
 	}
 	
+	@RequestMapping(value="WhatsYourTech", method = RequestMethod.POST)
+	public String play(HttpServletRequest request, HttpSession session, Model model) throws SQLException{
+		String username = (String)session.getAttribute("username");
+		String difficulty = request.getParameter("difficulty");
+		String round = request.getParameter("round");
+		int score = 0;
+		int game_id = 0;
+		
+		try{
+			score = Integer.parseInt(request.getParameter("score"));
+			game_id = Integer.parseInt(request.getParameter("game_id"));
+		}
+		catch(NumberFormatException e){			
+			System.out.println("Score: " + request.getParameter("score"));
+			System.out.println("Game_ID: " + request.getParameter("game_id"));
+		}
+		
+		HintsDAO hints = (HintsDAO)appContext.getBean("hintsDAOImpl");
+		Hints hint = new Hints();
+		//After clicking Start
+		if(difficulty.equals("none")){
+			PlayersDAO players = (PlayersDAO)appContext.getBean("playersDAOImpl");
+			Players player = new Players();
+			player.setPlayer(username);
+			player.setTotal_score(0);
+			game_id = players.addPlayer(player);
+
+			hint = hints.getEasyHints();			
+			difficulty = "Easy";
+			round = "one";
+		}
+		//After Round1
+		else if(difficulty.equals("Easy")){
+			hint = hints.getModerateHints();
+			difficulty = "Moderate";
+			round = "two";
+		}
+		//After Round2
+		else if(difficulty.equals("Moderate")){
+			hint = hints.getHardHints();			
+			difficulty = "Hard";
+			round = "three";
+		}
+		//After Round3
+		else if(difficulty.equals("Hard")){
+			PlayersDAO players = (PlayersDAO)appContext.getBean("playersDAOImpl");
+			Players player = new Players();
+			player.setGame_id(game_id);
+			player.setPlayer(username);
+			player.setTotal_score(score);
+			players.updateScore(player);
+			
+			model.addAttribute("round","none");
+			model.addAttribute("score", 0);
+			model.addAttribute("difficulty","none");
+			model.addAttribute("game_id",0);
+			
+			return "WhatsYourTech";
+		}
+		
+		model.addAttribute("round", round);
+		model.addAttribute("score", score);
+		model.addAttribute("difficulty",difficulty);
+		model.addAttribute("game_id", game_id);
+		
+		model.addAttribute("answer",hint.getAnswer());
+		model.addAttribute("hint1",hint.getHint1());
+		model.addAttribute("hint2",hint.getHint2());
+		model.addAttribute("hint3",hint.getHint3());
+		
+		return "WhatsYourTech";
+	}
+		
+	//Create Table for Players
 	public void createTablePlayers() throws SQLException{
 		Connection conn;
 
@@ -75,6 +159,7 @@ public class WhatsYourTechController{
 		conn.close();			
 	}
 	
+	//Create Table for Hints 
 	public void createTableHints() throws SQLException {
 		Connection conn;
 
@@ -105,7 +190,7 @@ public class WhatsYourTechController{
 		}
 		conn.close();			
 	}
-
+	//Populate the Hints Table
 	public void populateTable() throws SQLException{
 		
 		HintsDAO hintsDAO = (HintsDAO)appContext.getBean("hintsDAOImpl"); 

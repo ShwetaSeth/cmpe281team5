@@ -10,6 +10,5 @@ public interface HintsDAO {
 	public Hints getEasyHints() throws SQLException;
 	public Hints getModerateHints() throws SQLException;
 	public Hints getHardHints() throws SQLException;
-	
-	
+		
 }

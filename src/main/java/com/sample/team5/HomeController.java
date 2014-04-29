@@ -85,6 +85,7 @@ public class HomeController {
 		if(message.substring(0, 7).equals("Success")){
 			model.addAttribute("username", request.getParameter("username"));
 			uname = request.getParameter("username");			
+			session.setAttribute("username", uname);
 			return "profile";
 		}
 		else{
@@ -118,6 +119,7 @@ public class HomeController {
 		if(message.substring(0, 7).equals("Success")){
 			model.addAttribute("username", request.getParameter("username"));
 			uname = request.getParameter("username");
+			session.setAttribute("username", uname);
 			return "profile";
 		}
 		else{

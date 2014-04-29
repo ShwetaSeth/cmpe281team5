@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>    
+
+<%String username = (String)session.getAttribute("username"); %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,10 +13,10 @@
 </head>
 
 <body>
-<font size=3 style="position: absolute; right:50px; top:30px"> Welcome ${username}  <a href = "signout"> Sign out</a> <br> </font>
+<font size=3 style="position: absolute; right:50px; top:30px"> Welcome <%=username %> <a href = "signout"> Sign out</a> <br> </font>
 
 <form id="form" method="get" action="play">
-	<input type="hidden" name="username" id="username" value="${username}"/>	
+	<input type="hidden" name="username" id="username" value="<%=username %>"/>	
 	<input type="hidden" name="game" id="game" />
 	
 	<center>
