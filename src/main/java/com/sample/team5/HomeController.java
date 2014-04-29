@@ -53,25 +53,23 @@ public class HomeController {
 			DatabaseMetaData meta = conn.getMetaData();
 			ResultSet res = meta.getTables(null, null, "users", null);
 			if(res.next()){
-				System.out.println("Table 'users' already exists.");
+//				System.out.println("Table 'users' already exists.");
 				logger.info("Table 'users' already exists.");
 			}
 			else{
 				Statement stmt = conn.createStatement();
 				
-				String query = " CREATE TABLE IF NOT EXISTS users ( " +
-						 	"username VARCHAR(45) NOT NULL ," + 
-						 	"password VARCHAR(45) NOT NULL ," +
-						 	"fname VARCHAR(45) NOT NULL ," +
-						 	"lname VARCHAR(45) NOT NULL ," +
-						 	"game1_highscore INT NULL DEFAULT 0 ," +					  
-						 	"game2_highscore INT NULL DEFAULT 0 ," +
-						 	"game3_highscore INT NULL DEFAULT 0 ," +
-						 	"game4_highscore INT NULL DEFAULT 0 ," +
-						 	"active INT NOT NULL DEFAULT 0 ," +
-						 	"team INT NOT NULL DEFAULT 0 ," +
-						 	"PRIMARY KEY (username) ," +
-						 	"UNIQUE INDEX username_UNIQUE (username ASC) )";
+				String query =  "CREATE TABLE IF NOT EXISTS users ( " +
+						 		"username VARCHAR(45) NOT NULL ," + 
+						 		"password VARCHAR(45) NOT NULL ," +
+						 		"fname VARCHAR(45) NOT NULL ," +
+						 		"lname VARCHAR(45) NOT NULL ," +
+						 		"game1_highscore INT NULL DEFAULT 0 ," +					  
+						 		"game2_highscore INT NULL DEFAULT 0 ," +
+						 		"game3_highscore INT NULL DEFAULT 0 ," +
+						 		"game4_highscore INT NULL DEFAULT 0 ," +
+						 		"PRIMARY KEY (username) ," +
+						 		"UNIQUE INDEX username_UNIQUE (username ASC) )";
 				stmt.executeUpdate(query);
 				logger.info("Table 'users' created.");
 				System.out.println("Table 'users' created.");
@@ -80,13 +78,14 @@ public class HomeController {
 	}		
 	
 	@RequestMapping(value = "signin", method = RequestMethod.POST)
-	public String getSignIn(HttpServletRequest request, HttpSession session, Model model) {		
+	public String getSignIn(HttpServletRequest request, HttpSession session, Model model) throws SQLException{		
 		session.setMaxInactiveInterval(300);
 		HomeController con = (HomeController)appContext.getBean("homeController");
 		String message = con.signIn(request);	
 		if(message.substring(0, 7).equals("Success")){
 			model.addAttribute("username", request.getParameter("username"));
-			uname = request.getParameter("username");
+			uname = request.getParameter("username");			
+			session.setAttribute("username", uname);
 			return "profile";
 		}
 		else{
@@ -95,7 +94,7 @@ public class HomeController {
 		}			
 	}
 	
-	public String signIn(HttpServletRequest request) {		
+	public String signIn(HttpServletRequest request) throws SQLException {		
 		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
 		User user = new User();
 		
@@ -113,13 +112,14 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "signup", method = RequestMethod.POST)
-	public String getSignUp(HttpServletRequest request, HttpSession session, Model model) {		
+	public String getSignUp(HttpServletRequest request, HttpSession session, Model model) throws SQLException {		
 		session.setMaxInactiveInterval(300);
 		HomeController con = (HomeController)appContext.getBean("homeController");
 		String message = con.signUp(request);				
 		if(message.substring(0, 7).equals("Success")){
 			model.addAttribute("username", request.getParameter("username"));
 			uname = request.getParameter("username");
+			session.setAttribute("username", uname);
 			return "profile";
 		}
 		else{
@@ -128,7 +128,7 @@ public class HomeController {
 		}							
 	}
 	
-	public String signUp(HttpServletRequest request) {		
+	public String signUp(HttpServletRequest request) throws SQLException {		
 		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
 		User user = new User();
 		
@@ -150,19 +150,9 @@ public class HomeController {
 	@RequestMapping(value = "signout", method = RequestMethod.POST)
 	public String getSignOut(HttpServletRequest request, HttpSession session, Model model) {		
 		session.setMaxInactiveInterval(300);
-		HomeController con = (HomeController)appContext.getBean("homeController");
-		String message = con.signOut(request.getParameter("username"), session);				
+		String message = "Logged out successfully";				
 		model.addAttribute("message", message);
 			return "home";				
-	}
-	
-	public String signOut(String username, HttpSession session) {		
-		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
-		User user = new User();
-		user.setUsername(username);		
-		String result = userDAO.logOut(user);
-		session.invalidate();
-		return result;
 	}
 	
 	@RequestMapping(value = "profile", method = RequestMethod.GET)
@@ -170,5 +160,30 @@ public class HomeController {
 		model.addAttribute("username",uname);
 		return "profile";
 	}
-					
+	
+	@RequestMapping(value = "play", method = RequestMethod.GET)
+	public String play(HttpServletRequest request, HttpSession session, Model model) {	
+		
+		String game = request.getParameter("game");
+		String color = request.getParameter("backgroundColor");
+		
+		System.out.println(game);
+		model.addAttribute("username",uname);
+		session.setAttribute("color",color);
+		return "redirect:"+game;
+	}
+	
+	//TODO Kirthi: Modify and put the code for these 2 methods in your controller
+	/*@RequestMapping(value = "Puzzler", method = RequestMethod.GET)
+	public String puzzler(Model model) throws SQLException{		
+		return "Puzzler";
+	}
+	
+/*	@RequestMapping(value = "instructions", method = RequestMethod.GET)
+	public String puzzlerinstructions(Model model) throws SQLException{		
+		return "instructions";
+	}*/
+	
+
+	
 }

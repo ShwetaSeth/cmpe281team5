@@ -13,7 +13,8 @@ import Entity.User;
 
 public class UserDAOImpl implements UserDAO {
 
-	public DataSource dataSource;
+	private Connection connection;
+	private DataSource dataSource;
 
 	public DataSource getDataSource() {
 		return dataSource;
@@ -28,12 +29,11 @@ public class UserDAOImpl implements UserDAO {
     ResultSet rslt = null;
     	
 	@Override
-	public String register(User user) {
+	public String register(User user) throws SQLException {
 		int i=0;
 		String result = "";
 		String user_name = user.getUsername();
-		String username = user_name.toLowerCase();
-		Connection connection;
+		String username = user_name.toLowerCase();		
 		
 		try{
 			connection = dataSource.getConnection();
@@ -46,7 +46,7 @@ public class UserDAOImpl implements UserDAO {
 				}
 			}
 			if(i==0){
-				query = "INSERT INTO users (username,password,fname,lname,active) values(?,?,?,?,1)";
+				query = "INSERT INTO users (username,password,fname,lname) values(?,?,?,?)";
 				pstmt = connection.prepareStatement(query);
 				pstmt.setString(1, user.getUsername());
 				pstmt.setString(2, user.getPassword());
@@ -59,22 +59,22 @@ public class UserDAOImpl implements UserDAO {
 			else{
 				result="Error:::Username '" + username + "' already taken.";
 			}
-			connection.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		
+		}
+		finally{
+			connection.close();
 		}
 		return result;
 	}
 
 	@Override
-	public String logIn(User user) {
-		Connection connection;
+	public String logIn(User user) throws SQLException{
 		String result = "";
     	String username = (user.getUsername()).toLowerCase();
     	String password = user.getPassword();
     	Boolean b = false;
-		int active = 0;
 		try{
 			connection = dataSource.getConnection();
 			String query = "Select count(*) from users";
@@ -94,12 +94,6 @@ public class UserDAOImpl implements UserDAO {
 					
 					if(username.equals(rslt.getString("username"))){
 						b=true;
-						query = "select active from users where username = ?";
-						pstmt = connection.prepareStatement(query);
-						pstmt.setString(1, username);
-						ResultSet rsltu = pstmt.executeQuery();
-						rsltu.next();
-						active = rsltu.getInt("active");
 						break whileloop;
 					}
 					else{
@@ -116,17 +110,7 @@ public class UserDAOImpl implements UserDAO {
 						String pass = rslt.getString("password");
 						
 						if(password.equals(pass)){
-							query = "Update users set active = 1 where username = ?";
-							pstmt = connection.prepareStatement(query);
-							pstmt.setString(1, username);
-							pstmt.executeUpdate();
-							if(active==1){
-								result = "Error:::User already logged in. Please close the other session and try again after sometime.";
-							}
-							else{
-								result = "Success:User logged in successfully!";								
-							}
-							
+							result = "Success:Logged in successfully";
 						}
 						else{
 							result = "Error:::Incorrect password";
@@ -135,37 +119,19 @@ public class UserDAOImpl implements UserDAO {
 				else{
 					result = "Error:::User does not exist";
 				}
-				connection.close();
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+		}
+		finally{
+			connection.close();
 		}
     	return result;
 	}
 
 	@Override
-	public String logOut(User user) {
-		String result = "";
-		Connection connection;
-    	try{
-    		connection = dataSource.getConnection();
-    		String query = "Update users set active=0 where username = ?";
-    		pstmt = connection.prepareStatement(query);
-    		pstmt.setString(1, user.getUsername());
-    		pstmt.executeUpdate();
-    		connection.close();
-			result = "Logged out successfully";
-			connection.close();
-    	}catch(Exception e){
-    		e.printStackTrace();    		
-    	}
-    	return result;
-	}
-
-	@Override
-	public User getUser(String username) {
+	public User getUser(String username) throws SQLException{
 		User user = new User();
-		Connection connection;
 		try {
 			connection = dataSource.getConnection();		
 			String query  = "SELECT * FROM users WHERE username = '" + username + "'" ;
@@ -180,10 +146,12 @@ public class UserDAOImpl implements UserDAO {
 				user.setGame2_highscore(rslt.getInt("game2_highscore"));
 				user.setGame3_highscore(rslt.getInt("game3_highscore"));
 				user.setGame4_highscore(rslt.getInt("game4_highscore"));
-				user.setActive(rslt.getInt("active"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		finally{
+			connection.close();
 		}
 		return user;
 	}

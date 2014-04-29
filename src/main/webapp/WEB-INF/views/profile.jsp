@@ -12,8 +12,13 @@
 <script language="javascript" type="text/javascript">
 
 function submitForm(cell){
+<<<<<<< HEAD
 document.getElementById("game").value = cell;
 document.forms.form.submit();
+=======
+	document.getElementById("game").value = cell;
+	document.forms.form.submit();
+>>>>>>> 2313adf86ce5a3ccc90701d1d5c6eb6abdcb38cd
 }
 
 </script>
@@ -24,14 +29,24 @@ document.forms.form.submit();
 <font size=3 style="position: absolute; right:50px; top:30px"> Welcome <%=username %> <a href = "signout"> Sign out</a> <br> </font>
 
 <form id="form" method="get" action="play">
+<<<<<<< HEAD
 <input type="hidden" name="username" id="username" value="<%=username %>"/>	
 <input type="hidden" name="game" id="game" />
 <label>Choose your background color</label>
 <select name="backgroundColor" id = "backgroundColor">
+=======
+	
+	<input type="hidden" name="username" id="username" value="<%=username %>"/>	
+	<input type="hidden" name="game" id="game" />
+	
+	<label>Choose your background color</label>
+	<select name="backgroundColor" id = "backgroundColor">
+>>>>>>> 2313adf86ce5a3ccc90701d1d5c6eb6abdcb38cd
         <option value="blue">Blue</option>
         <option value="green">green</option>
         <option value="red">red</option>
    </select>
+<<<<<<< HEAD
 <center>
 <table border="0">
             <tr>
@@ -41,12 +56,26 @@ document.forms.form.submit();
                 <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/Puzzler1.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('Puzzler');"/></div> </td>   
             </tr>
 </table>
+=======
+	
+	<center>
+	
+	<table border="0">
+            <tr>
+                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('scramble');"/></div> </td>   
+                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('WhatsYourTech');"/></div> </td>   
+                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/game3.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('profile');" /></div> </td>   
+                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/Puzzler1.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('Puzzler');"/></div> </td>   
+            </tr>
+	</table>
+>>>>>>> 2313adf86ce5a3ccc90701d1d5c6eb6abdcb38cd
         
         
 
 <!-- <button name="Submit" value="Submit">Submit</button> -->
 
 
+<<<<<<< HEAD
 <%-- <table style="margin-top:200px;">
 <tr>
 <td width="250px" height="250px"> <div class="image"> <a href="scramble"> <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
@@ -56,6 +85,20 @@ document.forms.form.submit();
 </tr>	
 </table> --%>
 </center>
+=======
+	<%-- <table style="margin-top:200px;">
+	
+		<tr>
+		
+		
+			<td width="250px" height="250px"> <div class="image"> <a href="scramble"> <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
+			<td width="250px" height="250px"> <div class="image"> <a href="WhatsYourTech"> <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
+			<td width="250px" height="250px"> <div class="image"> <a href="profile"> <img src="<c:url value="/resources/game3.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
+			<td width="250px" height="250px"> <div class="image"> <a href="Puzzler"> <img src="<c:url value="/resources/Puzzler1.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>		
+		</tr>	
+	</table> --%>
+	</center>
+>>>>>>> 2313adf86ce5a3ccc90701d1d5c6eb6abdcb38cd
 </form>
 
 </body>
