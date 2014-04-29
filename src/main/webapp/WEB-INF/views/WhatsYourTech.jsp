@@ -45,7 +45,7 @@ function checkRound(){
 	}
 }
 
-function startGame(){
+function submitForm(){
 	document.forms.form.submit();
 }
 
@@ -97,11 +97,11 @@ function load(){
 		document.getElementById("scores").innerHTML = document.getElementById("score").value;		
 		startTimer();
 	}
-	else{
-		
+	else{	
 		document.getElementById("scores").value = 0;
 		document.getElementById("time").value = 0;
 		document.getElementById("next").disabled = true;		
+		document.getElementById("skip").disabled = true;		
 		document.getElementById("submit").disabled = true;		
 	}
 }
@@ -165,11 +165,12 @@ function load(){
 			If you are unable to guess the technology after 3 hints or if the time runs out, you won't get any points and will move forward to next question.
 			</p>
 			<div id = "buttons" style="float:center;margin-left:20px;margin-top:30px;"> 
-				<input type="button" id="startGame" value="Start" style="font-size:18;width:150px;height:50px;" onclick="startGame()"/>
+				<input type="button" id="startGame" value="New Game" style="font-size:18;width:150px;height:50px;margin-left:20px;" onclick="submitForm()"/>
 				<input type="button" id="next" value="Next Hint" style="font-size:18;width:150px;height:50px;margin-left:20px;" onclick="nextHint()" /> <br>
 				
 				<input size="35" style="font-size:18;height:50px;margin-top:30px;padding:10px;" type="text" id="guess" name="guess" /> <br> 
-				<input type="button" id="submit" value="Submit" style="font-size:18;width:150px;height:50px;margin-top:20px;margin-left:200px;" onclick="checkAnswer();" />
+				<input type="button" id="skip" value="Skip" style="font-size:18;width:150px;height:50px;margin-top:20px;margin-left:20px;" onclick="checkRound();" />
+				<input type="button" id="submit" value="Submit" style="font-size:18;width:150px;height:50px;margin-left:20px;" onclick="checkAnswer();" />
 			</div>						
 			
 		</div>

@@ -30,9 +30,9 @@ function submitForm(cell){
 	
 	<label>Choose your background color</label>
 	<select name="backgroundColor" id = "backgroundColor">
-        <option value="blue">Blue</option>
-        <option value="green">Green</option>
-        <option value="red">Red</option>
+        <option value="honeydew">Honeydew</option>
+        <option value="lightyellow">Yellow</option>
+        <option value="whitesmoke">White Smoke</option>
    </select>
 	
 	<center>
@@ -40,7 +40,7 @@ function submitForm(cell){
             <tr>
                 <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('scramble');"/></div> </td>   
                 <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('WhatsYourTech');"/></div> </td>   
-                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/memory.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('memory');" /></div> </td>   
+                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/memory.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('memory');" /></div> </td>   
                 <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/Puzzler1.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('Puzzler');"/></div> </td>   
             </tr>
 	</table>
