@@ -47,8 +47,7 @@ public class WhatsYourTechController{
 		WhatsYourTechController controller = (WhatsYourTechController)appContext.getBean("WhatsYourTech");		
 		controller.createTablePlayers();
 		controller.createTableHints();
-		String color = request.getParameter("color");
-		model.addAttribute("color",color);
+		
 		
 		model.addAttribute("username", username);
 		model.addAttribute("round", "none");
