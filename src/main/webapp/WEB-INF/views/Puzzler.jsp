@@ -8,6 +8,7 @@
 
 body {
 	text-align: center;
+	
 }
 
 #container {
@@ -52,12 +53,11 @@ position: absolute;
 	width: 135px;
 	height: 31px;
 	}
-
 #link
 {
 position: absolute;
 	top: 550px;
-	left: 400px;
+	left: 420px;
 	height: 50px;
 	width: 135px;
 }	
@@ -78,6 +78,11 @@ function startTimer(){
 }
 function stopTimer(){
 	clearInterval(refreshIntervalId);
+}
+
+function displaycounter(){
+	counter++;
+	document.getElementById("User").innerHTML =counter;
 }
 
 function FindRow(top) { 
@@ -147,7 +152,8 @@ function FindColumn(left) {
 			if (row == emptyrow) {
 				var difference = column - emptycolumn;
 				if (difference == 1 || difference == -1) {
-					counter++;
+					displaycounter();
+					//counter++;
 
 					$('#empty').animate({
 						left : nleft
@@ -161,7 +167,8 @@ function FindColumn(left) {
 			else if (column == emptycolumn) {
 				var difference = row - emptyrow;
 				if (difference == 1 || difference == -1) {
-					counter++;
+					displaycounter();
+					//counter++;
 
 					$('#empty').animate({
 						top : ntop
@@ -187,23 +194,21 @@ function FindColumn(left) {
 		  }else{
 				stopTimer();
 				$('#shuffle').val("Start");
-				//out.print("Moves"+ counter);
 		  }
 		});
 	});
 </script>
 </head>
-<body>
+
+<body >
 
 
-
-	<form id="form1">
+	<form id="form1" action="shuffle" method="POST">
 		<div id="main" align="center">
 			<h1 >Puzzler</h1>
             <br></br>
-            <div id="User" class ="User">Player:</div>
+            <div id="User" class ="User"><label >Moves:</label><input type="text" ></div>
             <div id="Timer"class="Timer" >Time</div>
-             <div id="Moves"class="Moves" >Move #:</div>
              <br></br>
 			<div id="container">
 				<div id="1" class="boxes"

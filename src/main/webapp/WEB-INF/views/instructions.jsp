@@ -85,7 +85,7 @@ margin:1px;
 <p>Finally the puzzle should look like this when it is solved:</p>
 </div>
 
-<div style= "text-align:center;" > <IMG SRC="c: url value="/resources/puzzler.png" ></div>
+
 <div id="container"  >
 
 <div id="row" class="boxrow" >

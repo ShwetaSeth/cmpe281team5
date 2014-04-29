@@ -24,8 +24,8 @@
 		<tr>
 			<td width="250px" height="250px"> <div class="image"> <a href="scramble"> <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
 			<td width="250px" height="250px"> <div class="image"> <a href="WhatsYourTech"> <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
-			<td width="250px" height="250px"> <div class="image"> <a href="Puzzler"> <img src="<c:url value="/resources/puzzler.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
-			<td width="250px" height="250px"> <div class="image"> <a href="profile"> <img src="<c:url value="/resources/game4.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>		
+			<td width="250px" height="250px"> <div class="image"> <a href="profile"> <img src="<c:url value="/resources/game3.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
+			<td width="250px" height="250px"> <div class="image"> <a href="Puzzler"> <img src="<c:url value="/resources/Puzzler1.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>		
 		</tr>	
 	</table>
 	</center>

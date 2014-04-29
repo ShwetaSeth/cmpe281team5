@@ -30,6 +30,10 @@
 		<property name="dataSource" ref="dbDataSource"/>
 	</bean>		
 		
+	<bean id="puzzlerController" class="com.sample.team5.PuzzlerController" >
+		<property name="dataSource" ref="dbDataSource"/>
+	</bean>		
+
 	<bean id="stateValue" class="com.sample.team5.StateValueAspect" >
 		<property name="dataSource" ref="dbDataSource"/>
 	</bean>
@@ -42,6 +46,9 @@
 		<property name="dataSource" ref="dbDataSource" />
 	</bean>
 	
+	<bean id="puzzlerDAOImpl" class="DAOImpl.PuzzlerDAOImpl">
+		<property name="dataSource" ref="dbDataSource" />
+	</bean>
 	<bean id="playersDAOImpl" class="DAOImpl.PlayersDAOImpl">
 		<property name="dataSource" ref="dbDataSource" />
 	</bean>
