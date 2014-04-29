@@ -11,7 +11,7 @@
 
 <%  
   
-String myColor = request.getParameter("color");  
+String myColor = (String)session.getAttribute("color");  
   if (myColor == null || myColor == ""){  
 	myColor = "red";
   }
@@ -54,7 +54,7 @@ if( secs == 0 && mins == 0 ) // time over
 document.forma.Submit.disabled = true;  
 document.forma.mins.disabled = true; 
 document.forma.secs.disabled = true; 
-//document.formb.results.style.display = "block";  
+document.formb.results.style.display = "block";  
 }  
 else // call timer() recursively every 1000 ms == 1 sec  
 {  
@@ -88,6 +88,11 @@ Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid 
 <label>Score</label><input type="text" value = ${score} name = "word"/>
 
 </form>
+
+<form action="results" name="formb">  
+<input type="submit" name="results" value="show results" style="display:none;">   
+</form>  
+
  
 </body>
 </html>

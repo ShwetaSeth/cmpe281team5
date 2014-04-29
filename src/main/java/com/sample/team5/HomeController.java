@@ -169,7 +169,7 @@ public class HomeController {
 		
 		System.out.println(game);
 		model.addAttribute("username",uname);
-		model.addAttribute("color",color);
+		session.setAttribute("color",color);
 		return "redirect:"+game;
 	}
 	
