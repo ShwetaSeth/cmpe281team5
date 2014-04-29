@@ -38,14 +38,17 @@ public class ScrambleController {
 	ApplicationContext appContext = AppContext.getApplicationContext();
 	
 	@RequestMapping(value = "scramble", method = RequestMethod.GET)
-	public String scramble(Model model) throws SQLException {		
+	public String scramble(HttpServletRequest request, Model model) throws SQLException {		
 		ScrambleController con = (ScrambleController)appContext.getBean("scrambleController");		
 		ScrambleDAO scrambleDAO = (ScrambleDAO)appContext.getBean("scrambleDAOImpl");
 		con.createScrambleTable();
 		con.createScrambleWords();
 		
+		String color = request.getParameter("backgroundColor");
+		
 		scrambleDAO.setGame();	
 		model.addAttribute("score", "0");
+		model.addAttribute("color", color);
 		return "scramble";
 	}
 	

@@ -2,9 +2,22 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>  
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>CMPE Scramble</title>
+<%-- <style type="text/css">
+<%@ include file="/resources/profile.css" %>
+</style> --%>
+
+<%  
+  
+String myColor = request.getParameter("color");  
+  if (myColor == null || myColor == ""){  
+	myColor = "red";
+  }
+  
+%>  
+   
 
 
 <%  
@@ -15,7 +28,7 @@ String secs = request.getParameter( "secs" );
 if( secs == null ) secs = "1";  
 %>  
 <script>  
-<!--  
+ 
 var mins = <%=mins%>; // write mins to javascript  
 var secs = <%=secs%>; // write secs to javascript  
 function timer()  
@@ -39,7 +52,9 @@ document.forma.secs.value = secs;
 if( secs == 0 && mins == 0 ) // time over  
 {  
 document.forma.Submit.disabled = true;  
-document.formb.results.style.display = "block";  
+document.forma.mins.disabled = true; 
+document.forma.secs.disabled = true; 
+//document.formb.results.style.display = "block";  
 }  
 else // call timer() recursively every 1000 ms == 1 sec  
 {  
@@ -50,13 +65,13 @@ window.setTimeout( "timer()", 1000 );
 </script></head>  
  
 
+<body bgcolor="<%=myColor %>">
+
+<form  name="forma" method="post" action="scramble">
+Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid black;text-align:right">:<input type="text" name="secs" size="1" style="border:0px solid black">  
 
 
-<form name="forma" method="post" action="scramble">
-<input type="text" name="mins" size="1" style="border:0px solid black;text-align:right">:<input type="text" name="secs" size="1" style="border:0px solid black">  
-
-
-<table border = '1'>
+<table class = "CSSTableGenerator" border = '1'>
 
 <tr><td>a</td><td>m</td><td>a</td><td>z</td><td>o</td><td>n</td><td>a</td><td>a</td></tr>
 <tr><td>a</td><td>w</td><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td></tr>
@@ -68,21 +83,11 @@ window.setTimeout( "timer()", 1000 );
 <tr><td>a</td><td>a</td><td>a</td><td>a</td><td>r</td><td>r</td><td>a</td><td>a</td></tr>
 
 </table>
-<label>Enter the words</label><input type="text" name = "word"><button name="Submit" value="Submit">Submit</button>
-<label>Score</label><input type="text" value = ${score} name = "word">
 
+<label>Enter the words</label><input type="text" name = "word"><button name="Submit" value="Submit">Submit</button>
+<label>Score</label><input type="text" value = ${score} name = "word"/>
 
 </form>
-
-<hr>  
-<form action="#" name="formb">  
-<input type="submit" name="results" value="show results" style="display:none;">   
-</form>  
-<script>  
-<!--  
-timer(); // call timer() after page is loaded  
-//-->  
-</script>  
-
+ 
 </body>
 </html>

@@ -18,6 +18,12 @@
 <form id="form" method="get" action="play">
 	<input type="hidden" name="username" id="username" value="<%=username %>"/>	
 	<input type="hidden" name="game" id="game" />
+	<label>Choose your background color</label>
+	<select name="backgroundColor" id = "backgroundColor">
+        <option value="blue">Blue</option>
+        <option value="green">green</option>
+        <option value="red">red</option>
+   </select>
 	
 	<center>
 	<table style="margin-top:200px;">
