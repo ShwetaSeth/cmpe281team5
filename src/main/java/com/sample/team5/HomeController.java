@@ -161,6 +161,18 @@ public class HomeController {
 		return "profile";
 	}
 	
+	@RequestMapping(value = "play", method = RequestMethod.GET)
+	public String play(HttpServletRequest request, HttpSession session, Model model) {	
+		
+		String game = request.getParameter("game");
+		String color = request.getParameter("backgroundColor");
+		
+		System.out.println(game);
+		model.addAttribute("username",uname);
+		model.addAttribute("color",color);
+		return "redirect:"+game;
+	}
+	
 	//TODO Kirthi: Modify and put the code for these 2 methods in your controller
 	/*@RequestMapping(value = "Puzzler", method = RequestMethod.GET)
 	public String puzzler(Model model) throws SQLException{		

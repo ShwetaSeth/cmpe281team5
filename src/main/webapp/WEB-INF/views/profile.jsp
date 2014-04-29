@@ -17,7 +17,7 @@
 
 <form id="form" method="get" action="play">
 	<input type="hidden" name="username" id="username" value="<%=username %>"/>	
-	<input type="hidden" name="game" id="game" />
+	<!-- <input type="hidden" name="game" id="game" /> -->
 	<label>Choose your background color</label>
 	<select name="backgroundColor" id = "backgroundColor">
         <option value="blue">Blue</option>
@@ -26,8 +26,26 @@
    </select>
 	
 	<center>
+	
+	<table border="0">
+            <tr>
+                <td><input type="checkbox" name="game" value="scramble" /></td>
+                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" /></div> </td>
+               
+            </tr>
+            
+        </table>
+        
+        
+
+<button name="Submit" value="Submit">Submit</button>
+
+
 	<table style="margin-top:200px;">
+	
 		<tr>
+		
+		
 			<td width="250px" height="250px"> <div class="image"> <a href="scramble"> <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
 			<td width="250px" height="250px"> <div class="image"> <a href="WhatsYourTech"> <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>
 			<td width="250px" height="250px"> <div class="image"> <a href="profile"> <img src="<c:url value="/resources/game3.png" />" alt="" height="200" width="200" style="border-radius:20px;" /> </a> </div> </td>

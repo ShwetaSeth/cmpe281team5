@@ -44,11 +44,13 @@ public class ScrambleController {
 		con.createScrambleTable();
 		con.createScrambleWords();
 		
-		String color = request.getParameter("backgroundColor");
+		String color = request.getParameter("color");
+		System.out.println(color);
 		
 		scrambleDAO.setGame();	
 		model.addAttribute("score", "0");
-		model.addAttribute("color", color);
+		model.addAttribute("color",color);
+		
 		return "scramble";
 	}
 	
