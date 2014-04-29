@@ -24,7 +24,7 @@ function submitForm(cell){
 <font size=3 style="position: absolute; right:50px; top:30px"> Welcome <%=username %> <a href = "signout"> Sign out</a> <br> </font>
 
 <form id="form" method="get" action="play">
-	
+
 	<input type="hidden" name="username" id="username" value="<%=username %>"/>	
 	<input type="hidden" name="game" id="game" />
 	
@@ -36,16 +36,14 @@ function submitForm(cell){
    </select>
 	
 	<center>
-	
 	<table style="margin-top:200px;">
             <tr>
                 <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('scramble');"/></div> </td>   
                 <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('WhatsYourTech');"/></div> </td>   
-                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/game3.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('profile');" /></div> </td>   
+                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/game3.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('memory');" /></div> </td>   
                 <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/Puzzler1.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('Puzzler');"/></div> </td>   
             </tr>
 	</table>
-        
 	</center>
 </form>
 
