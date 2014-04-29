@@ -168,7 +168,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection connection;
 		try {
 			connection = dataSource.getConnection();		
-			String query  = "SELCT * FROM users WHERE username = '" + username + "'" ;
+			String query  = "SELECT * FROM users WHERE username = '" + username + "'" ;
 			pstmt = connection.prepareStatement(query);
 			ResultSet rslt = pstmt.executeQuery();
 			while(rslt.next()){
