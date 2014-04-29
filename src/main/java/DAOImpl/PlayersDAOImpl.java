@@ -67,14 +67,15 @@ public class PlayersDAOImpl implements PlayersDAO{
 			query = "SELECT game2_highscore from users where username = '" + player.getPlayer() + "'"; 
 			stmt = connection.createStatement();
 			rslt = stmt.executeQuery(query);
-			rslt.next();			
-			int current_highscore = rslt.getInt("game2_highscore");
-			if(current_highscore < player.getTotal_score()){
-				query = "UPDATE users SET game2_highscore = ? WHERE username = ?";
-				pstmt1 = connection.prepareStatement(query);
-				pstmt1.setInt(1, player.getTotal_score());
-				pstmt1.setString(2, player.getPlayer());
-				pstmt1.executeUpdate();						
+			if(rslt.next()){			
+				int current_highscore = rslt.getInt("game2_highscore");
+				if(current_highscore < player.getTotal_score()){
+					query = "UPDATE users SET game2_highscore = ? WHERE username = ?";
+					pstmt1 = connection.prepareStatement(query);
+					pstmt1.setInt(1, player.getTotal_score());
+					pstmt1.setString(2, player.getPlayer());
+					pstmt1.executeUpdate();						
+				}
 			}
 		}
 		finally{

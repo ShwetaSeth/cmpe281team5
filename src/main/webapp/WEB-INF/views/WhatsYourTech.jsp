@@ -85,6 +85,7 @@ function checkAnswer(){
 }
 
 function load(){
+	document.body.style.background = "<%=myColor%>";
 	var val = document.getElementById("round").value;
 	if(val != "none" && val != "done"){
 		
@@ -108,7 +109,7 @@ function load(){
 </script>
 
 </head>
-<body bgcolor="<%=myColor%>" onload="load()">
+<body onload="load()">
 	
 	<font size=3 style="position: absolute; right:30px; top:30px"> Welcome <%=username %> | <a href = "signout"> Sign out</a> </font> <br>
 	<font size=3 style="position: absolute; right:30px; top:50px"> <a href = "profile" id="back"> Back </a> </font>
