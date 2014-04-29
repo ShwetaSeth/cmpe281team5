@@ -40,7 +40,7 @@ function submitForm(cell){
             <tr>
                 <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('scramble');"/></div> </td>   
                 <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('WhatsYourTech');"/></div> </td>   
-                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/game3.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('memory');" /></div> </td>   
+                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/memory.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('memory');" /></div> </td>   
                 <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/Puzzler1.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('Puzzler');"/></div> </td>   
             </tr>
 	</table>
