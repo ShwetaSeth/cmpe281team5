@@ -88,11 +88,20 @@ Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid 
 <label>Score</label><input type="text" value = ${score} name = "word"/>
 
 </form>
-
+<hr>  
+<form action="#" name="formb">  
+<input type="submit" name="results" value="show results" style="display:none;">   
+</form>  
+<script>  
+<!--  
+timer(); // call timer() after page is loaded  
+//-->  
+</script>  
+<!-- <hr>
 <form action="results" name="formb">  
 <input type="submit" name="results" value="show results" style="display:none;">   
 </form>  
-
+ -->
  
 </body>
 </html>

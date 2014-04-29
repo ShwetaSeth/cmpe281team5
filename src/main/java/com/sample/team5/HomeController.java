@@ -94,6 +94,7 @@ public class HomeController {
 		}			
 	}
 	
+	
 	public String signIn(HttpServletRequest request) throws SQLException {		
 		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
 		User user = new User();

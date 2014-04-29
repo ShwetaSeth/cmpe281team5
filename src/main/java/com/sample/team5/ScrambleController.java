@@ -43,13 +43,6 @@ public class ScrambleController {
 		ScrambleDAO scrambleDAO = (ScrambleDAO)appContext.getBean("scrambleDAOImpl");
 		con.createScrambleTable();
 		con.createScrambleWords();
-		
-		//String color = (String) session.getAttribute("color");
-		
-		//model.addAttribute("color",color);
-		
-		//System.out.println(color);
-		
 		scrambleDAO.setGame();	
 		model.addAttribute("score", "0");
 		
@@ -77,7 +70,6 @@ public class ScrambleController {
 					"FOREIGN KEY (username) REFERENCES users (username) ON DELETE CASCADE ON UPDATE CASCADE)";
 			
 			stmt.executeUpdate(query);
-			logger.info("Table 'scramble' created.");
 			System.out.println("Table 'scramble' created.");
 			
 		}

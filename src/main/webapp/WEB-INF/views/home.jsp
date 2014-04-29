@@ -5,7 +5,34 @@
 	<title>Home</title>
 	<link href="<c:url value="/resources/sample.css" />"  rel="stylesheet" type="text/css"  />
 </head>
+
 <body>
+	<form class="box login" id="form1" method="post" action="home">
+		
+		<label>CMPE 281 Team 5 </label>
+	
+		<fieldset class="boxBody">
+			<label>Username</label> <input type="text" tabindex="1"
+				placeholder="Enter Username"  name="username">
+			<!-- <label><a href="#" class="rLink" tabindex="5">Forget your password?</a>Password</label> -->
+			<label>Password</label>
+			<input type="password" placeholder="Enter Password" tabindex="2" name="password">
+		</fieldset>
+		
+		<footer>
+			<!-- <label><input type="checkbox" tabindex="3">Keep me logged in</label>-->
+			<input type="submit" class="btnLogin" value="Login" tabindex="3">
+			
+		</footer>
+	</form>
+	<footer id="main"> </footer>
+</body>
+
+
+
+
+
+<%-- <body>
 <div><b><font size="8"> CmpE281 </font></b></div>
 <div><b><font size="4">Team5</font></b></div>
 <div><b><font size="4" style="position: absolute; right: 50px; top: 150px">Sign In</font></b></div><br>
@@ -15,6 +42,6 @@
 	<div class="form-row"><span class="label"><font size="3" style="position: absolute; right: 230px; top: 233px"> Password </font> </span><input style="position: absolute; right: 50px; top: 230px" type="password" name="password" /></div><br>
 	<div class="form-row"><font size="2" style="position: absolute; right: 120px; top: 265px"> New User? <a href = "signup">Register</a> </font> <input class="submit" type="submit" value="Sign In" style="position: absolute; right: 50px; top: 260px"></div><br>
 </form>
-</body>
+</body> --%>
 
 </html>
