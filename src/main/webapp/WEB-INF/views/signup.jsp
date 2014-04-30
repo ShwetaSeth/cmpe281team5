@@ -64,6 +64,12 @@ function validate(){
 		return false;
 	}
 }
+
+function addColor(cell){
+	
+	document.getElementById("bgcolor").value = cell;	
+}
+
 </script>
 
 </head>
@@ -77,12 +83,20 @@ function validate(){
 <div><font size="2" style="position: absolute; left: 440px; top: 190px">- Password must be between 6 and 16 characters and <br> must not have the special characters (!`~@#,$_%^&amp;*()+=-[]\/';{}|":&lt;&gt;?).</font></div>
 
 <form id="form1" method="post" action="signup">
+	<input type="hidden" name="bgcolor" id="bgcolor" value="whitesmoke"/>
+	
 	<div class="form-row"> <font color="red" size="2">${message}</font></div><br>
 	<div class="form-row"><span class="label"><font size="3"> *First name </font> </span><input size="30" style="position: absolute; left: 140px;" type="text" id="fname" name="fname" /></div><br>
 	<div class="form-row"><span class="label"><font size="3"> *Last name </font> </span><input size="30" style="position: absolute; left: 140px;" type="text" id="lname" name="lname" /></div><br>
 	<div class="form-row"><span class="label"><font size="3"> *Username </font> </span><input size="30" style="position: absolute; left: 140px;" type="text" id="username" name="username" /></div><br>
 	<div class="form-row"><span class="label"><font size="3"> *Password </font> </span><input size="30" style="position: absolute; left: 140px;" type="password" id="password" name="password" /></div><br>
 	<div class="form-row"><span class="label"><font size="3"> *Retype Password </font> </span><input size="30" style="position: absolute; left: 140px;" type="password" id="password1" name="password1" /></div><br>
+	<div class="form-row"><span class="label"><font size="3"> Background Color </font></span></div><br>
+	<div class="form-row"> 
+		<div class="colors" style="background-color:whitesmoke;border:2px solid #000000;margin-left:140px;margin-top:10px;" onclick="addColor('whitesmoke');"></div> 
+		<div class="colors" style="background-color:honeydew;border:2px solid ##420101;margin-left:20px;margin-top:10px;" onclick="addColor('honeydew');"></div>
+		<div class="colors" style="background-color:lightyellow;border:2px solid ##420101;margin-left:20px;margin-top:10px;" onclick="addColor('lightyellow');"></div>	
+	</div>
 	<div class="form-row"><input class="submit" type="submit" value="Sign Up" style="position: absolute; left: 230px;" onclick = "return validate();"></div><br>
 </form>
 

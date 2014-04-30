@@ -5,6 +5,7 @@ public class User {
 	String password;
 	String fname;
 	String lname;
+	String bgcolor;
 	int game1_highscore;
 	int game2_highscore;
 	int game3_highscore;
@@ -36,6 +37,13 @@ public class User {
 	}
 	public void setLname(String lname) {
 		this.lname = lname;
+	}
+	
+	public String getBgcolor() {
+		return bgcolor;
+	}
+	public void setBgcolor(String bgcolor) {
+		this.bgcolor = bgcolor;
 	}
 	
 	public int getGame1_highscore() {

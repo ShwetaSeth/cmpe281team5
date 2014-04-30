@@ -2,13 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%String username = (String)session.getAttribute("username"); %>
-<%  
-  
+<%   
 String myColor = (String)session.getAttribute("color");  
   if (myColor == null || myColor == ""){  
 	myColor = "red";
-  }
-  
+  }  
 %> 
 
 <html>

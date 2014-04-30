@@ -63,7 +63,8 @@ public class HomeController {
 						 		"username VARCHAR(45) NOT NULL ," + 
 						 		"password VARCHAR(45) NOT NULL ," +
 						 		"fname VARCHAR(45) NOT NULL ," +
-						 		"lname VARCHAR(45) NOT NULL ," +
+						 		"lname VARCHAR(45) NULL DEFAULT 'whitesmoke'," +
+						 		"bgcolor VARCHAR(45) NULL ," +
 						 		"game1_highscore INT NULL DEFAULT 0 ," +					  
 						 		"game2_highscore INT NULL DEFAULT 0 ," +
 						 		"game3_highscore INT NULL DEFAULT 0 ," +
@@ -86,7 +87,7 @@ public class HomeController {
 			model.addAttribute("username", request.getParameter("username"));
 			uname = request.getParameter("username");			
 			session.setAttribute("username", uname);
-			return "profile";
+			return "redirect:profile";
 		}
 		else{
 			model.addAttribute("message", message.substring(8));
@@ -121,7 +122,7 @@ public class HomeController {
 			model.addAttribute("username", request.getParameter("username"));
 			uname = request.getParameter("username");
 			session.setAttribute("username", uname);
-			return "profile";
+			return "redirect:profile";
 		}
 		else{
 			model.addAttribute("message", message.substring(8));
@@ -137,7 +138,7 @@ public class HomeController {
 		user.setPassword(request.getParameter("password"));
 		user.setFname(request.getParameter("fname"));
 		user.setLname(request.getParameter("lname"));
-		
+		user.setBgcolor(request.getParameter("bgcolor"));
 		String result = userDAO.register(user);
 		return result;
 	}
@@ -157,8 +158,11 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "profile", method = RequestMethod.GET)
-	public String getProfile(Model model) {		
+	public String getProfile(Model model) throws SQLException{		
 		model.addAttribute("username",uname);
+		UserDAO users = (UserDAO)appContext.getBean("userDAOImpl");
+		User user = users.getUser(uname);
+		model.addAttribute("color",user.getBgcolor());
 		return "profile";
 	}
 	

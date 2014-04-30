@@ -5,3 +5,11 @@ body
 	background-color: white;
 	font-family: Cambria;
 }
+.colors{
+	border: 2px solid #ffffff;
+	height: 40px;
+	width: 40px;
+}
+.colors:hover{
+	border: 2px solid #000000;
+}
