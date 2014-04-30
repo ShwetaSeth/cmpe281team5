@@ -43,6 +43,9 @@ public class PuzzlerController {
 		PuzzlerController con = (PuzzlerController)appContext.getBean("puzzlerController");		
 		PuzzlerDAO puzzlerDAO = (PuzzlerDAO)appContext.getBean("puzzlerDAOImpl");
 		
+		//String color = request.getParameter("color");
+		//model.addAttribute("color",color);
+
 		con.createPuzzlerTable();
 		return "Puzzler";
 		}
@@ -78,37 +81,33 @@ public class PuzzlerController {
 		}
 	}	
 
-	//not sure wht needs to be done here..
+
 	@RequestMapping(value = "shuffle", method = RequestMethod.POST)
 	public String getGameScore (HttpServletRequest request, HttpSession session, Model model) {		
 		
 		PuzzlerController con = (PuzzlerController)appContext.getBean("puzzlerController");	
 		Puzzler puzzler = new Puzzler();
-		//DB Update
-		//SCORE cal
-		//
-		int Score = con.getGameScore(request);
-		
-		//model.addAttribute("username", request.getParameter("username"));
-		model.addAttribute("Score", request.getParameter("Score"));
+				
+		//String action = request.getParameter("action");
+		String time = request.getParameter("time");
+		String moves = request.getParameter("moves");
+		puzzler.setMoves(Integer.parseInt(moves));
+		PuzzlerDAO puzzlerDAO = (PuzzlerDAO)appContext.getBean("puzzlerDAOImpl");
+		puzzlerDAO.setGameScore(puzzler);
+		//System.out.println("action" + action);
 		return "Puzzler";	
 				
 	}
 	
-	public int getGameScore(HttpServletRequest request) {		
+	public int getgameScore(HttpServletRequest request) {		
 		PuzzlerDAO puzzlerDAO = (PuzzlerDAO)appContext.getBean("puzzlerDAOImpl");
 		Puzzler puzzler = new Puzzler();
-		//puzzler.setTime(Integer.parseInt(request.getParameter("Timer")));// get and set Time 
-		System.out.println(request.getParameter("counter1"));
-		puzzler.setMoves(Integer.parseInt(request.getParameter("counter1")));//do i directly do a setgame in DAO??
+		//System.out.println(request.getParameter("User"));
+		puzzler.setMoves(Integer.parseInt(request.getParameter("User")));
 	
 		
-		int Score=puzzler.getMoves();// or do it via DAO
+		int Score=puzzler.getMoves();
 		
-		//int Time = puzzlerDAO.getTime(puzzler);
-		//int Moves = puzzlerDAO.getMoves(puzzler);
-		//puzzler.setTime(request.getParameter("Time"));//how to insert the time in the db
-		//puzzler.setMoves(request.getParameter("counter"));
 		return Score;
 	}	
 	

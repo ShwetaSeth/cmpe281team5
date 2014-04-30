@@ -3,13 +3,13 @@ package DAOImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.sql.DataSource;
 
 import DAO.PuzzlerDAO;
 import Entity.Puzzler;
-import Entity.User;
 
 public class PuzzlerDAOImpl implements PuzzlerDAO {
 	
@@ -27,11 +27,11 @@ public class PuzzlerDAOImpl implements PuzzlerDAO {
 		this.dataSource = dataSource;
 	}
 
-	//need to change
+
 	public void setGameScore(Puzzler puzzler) {
 		String username = puzzler.getUsername();
 		username = "abc";
-		Connection connection;
+		Connection connection = null;
 		
 		//int score = puzzler.getScore();
           int score = puzzler.getMoves();
@@ -39,14 +39,28 @@ public class PuzzlerDAOImpl implements PuzzlerDAO {
 		try{
 			connection = dataSource.getConnection();
 			stmt = connection.createStatement();
-			Statement stmt = conn.createStatement();
-			String query = "INSERT INTO puzzler (Score) VALUES (score)";// is this right?
-			stmt.executeUpdate(query);
+			
+			
+			String query = "INSERT INTO puzzler ( username,Score, Time, Moves ) VALUES (?,?,?,?)";// is this right?
+			pstmt= connection.prepareStatement(query);
+			pstmt.setString(1, username);
+			pstmt.setInt(2, 3);
+			pstmt.setInt(3, 2);
+			pstmt.setInt(4, puzzler.getMoves());
+			pstmt.executeUpdate();
+			
 		
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		
+		}finally{
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
