@@ -55,6 +55,7 @@ document.forma.Submit.disabled = true;
 document.forma.mins.disabled = true; 
 document.forma.secs.disabled = true; 
 document.formb.results.style.display = "block";  
+
 }  
 else // call timer() recursively every 1000 ms == 1 sec  
 {  
@@ -84,13 +85,15 @@ Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid 
 
 </table>
 
-<label>Enter the words</label><input type="text" name = "word"><button name="Submit" value="Submit">Submit</button>
+<label>Enter the words</label><input autofocus="autofocus" type="text" name = "word"><button name="Submit" value="Submit">Submit</button>
 <label>Score</label><input type="text" value = ${score} name = "word"/>
+
 
 </form>
 <hr>  
-<form action="#" name="formb">  
-<input type="submit" name="results" value="show results" style="display:none;">   
+<form action="results" name="formb" method="post">  
+<input type="hidden" value = ${score} name = "score"/>
+<input type="submit" name="results" value="View Results" style="display:none;">   
 </form>  
 <script>  
 <!--  
