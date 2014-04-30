@@ -160,7 +160,11 @@ public class ScrambleController {
 		Scramble scramble = new Scramble();
 		
 		String username = (String) session.getAttribute("username");
+		int currScore = Integer.parseInt(request.getParameter("score"));
 		scramble.setUsername(username);
+		scramble.setCurrScore(currScore);
+		
+		
 		int prevScore = scrambleDAO.getResult(scramble);
 		
 		

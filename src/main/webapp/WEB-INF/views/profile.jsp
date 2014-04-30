@@ -21,9 +21,14 @@ function submitForm(cell){
 </head>
 
 <body>
-<div id="container">
-<div id = "content">
-<h1> Welcome <%=username %></h1> <a href = "signout"> Sign out</a> <br> 
+<div class="container">
+<div class = "content">
+
+
+<div id="navbar">
+		<jsp:include page="navbar.jsp"></jsp:include>
+</div>
+<h1> Welcome <%=username %></h1>
 
 <form id="form" method="get" action="play">
 
