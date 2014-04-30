@@ -68,12 +68,13 @@ window.setTimeout( "timer()", 1000 );
 <fieldset>
 <legend>
 
-<input  align="middle" type="text" name="mins" id="mins" size="1" style="border:0px solid black;text-align:right;background-color: lightblue;font-size: 18pt;"/>:
-<input type="text" id="secs" name="secs" size="1" style="border:0px solid black;background-color: lightblue;font-size: 18pt;"/>  
+<input  align="middle" type="text" name="mins" id="mins" size="1" style="border:0px solid black;text-align:right;font-size: 18pt;"/>:
+<input type="text" id="secs" name="secs" size="1" style="border:0px solid black;font-size: 18pt;"/>  
 
 </legend>
   
 <table align="center">
+<tr><td>${message}${score}</td></tr>
 <tr>
 <td><label>Enter the words:</label></td>
 <td><textarea name="ans" id="ans" cols="20" rows="10" style="overflow:hidden;"></textarea></td>

@@ -31,16 +31,30 @@ public class MemoryDAOImpl implements MemoryDAO{
 		int result = 0;
 		String player = memory.getPlayerId();
 		int curr=memory.getScore();
+		int finalscore=memory.getScore();
 		Connection connection;
 		
 		try{
 			String outcome="";
+			PreparedStatement pstmt = null;
+		    Statement stmt = null;
+		    ResultSet rslt = null;
+		    int prevmax=0;
 			connection = dataSource.getConnection();
 			stmt = connection.createStatement();
-			String query  = "SELECT MAX(Score) from memscore where Player_id='"+player+"'" ;
+			String query  = "SELECT MAX(Score) as max from memscore where Player_id='"+player+"'" ;
+			System.out.println(query);
 			pstmt = connection.prepareStatement(query);
-			ResultSet rslt = pstmt.executeQuery();
-			int prevmax=rslt.getInt(0);
+			rslt = pstmt.executeQuery();
+			if(rslt.next())
+			{	
+			prevmax=rslt.getInt("max");
+			}
+			else
+			{
+				prevmax=0;
+			}
+			System.out.println("MAX:"+prevmax);
 			if(prevmax>curr)
 			{
 				outcome="L";
@@ -49,6 +63,8 @@ public class MemoryDAOImpl implements MemoryDAO{
 			{
 				outcome="W";
 			}
+			System.out.println(outcome);
+			System.out.println(memory.getPicId());
 			 query = "INSERT INTO memscore (Player_id,Score,Outcome,Game_pic_id) values(?,?,?,?)";
 				pstmt = connection.prepareStatement(query);
 				pstmt.setString(1, memory.getPlayerId());
@@ -56,21 +72,17 @@ public class MemoryDAOImpl implements MemoryDAO{
 				pstmt.setString(3, outcome);
 				pstmt.setInt(4, memory.getPicId());
 				pstmt.executeUpdate();
-											
+				System.out.println(query);
+			
 			connection.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		
 		}
-		return result;
+		return finalscore;
 	}
 
-    	
-	
-	
-		
-	
-		
+    		
 	}
 
 	
