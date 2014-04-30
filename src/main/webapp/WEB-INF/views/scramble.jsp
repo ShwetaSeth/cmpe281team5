@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>CMPE Scramble</title>
-<%-- <style type="text/css">
+ <style type="text/css">
 <%@ include file="/resources/profile.css" %>
-</style> --%>
+</style> 
 
 <%  
   
@@ -27,13 +27,19 @@ if( mins == null ) mins = "1";
 String secs = request.getParameter( "secs" );  
 if( secs == null ) secs = "1";  
 %>  
+
 <script>  
+window.onload=function(){
+    document.getElementById("word").focus();
+};
+
+
  
 var mins = <%=mins%>; // write mins to javascript  
 var secs = <%=secs%>; // write secs to javascript  
 function timer()  
 {  
-// tic tac  
+  
 if( --secs == -1 )  
 {  
 secs = 59;  
@@ -54,7 +60,9 @@ if( secs == 0 && mins == 0 ) // time over
 document.forma.Submit.disabled = true;  
 document.forma.mins.disabled = true; 
 document.forma.secs.disabled = true; 
-document.formb.results.style.display = "block";  
+document.formb.results.style.display = "block"; 
+
+
 }  
 else // call timer() recursively every 1000 ms == 1 sec  
 {  
@@ -70,7 +78,7 @@ window.setTimeout( "timer()", 1000 );
 <form  name="forma" method="post" action="scramble">
 Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid black;text-align:right">:<input type="text" name="secs" size="1" style="border:0px solid black">  
 
-
+<center>
 <table class = "CSSTableGenerator" border = '1'>
 
 <tr><td>a</td><td>m</td><td>a</td><td>z</td><td>o</td><td>n</td><td>a</td><td>a</td></tr>
@@ -83,14 +91,16 @@ Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid 
 <tr><td>a</td><td>a</td><td>a</td><td>a</td><td>r</td><td>r</td><td>a</td><td>a</td></tr>
 
 </table>
-
-<label>Enter the words</label><input type="text" name = "word"><button name="Submit" value="Submit">Submit</button>
+</center>
+<label>Enter the words</label><input type="text" id = "word" name = "word"><button name="Submit" value="Submit"  onclick="load()">Submit</button>
 <label>Score</label><input type="text" value = ${score} name = "word"/>
+
 
 </form>
 <hr>  
-<form action="#" name="formb">  
-<input type="submit" name="results" value="show results" style="display:none;">   
+<form action="results" name="formb" method="post">  
+<input type="hidden" value = ${score} name = "score"/>
+<input type="submit" name="results" value="View Results" style="display:none;">   
 </form>  
 <script>  
 <!--  

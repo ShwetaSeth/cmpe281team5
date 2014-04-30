@@ -9,6 +9,11 @@
 <link href="<c:url value="/resources/sample.css" />"  rel="stylesheet" type="text/css"  />
 
 <%  
+
+String myColor = (String)session.getAttribute("color");  
+if (myColor == null || myColor == ""){  
+	myColor = "cyan";
+}
 String mins = request.getParameter( "mins" );  
 if( mins == null ) mins = "1";  
    
@@ -40,8 +45,9 @@ document.memform.secs.value = secs;
   
 // continue?  
 
-window.setTimeout( function(){document.getElementById('wcloud').style.visibility='hidden';document.getElementById('submit').disabled='';}, 11000 );
-//window.setTimeout( function(){document.getElementbyId('answer').style.visibility='';}, 12000 );
+window.setTimeout( function()
+{document.getElementById('wcloud').style.visibility='hidden';document.getElementById('submit').disabled='';document.getElementById('showtext').style.display='block';}, 11000 );
+
 if( document.getElementById('secs').value == '00' && document.getElementById('mins').value == '00' ) // time over  
 {  
 
@@ -68,12 +74,15 @@ window.setTimeout( "timer()", 1000 );
 <fieldset>
 <legend>
 
-<input  align="middle" type="text" name="mins" id="mins" size="1" style="border:0px solid black;text-align:right;background-color: lightblue;font-size: 18pt;">:
-<input type="text" id="secs" name="secs" size="1" style="border:0px solid black;background-color: lightblue;font-size: 18pt;">  
+<input  align="middle" type="text" name="mins" id="mins" size="1" style="border:0px solid black;text-align:right;font-size: 18pt;">:
+<input type="text" id="secs" name="secs" size="1" style="border:0px solid black;font-size: 18pt;">  
 
 </legend>
 <div align='center' id='wcloud'>
 <img src="<c:url value="/resources/${pic}" />" alt="wordcloud" height="300" width="500" border="1"/>
+</div>
+<div align='center' id='showtext' >
+<label style="font-size:18pt;display:none;">Remember the words?</label>
 </div>
 <br/><br/>
 <div align='center' id='answer'>

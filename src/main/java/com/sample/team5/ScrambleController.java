@@ -116,25 +116,62 @@ public class ScrambleController {
 	@RequestMapping(value = "scramble", method = RequestMethod.POST)
 	public String enterWord(HttpServletRequest request, HttpSession session, Model model) {		
 		ScrambleController con = (ScrambleController)appContext.getBean("scrambleController");		
-		int score = con.enterWord(request);	
+		int score = con.enterWord(request,session);	
 		
 		//String message = con.getJSP();
 		model.addAttribute("score", score);
 		return "scramble";
 	}
 	
-	public int enterWord(HttpServletRequest request) {		
+	public int enterWord(HttpServletRequest request, HttpSession session) {		
 		ScrambleDAO scrambleDAO = (ScrambleDAO)appContext.getBean("scrambleDAOImpl");
 		Scramble scramble = new Scramble();
 		System.out.println(request.getParameter("word"));
 		scramble.setLastWord(request.getParameter("word"));
+		String username = (String) session.getAttribute("username");
+		System.out.println("username is "+username);
+		scramble.setUsername(username);
+		
 		int currScore = scrambleDAO.getCurrentScore(scramble);
 		
 		scramble.setCurrScore(currScore);
+		
+		
 		int score = scrambleDAO.enterWord(scramble);
 		
 		System.out.println("after increment"+scramble.getCurrScore());
 		return score;
 	}
 	
-}
+	@RequestMapping(value = "results", method = RequestMethod.POST)
+	public String getResult(HttpServletRequest request, HttpSession session, Model model) {		
+		ScrambleController con = (ScrambleController)appContext.getBean("scrambleController");		
+		int prevScore = con.getResult(request,session);	
+		String score = request.getParameter("score");
+		//String message = con.getJSP();
+		model.addAttribute("currScore", score);
+		model.addAttribute("prevScore", prevScore);
+		
+		return "scrambleresult";
+	}
+	
+	public int getResult(HttpServletRequest request, HttpSession session) {
+		ScrambleDAO scrambleDAO = (ScrambleDAO)appContext.getBean("scrambleDAOImpl");
+		Scramble scramble = new Scramble();
+		
+		String username = (String) session.getAttribute("username");
+		int currScore = Integer.parseInt(request.getParameter("score"));
+		scramble.setUsername(username);
+		scramble.setCurrScore(currScore);
+		
+		
+		int prevScore = scrambleDAO.getResult(scramble);
+		
+		
+		return prevScore;
+		
+	}
+	}
+	
+	
+

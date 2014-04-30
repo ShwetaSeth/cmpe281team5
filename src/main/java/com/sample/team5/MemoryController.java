@@ -25,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import DAO.MemoryDAO;
+import DAO.ScrambleDAO;
 import Entity.Memory;
+import Entity.Scramble;
 
 
 
@@ -80,9 +82,7 @@ public class MemoryController {
 		if(res.next()){
 			System.out.println("Table 'Gamepic' already exists.");
 			logger.info("Table 'Gamepic' already exists.");
-			
-			
-			
+					
 		}
 		else{
 		
@@ -93,10 +93,21 @@ public class MemoryController {
 					"`Occurence` INT NULL DEFAULT 0,PRIMARY KEY (`Game_pic_id`))";
 			stmtocc.executeUpdate(queryocc);
 			
+			}
 			
 			
-			
-// create image table		
+// create image table	
+		
+		DatabaseMetaData meta1 = conn.getMetaData();
+		ResultSet res1 = meta1.getTables(null, null, "image", null);
+		if(res1.next())
+		{
+			System.out.println("Table 'image' already exists.");
+			logger.info("Table 'image' already exists.");
+					
+		}
+		else{
+		
 			Statement stmt = conn.createStatement();
 
 String query="CREATE TABLE IF NOT EXISTS `image`(`Id` INT NOT NULL AUTO_INCREMENT,`Words` VARCHAR(45) NULL,`Game_pic_id` INT NULL,PRIMARY KEY (`Id`))";
@@ -105,10 +116,10 @@ String query="CREATE TABLE IF NOT EXISTS `image`(`Id` INT NOT NULL AUTO_INCREMEN
 			logger.info("Table 'image' created.");
 			System.out.println("Table 'image' created.");
 			
-					
-			
-					     
-		  
+		
+		
+//update words in image table
+		
 			Statement stmt2 = conn.createStatement();
 			String query2="";
 				 query2 = "INSERT INTO image(Words,Game_pic_id) values('history',1),('flame',1),"
@@ -126,32 +137,43 @@ String query="CREATE TABLE IF NOT EXISTS `image`(`Id` INT NOT NULL AUTO_INCREMEN
 				 System.out.println(query2);
 				 stmt2.executeUpdate(query2);
 				
-			
-		 		
 			logger.info("Records inserted in table 'image'.");
 			System.out.println("Records inserted in table 'image'.");
-			
+		}
 			//create score table
-			String query12 = "CREATE TABLE IF NOT EXISTS `memscore`(`"+
-					"Game_id` INT NOT NULL AUTO_INCREMENT,"+
-					"`Player_id` VARCHAR(50) NOT NULL,"+
-					"`Score` INT NULL ,"
-					+ "`Outcome` ENUM('W','L') NULL ,"
-					+ "`Game_pic_id` INT NOT NULL ,"
-					+ "PRIMARY KEY (`Game_id`))"
-					+ "ENGINE = InnoDB";
-					stmt.executeUpdate(query12);
-					logger.info("Table 'memscore' created.");
-					System.out.println("Table 'memscore' created.");
+			DatabaseMetaData meta2 = conn.getMetaData();
+			ResultSet res2 = meta2.getTables(null, null, "memscore", null);
+			if(res2.next()){
+				System.out.println("Table 'memscore' already exists.");
+				logger.info("Table 'memscore' already exists.");
+						
+			}
+			else{
+				Statement stmt = conn.createStatement();
+				String query12 = "CREATE TABLE IF NOT EXISTS `memscore`(`"+
+						"Game_id` INT NOT NULL AUTO_INCREMENT,"+
+						"`Player_id` VARCHAR(50) NOT NULL,"+
+						"`Score` INT NULL DEFAULT 0,"
+						+ "`Outcome` ENUM('W','L') NULL ,"
+						+ "`Game_pic_id` INT NOT NULL ,"
+						+ "PRIMARY KEY (`Game_id`))"
+						+ "ENGINE = InnoDB";
+						stmt.executeUpdate(query12);
+						logger.info("Table 'memscore' created.");
+						System.out.println("Table 'memscore' created.");
+				
+						     
+			}
+			
 
 			
-		}
-		Statement stmt = conn.createStatement();
-		String query = "UPDATE Gamepic SET Occurence=Occurence+1 where Game_pic_id="+pic;
 		
-		stmt.executeUpdate(query);
+		/*Statement stmtup = conn.createStatement();
+		String queryup = "UPDATE gamepic SET Occurence=Occurence+1 where Game_pic_id='"+pic+"'";
+		System.out.println(queryup);
+		stmtup.executeUpdate(queryup);
 		logger.info("Table 'gamepic' updated.");
-		System.out.println("Table 'gamepic' updated.");
+		System.out.println("Table 'gamepic' updated.");*/
 		conn.close();
 		return pic;
 		
@@ -164,44 +186,54 @@ public String getScore(HttpServletRequest req, HttpSession session, Model model)
 	   session.setMaxInactiveInterval(300);
 	   int score=0;
 		MemoryController con = (MemoryController)appContext.getBean("memoryController");
-		//MemoryDAO memoryDAO = (MemoryDAO)appContext.getBean("memoryDAOImpl");
+		
 		model.addAttribute("picid", req.getParameter("picid"));
 		String picnum=req.getParameter("picid");
 		int picno=Integer.parseInt(picnum);
-		//System.out.println(req.getParameter("ans"));
+				
 		String [] words=req.getParameter("ans").split("\n");
 		String picwords="";
 		for(int j=0;j<words.length;j++)
 		{
-		picwords=picwords+words[j]+",";
+			if(j==words.length-1)
+			{
+				picwords=picwords+"'"+words[j]+"'";
+			}
+			else
+			{
+				picwords=picwords+"'"+words[j]+"',";
+			}
+		
 		
 		}
-		System.out.println(picwords);
+	
 		try {
 			score = con.countWords(picno,picwords);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
-		int message = con.getGameScore(req);
-		model.addAttribute("score",score );
-		model.addAttribute("message", "Your score for this game is");
+		int currscore = con.getGameScore(req,session,score,picno);
+		System.out.println(currscore);
+		model.addAttribute("score",currscore );
+		model.addAttribute("message", "Your score for this game is:");
 		
 		return "memoryscore";
 	}
 
-public int getGameScore(HttpServletRequest request) 
+public int getGameScore(HttpServletRequest request,HttpSession session,int score,int picid) 
 {		
 	MemoryDAO memoryDAO = (MemoryDAO)appContext.getBean("memoryDAOImpl");
 	Memory memory  = new Memory();
-		
-	//memory.setPlayerId(request.getParameter("username"));
-	//memory.setScore(request.getParameter(score));
-	//memory.setPicId(request.getParameter(picid));
-	//memory.setLname(request.getParameter("lname"));
-	
-	int result = memoryDAO.getScore(memory);
-	return result;
+	//updating user table	
+	String username = (String) session.getAttribute("username");
+	System.out.println(score+"here");
+	memory.setPlayerId(username);
+	memory.setScore(score);	
+	memory.setPicId(picid);
+	int currscore = memoryDAO.getScore(memory);
+	System.out.println(currscore+"here");
+	return currscore;
 }
 
 public int countWords(int picid,String wordlist) throws SQLException{
@@ -209,33 +241,24 @@ public int countWords(int picid,String wordlist) throws SQLException{
 
 		
 		conn = dataSource.getConnection();
-		System.out.println(wordlist);
-		//finding words used in the game picture
 		
-		//String query="Select Word1,Word2,Word3,Word4,Word5,Word6,Word7,Word8,Word9,Word10 from gamepic where Game_pic_id='"+picid+"'";
-		  String [] arr1={"history","flame","light","earth","advertisement","account","ice","belief","discussion","government"};
-			String [] arr2={"memory","committee","servant","light","humor","answer","invention","religion","plant","destruction"};
-			String [] arr3={"trade","milk","food","peace","list","condition","art","direction","rest","poison"};
-			String [] arr4={"money","twist","butter","fruit","road","silver","copy","authority","distance","wound"};
-			String [] arr5={"respect","digestion","competition","breath","liquid","argument","expert","fold","point","winter"};
-			String [] arr6={"transport","reward","force","discovery","building","wood","attack","mind","polish","connection"};
-			String [] arr7={"experience","mountain","morning","limit","size","print","metal","division","cotton","room"};
-			String [] arr8={"position","disease","trouble","rice","burst","attention","sign","minute","cook","friend"};
-			String [] arr9={"tin","iron","flight","company","brass","wind","detail","play","expansion","representative"};
-			String [] arr10={"mist","river","turn","business","front","disgust","silk","copper","work","powder"};
-			
-		String query="Select count(*) from image where Game_pic_id='"+picid+"' and Words in("+wordlist+")";
+		//finding words used in the game picture
+		String gamewords=wordlist.replace("\n", "").replace("\r", "");
+		
+		String query="Select count(*) as score from image where Game_pic_id='"+picid+"' and Words in("+gamewords+")";
 		System.out.println(query);
-		//System.out.println(wordlist);
+		
 		pstmt = conn.prepareStatement(query);
 		rslt = pstmt.executeQuery();
-			
-		int score=rslt.getInt(0);
-				
+		int score=0;
+		if(rslt.next())
+		{
+		score=rslt.getInt("score");
+		}		
 		System.out.println(score);
+		
 		conn.close();
 		return score;
-		
 		
 }	
 	

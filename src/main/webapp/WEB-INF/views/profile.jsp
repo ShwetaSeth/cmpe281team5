@@ -21,7 +21,14 @@ function submitForm(cell){
 </head>
 
 <body>
-<font size=3 style="position: absolute; right:50px; top:30px"> Welcome <%=username %> <a href = "signout"> Sign out</a> <br> </font>
+<div class="container">
+<div class = "content">
+
+
+<div id="navbar">
+		<jsp:include page="navbar.jsp"></jsp:include>
+</div>
+<h1> Welcome <%=username %></h1>
 
 <form id="form" method="get" action="play">
 
@@ -45,7 +52,9 @@ function submitForm(cell){
             </tr>
 	</table>
 	</center>
-</form>
 
+</form>
+</div>
+</div>
 </body>
 </html>
