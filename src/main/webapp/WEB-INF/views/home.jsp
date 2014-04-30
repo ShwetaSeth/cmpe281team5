@@ -7,9 +7,9 @@
 </head>
 
 <body>
-	<form class="box login" id="form1" method="post" action="home">
+	<form  class="box login" id="form1" method="post" action="home">
 		
-		<label>CMPE 281 Team 5 </label>
+		<h1>CMPE 281 Team 5 </h1>
 	
 		<fieldset class="boxBody">
 			<label>Username</label> <input type="text" tabindex="1"

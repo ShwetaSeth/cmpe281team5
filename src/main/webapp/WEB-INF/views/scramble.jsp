@@ -27,20 +27,19 @@ if( mins == null ) mins = "1";
 String secs = request.getParameter( "secs" );  
 if( secs == null ) secs = "1";  
 %>  
-<script>  
 
-function load()
-{
-	document.getElementById("word").focus();
-	//document.getElementById("word").select();
-	
-}
+<script>  
+window.onload=function(){
+    document.getElementById("word").focus();
+};
+
+
  
 var mins = <%=mins%>; // write mins to javascript  
 var secs = <%=secs%>; // write secs to javascript  
 function timer()  
 {  
-// tic tac  
+  
 if( --secs == -1 )  
 {  
 secs = 59;  

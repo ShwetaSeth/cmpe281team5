@@ -21,7 +21,9 @@ function submitForm(cell){
 </head>
 
 <body>
-<font size=3 style="position: absolute; right:50px; top:30px"> Welcome <%=username %> <a href = "signout"> Sign out</a> <br> </font>
+<div id="container">
+<div id = "content">
+<h1> Welcome <%=username %></h1> <a href = "signout"> Sign out</a> <br> 
 
 <form id="form" method="get" action="play">
 
@@ -45,7 +47,9 @@ function submitForm(cell){
             </tr>
 	</table>
 	</center>
-</form>
 
+</form>
+</div>
+</div>
 </body>
 </html>

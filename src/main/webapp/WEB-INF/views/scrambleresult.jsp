@@ -24,9 +24,9 @@ String myColor = (String)session.getAttribute("color");
 
 Your Results are 
 
-<label>Current Score</label><input type="text" value = ${currScore} name = "currScore"/>
+<label>Current Score</label><%=currScore %>
 <br>
-<label>Previous Score</label><input type="text" value = ${prevScore} name = "prevScore"/>
+<label>Previous Score</label><%=prevScore %>
 
 
 </body>
