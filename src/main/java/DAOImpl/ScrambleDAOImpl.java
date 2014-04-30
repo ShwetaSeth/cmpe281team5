@@ -138,14 +138,19 @@ public class ScrambleDAOImpl implements ScrambleDAO{
 			String query = "Select prevScore from scramble where username = '"
 					+ username + "'";
 			rslt = stmt.executeQuery(query);
+			
+			int prevScore = rslt.getInt("prevScore");
 			while (rslt.next()) {
 				System.out.println("prevScore is" + rslt.getInt("prevScore"));
 				connection.close();
-				return rslt.getInt("prevScore");
+				
 			}
 			
+			query = "UPDATE scramble SET prevScore= "+prevScore+" where username = '"+ username + "'";
+			pstmt = connection.prepareStatement(query);
+			pstmt.executeUpdate();
 			
-			
+			return rslt.getInt("prevScore");
 
 		} catch (Exception e) {
 			e.printStackTrace();

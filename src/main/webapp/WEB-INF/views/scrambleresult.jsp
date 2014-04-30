@@ -21,13 +21,14 @@ String myColor = (String)session.getAttribute("color");
 %>  
 
 <body bgcolor="<%=myColor %>">
+<div id="container">
+<div id = "content">
+<h1>Your Results are</h1>
 
-Your Results are 
-
-<label>Current Score</label><%=currScore %>
+<label>Current Score</label><input type="text" readonly="readonly" value = ${currScore} name = "currScore"/>
 <br>
-<label>Previous Score</label><%=prevScore %>
+<label>Previous Score</label><input type="text" readonly="readonly" value = ${prevScore} name = "prevScore"/>
 
-
+</div></div>
 </body>
 </html>
