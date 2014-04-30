@@ -28,6 +28,13 @@ String secs = request.getParameter( "secs" );
 if( secs == null ) secs = "1";  
 %>  
 <script>  
+
+function load()
+{
+	document.getElementById("word").focus();
+	//document.getElementById("word").select();
+	
+}
  
 var mins = <%=mins%>; // write mins to javascript  
 var secs = <%=secs%>; // write secs to javascript  
@@ -54,7 +61,8 @@ if( secs == 0 && mins == 0 ) // time over
 document.forma.Submit.disabled = true;  
 document.forma.mins.disabled = true; 
 document.forma.secs.disabled = true; 
-document.formb.results.style.display = "block";  
+document.formb.results.style.display = "block"; 
+
 
 }  
 else // call timer() recursively every 1000 ms == 1 sec  
@@ -71,7 +79,7 @@ window.setTimeout( "timer()", 1000 );
 <form  name="forma" method="post" action="scramble">
 Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid black;text-align:right">:<input type="text" name="secs" size="1" style="border:0px solid black">  
 
-
+<center>
 <table class = "CSSTableGenerator" border = '1'>
 
 <tr><td>a</td><td>m</td><td>a</td><td>z</td><td>o</td><td>n</td><td>a</td><td>a</td></tr>
@@ -84,8 +92,8 @@ Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid 
 <tr><td>a</td><td>a</td><td>a</td><td>a</td><td>r</td><td>r</td><td>a</td><td>a</td></tr>
 
 </table>
-
-<label>Enter the words</label><input autofocus="autofocus" type="text" name = "word"><button name="Submit" value="Submit">Submit</button>
+</center>
+<label>Enter the words</label><input type="text" id = "word" name = "word"><button name="Submit" value="Submit"  onclick="load()">Submit</button>
 <label>Score</label><input type="text" value = ${score} name = "word"/>
 
 

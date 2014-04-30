@@ -143,6 +143,9 @@ public class ScrambleDAOImpl implements ScrambleDAO{
 				connection.close();
 				return rslt.getInt("prevScore");
 			}
+			
+			
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();

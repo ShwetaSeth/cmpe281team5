@@ -20,8 +20,10 @@
 		</fieldset>
 		
 		<footer>
+			<label>New User?</label> <a href = "signup"><label>Register,</label></a>
 			<!-- <label><input type="checkbox" tabindex="3">Keep me logged in</label>-->
 			<input type="submit" class="btnLogin" value="Login" tabindex="3">
+			
 			
 		</footer>
 	</form>
