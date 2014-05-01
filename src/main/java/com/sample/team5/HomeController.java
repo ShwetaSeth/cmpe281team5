@@ -166,9 +166,6 @@ public class HomeController {
 		HomeController con = (HomeController)appContext.getBean("homeController");
 		String message = con.signUp(request,session,model);				
 		if(message.substring(0, 7).equals("Success")){
-			model.addAttribute("username", request.getParameter("username"));
-			uname = request.getParameter("username");
-			session.setAttribute("username", uname);
 			return "redirect:profile";
 		}
 		else{
@@ -189,8 +186,6 @@ public class HomeController {
 			topscoreChecked = "false";
 		
 		
-		
-		
 		user.setUsername(request.getParameter("username"));
 		user.setPassword(request.getParameter("password"));
 		user.setFname(request.getParameter("fname"));
@@ -202,12 +197,18 @@ public class HomeController {
 		
 		String result = userDAO.register(user);
 		
-		String game = request.getParameter("game");
-		String color = request.getParameter("backgroundColor");
-		
-		System.out.println(game);
-		model.addAttribute("username",uname);
-		session.setAttribute("color",color);
+		if(result.contains("Success"))
+		{
+			String favgame = request.getParameter("favgame");
+			String color = request.getParameter("backgroundColor");
+			uname = request.getParameter("username");
+			
+	
+			session.setAttribute("username", uname);
+			session.setAttribute("color",color);
+			session.setAttribute("favgame", favgame);
+			session.setAttribute("topscoreChecked", topscoreChecked);
+		}
 		//return "redirect:"+game;
 		
 		return result;
@@ -240,11 +241,17 @@ public class HomeController {
 	public String play(HttpServletRequest request, HttpSession session, Model model) {	
 		
 		String game = request.getParameter("game");
-		String color = request.getParameter("backgroundColor");
+		/*UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
+		User user = new User();
+		//int highScore;
 		
-		System.out.println(game);
-		model.addAttribute("username",uname);
-		session.setAttribute("color",color);
+		String username = (String)session.getAttribute("username");
+		user.setUsername(username);
+		*/
+		/*System.out.println("High Score is : "+ highScore);
+		
+		model.addAttribute("highScore",highScore);*/
+		
 		return "redirect:"+game;
 	}
 		

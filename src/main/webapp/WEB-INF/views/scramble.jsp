@@ -8,8 +8,11 @@
  <style type="text/css">
 <%@ include file="/resources/profile.css" %>
 </style> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%  
+
+<% 
   
 String myColor = (String)session.getAttribute("color");  
   if (myColor == null || myColor == ""){  
@@ -77,6 +80,14 @@ window.setTimeout( "timer()", 1000 );
 
 <form  name="forma" method="post" action="scramble">
 Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid black;text-align:right">:<input type="text" name="secs" size="1" style="border:0px solid black">  
+
+
+<div>
+<c:if test="${topscoreChecked ne 'false' }">
+<label>Highest Score</label><input type="text" value = ${highScore} name = "highScore"/>
+</c:if>
+</div>	
+
 
 <center>
 <table class = "CSSTableGenerator" border = '1'>

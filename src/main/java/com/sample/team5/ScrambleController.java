@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import DAO.ScrambleDAO;
+import DAO.UserDAO;
 import Entity.Scramble;
+import Entity.User;
 
 @Controller
 public class ScrambleController {
@@ -41,10 +43,23 @@ public class ScrambleController {
 	public String scramble(HttpServletRequest request, HttpSession session, Model model) throws SQLException {		
 		ScrambleController con = (ScrambleController)appContext.getBean("scrambleController");		
 		ScrambleDAO scrambleDAO = (ScrambleDAO)appContext.getBean("scrambleDAOImpl");
+		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
+		User user = new User();
+		
+		String username = (String) session.getAttribute("username");
+		String game = (String) session.getAttribute("favgame");
+		
+		user.setUsername(username);
+		
 		con.createScrambleTable();
 		con.createScrambleWords();
 		scrambleDAO.setGame();	
+		int highScore= userDAO.getHighestScore(user, game);
+		
 		model.addAttribute("score", "0");
+		
+		System.out.println("highScore is "+ highScore);
+		model.addAttribute("highScore",highScore);
 		
 		
 		return "scramble";

@@ -154,7 +154,7 @@ function addColor(cell){
               
              <td>
               <table>
-                <td><input type="radio" name="favgame" value="profile" /></td>
+                <td><input type="radio" name="favgame" value="memory" /></td>
                 <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/memory.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" /></div> </td>   
            </table>
               </td>

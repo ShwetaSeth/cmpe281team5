@@ -72,6 +72,8 @@ public class UserDAOImpl implements UserDAO {
 		return result;
 	}
 
+	
+	
 	@Override
 	public String logIn(User user) throws SQLException{
 		String result = "";
@@ -161,5 +163,41 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return user;
 	}
+	
+	
+	public int getHighestScore(User user,String game)
+	{
+		String result = "";
+    	String username = (user.getUsername()).toLowerCase();
+    	int highScore = -1;
 
+		try{
+			connection = dataSource.getConnection();
+			String query = "Select game1_highscore, game2_highscore,game3_highscore,game4_highscore from users where username = ?";
+			pstmt = connection.prepareStatement(query);
+			pstmt.setString(1, username);
+			rslt = pstmt.executeQuery();
+			rslt.next();
+			
+			if(game.contains("scramble"))
+				highScore = rslt.getInt("game1_highscore");
+			
+			if(game.contains("WhatsYourTech"))
+				highScore = rslt.getInt("game2_highscore");
+			
+			if(game.contains("memory"))
+				highScore = rslt.getInt("game3_highscore");
+			
+			if(game.contains("Puzzler"))
+				highScore = rslt.getInt("game4_highscore");
+			
+		
+			return highScore;
+			}catch(Exception e){
+				e.printStackTrace();
+			
+			}
+	
+			return -1;
+		}
 }
