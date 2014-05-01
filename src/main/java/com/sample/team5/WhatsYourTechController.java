@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import DAO.HintsDAO;
 import DAO.PlayersDAO;
+import DAO.UserDAO;
 import Entity.Hints;
 import Entity.Players;
+import Entity.User;
 
 @Controller
 public class WhatsYourTechController{
@@ -45,6 +47,10 @@ public class WhatsYourTechController{
 		String username = (String)session.getAttribute("username");
 		
 		WhatsYourTechController controller = (WhatsYourTechController)appContext.getBean("WhatsYourTech");		
+		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
+		User user = new User();
+		
+		
 		controller.createTablePlayers();
 		controller.createTableHints();
 		
@@ -56,8 +62,6 @@ public class WhatsYourTechController{
 		model.addAttribute("game_id",0);
 		
 		
-
-		String username = (String) session.getAttribute("username");
 		String game = (String) session.getAttribute("favgame");
 		user.setUsername(username);
 		int highScore= userDAO.getHighestScore(user, game);
