@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%String username = (String)session.getAttribute("username"); %>
 <%   
 String myColor = (String)session.getAttribute("color");  
@@ -12,6 +13,13 @@ String myColor = (String)session.getAttribute("color");
 <html>
 <head>
 	<title>What's Your Tech?</title>
+	<div>
+<c:if test="${topscoreChecked ne 'false' }">
+<label>Highest Score</label><input type="text" value = ${highScore} name = "highScore"/>
+</c:if>
+</div>	
+
+	
 	<link href="<c:url value="/resources/sample.css" />"  rel="stylesheet" type="text/css"  />
 
 <script language="javascript" type="text/javascript">

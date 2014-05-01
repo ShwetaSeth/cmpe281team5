@@ -54,6 +54,15 @@ public class WhatsYourTechController{
 		model.addAttribute("score", 0);
 		model.addAttribute("difficulty","none");
 		model.addAttribute("game_id",0);
+		
+		
+
+		String username = (String) session.getAttribute("username");
+		String game = (String) session.getAttribute("favgame");
+		user.setUsername(username);
+		int highScore= userDAO.getHighestScore(user, game);
+		model.addAttribute("highScore",highScore);
+		
 		return "WhatsYourTech";
 	}
 	

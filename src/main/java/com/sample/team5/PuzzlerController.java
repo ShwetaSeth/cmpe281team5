@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import DAO.PuzzlerDAO;
+import DAO.UserDAO;
 import Entity.Puzzler;
+import Entity.User;
 
 
 @Controller
@@ -39,12 +41,17 @@ public class PuzzlerController {
 	ApplicationContext appContext = AppContext.getApplicationContext();
 	
 	@RequestMapping(value = "Puzzler", method = RequestMethod.GET)
-	public String Puzzler(HttpServletRequest request,Model model) throws SQLException {	
+	public String Puzzler(HttpServletRequest request, HttpSession session, Model model) throws SQLException {	
 		PuzzlerController con = (PuzzlerController)appContext.getBean("puzzlerController");		
 		PuzzlerDAO puzzlerDAO = (PuzzlerDAO)appContext.getBean("puzzlerDAOImpl");
-		
-		//String color = request.getParameter("color");
-		//model.addAttribute("color",color);
+		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
+		User user = new User();
+
+		String username = (String) session.getAttribute("username");
+		String game = (String) session.getAttribute("favgame");
+		user.setUsername(username);
+		int highScore= userDAO.getHighestScore(user, game);
+		model.addAttribute("highScore",highScore);
 
 		con.createPuzzlerTable();
 		return "Puzzler";

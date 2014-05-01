@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <meta charset="US-ASCII">
@@ -234,6 +236,13 @@ function FindColumn(left) {
 		<div id="main" align="center">
 			<h1 >Puzzler</h1>
             <br></br>
+            
+<c:if test="${topscoreChecked ne 'false' }">
+<label>Highest Score</label><input type="text" value = ${highScore} name = "highScore"/>
+</c:if>
+</div>	
+
+<br><br>
   <font size=3 style="position: absolute; right:30px; top:50px"> <a href = "profile" id="back"> Back </a> </font>
             <div id="User" class ="User"><label >Moves:</label><input id="v1" type="text" Size = 6 name="moves" /></div>
             <div id="Timer"class="Timer" >Time</div>

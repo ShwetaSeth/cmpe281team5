@@ -46,19 +46,22 @@ public class ScrambleController {
 		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
 		User user = new User();
 		
-		String username = (String) session.getAttribute("username");
-		String game = (String) session.getAttribute("favgame");
 		
-		user.setUsername(username);
+		
+		
 		
 		con.createScrambleTable();
 		con.createScrambleWords();
 		scrambleDAO.setGame();	
-		int highScore= userDAO.getHighestScore(user, game);
+		
 		
 		model.addAttribute("score", "0");
 		
-		System.out.println("highScore is "+ highScore);
+	
+		String username = (String) session.getAttribute("username");
+		String game = (String) session.getAttribute("favgame");
+		user.setUsername(username);
+		int highScore= userDAO.getHighestScore(user, game);
 		model.addAttribute("highScore",highScore);
 		
 		
