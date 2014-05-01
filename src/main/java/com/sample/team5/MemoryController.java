@@ -1,15 +1,11 @@
 package com.sample.team5;
 
-import java.awt.List;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import DAO.MemoryDAO;
-import DAO.ScrambleDAO;
 import Entity.Memory;
-import Entity.Scramble;
 
 
 
@@ -55,10 +49,7 @@ public class MemoryController {
 	
 	public String memory(Model model) throws SQLException {		
 		MemoryController con = (MemoryController)appContext.getBean("memoryController");
-		
-		//MemoryDAO memoryDAO = (MemoryDAO)appContext.getBean("memoryDAOImpl");
-		
-		
+				
 		int num=con.selectGamePic();
 		String pic="wc"+num+".jpg"; 
 		model.addAttribute("pic",pic );
@@ -216,7 +207,7 @@ public String getScore(HttpServletRequest req, HttpSession session, Model model)
 		int currscore = con.getGameScore(req,session,score,picno);
 		System.out.println(currscore);
 		model.addAttribute("score",currscore );
-		model.addAttribute("message", "Your score for this game is:");
+		model.addAttribute("message", "Your score is: ");
 		
 		return "memoryscore";
 	}
@@ -266,7 +257,7 @@ public int countWords(int picid,String wordlist) throws SQLException{
 	
 	@RequestMapping(value = "memoryans", method = RequestMethod.POST)
 	public String enterWord(HttpServletRequest request, HttpSession session, Model model) {		
-		MemoryController con = (MemoryController)appContext.getBean("memoryController");		
+		//MemoryController con = (MemoryController)appContext.getBean("memoryController");		
 		model.addAttribute("picid", request.getParameter("picid"));
 		return "memoryscore";
 		

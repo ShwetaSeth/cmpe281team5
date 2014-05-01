@@ -7,7 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Memory Game</title>
 <link href="<c:url value="/resources/sample.css" />"  rel="stylesheet" type="text/css"  />
+<style>
 
+#bgpic{
+background:url(<c:url value="/resources/wood.jpg" />); 
+ background-size:100%;
+    }
+
+</style>
 <%  
 
 String myColor = (String)session.getAttribute("color");  
@@ -46,11 +53,12 @@ document.memform.secs.value = secs;
 // continue?  
 
 window.setTimeout( function()
-{document.getElementById('wcloud').style.visibility='hidden';document.getElementById('submit').disabled='';document.getElementById('showtext').style.display='block';}, 11000 );
+{document.getElementById('wcloud').style.visibility='hidden';document.getElementById('submit').disabled='';document.getElementById('showtext').style.visibility='visible';}, 11000 );
 
 if( document.getElementById('secs').value == '00' && document.getElementById('mins').value == '00' ) // time over  
 {  
-
+	document.memform.secs.disabled = true;  
+	document.memform.mins.disabled = true;  
 }
 else // call timer() recursively every 1000 ms == 1 sec  
 {  
@@ -64,25 +72,27 @@ window.setTimeout( "timer()", 1000 );
 </script></head>  
  
 
-
+<body bgcolor="<%=myColor %>">
+<div align="center">
 
 <form name="memform" method="post" action="memoryans">
 
 <input type="hidden" name="pic" id="pic" value="${pic}"/>
 
 <input type="hidden" name="picid" id="picid" value="${picid}"/>
-<fieldset>
-<legend>
+<fieldset  id="bgpic" style="width:50%;">
 
-<input  align="middle" type="text" name="mins" id="mins" size="1" style="border:0px solid black;text-align:right;font-size: 18pt;">:
-<input type="text" id="secs" name="secs" size="1" style="border:0px solid black;font-size: 18pt;">  
 
-</legend>
+<input  align="middle" type="text" readonly="readonly" name="mins" id="mins" size="1" style="border:0px solid black;text-align:right;font-size: 18pt;"><span style="color:#ffffff;font-size: 18pt;">:</span>
+<input type="text" id="secs" readonly="readonly" name="secs" size="1" style="border:0px solid black;font-size: 18pt;">  
+
+
+<p><span style="font-size:24px;font-weight:bold;color:#ffffff;">Instructions:</span>&nbsp;<span style="color:#ffffff;font-size:18px;"> Memorize the words in the picture in a time of 10 seconds!Test your memory by remembering all the words.</span> </p>
 <div align='center' id='wcloud'>
 <img src="<c:url value="/resources/${pic}" />" alt="wordcloud" height="300" width="500" border="1"/>
 </div>
 <div align='center' id='showtext' >
-<label style="font-size:18pt;display:none;">Remember the words?</label>
+<label style="font-size:18pt;visibility:hidden;">Remember the words?</label>
 </div>
 <br/><br/>
 <div align='center' id='answer'>
@@ -92,7 +102,7 @@ window.setTimeout( "timer()", 1000 );
 </div>
 </fieldset>
 </form>
-
+</div>
 
 <script>  
 <!--  
