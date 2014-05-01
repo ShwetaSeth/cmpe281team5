@@ -42,6 +42,8 @@ public class HomeController {
 	public String home(Model model) throws SQLException{		
 		HomeController con = (HomeController)appContext.getBean("homeController");		
 		con.createTable();
+		con.createColorsTable();
+		con.populateColorsTable();
 		return "home";
 	}
 	
@@ -63,8 +65,10 @@ public class HomeController {
 						 		"username VARCHAR(45) NOT NULL ," + 
 						 		"password VARCHAR(45) NOT NULL ," +
 						 		"fname VARCHAR(45) NOT NULL ," +
-						 		"lname VARCHAR(45) NULL DEFAULT 'whitesmoke'," +
-						 		"bgcolor VARCHAR(45) NULL ," +
+						 		"lname VARCHAR(45) NULL ," +
+						 		"bgcolor VARCHAR(45) NULL DEFAULT 'whitesmoke'," +
+						 		"top_score_wanted VARCHAR(45) NOT NULL ," +
+						 		"favgame VARCHAR(45) NOT NULL," +
 						 		"game1_highscore INT NULL DEFAULT 0 ," +					  
 						 		"game2_highscore INT NULL DEFAULT 0 ," +
 						 		"game3_highscore INT NULL DEFAULT 0 ," +
@@ -76,8 +80,51 @@ public class HomeController {
 				System.out.println("Table 'users' created.");
 			}
 			conn.close();			
-	}		
+	}	
 	
+	
+	public void createColorsTable() throws SQLException{
+		Connection conn;
+
+		conn = dataSource.getConnection();
+		
+		DatabaseMetaData meta = conn.getMetaData();
+		ResultSet res = meta.getTables(null, null, "colors", null);
+		if(res.next()){
+//			System.out.println("Table 'users' already exists.");
+			logger.info("Table 'users' already exists.");
+		}
+		else{
+			Statement stmt = conn.createStatement();
+			
+			String query =  "CREATE TABLE IF NOT EXISTS colors ( " +
+					 		"bcolor VARCHAR(15) NOT NULL ," + 
+					 		"PRIMARY KEY (bcolor) )";
+			stmt.executeUpdate(query);
+			logger.info("Table 'colors' created.");
+			System.out.println("Table 'colors' created.");
+		}
+		conn.close();			
+}	
+	
+	public void populateColorsTable() throws SQLException{
+		Connection conn;
+		conn = dataSource.getConnection();
+		Statement stmt = conn.createStatement();
+		String query = "INSERT IGNORE INTO colors (bcolor) VALUES ('whitesmoke')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO colors (bcolor) VALUES ('honeydew')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO colors (bcolor) VALUES ('lightyellow')";
+		stmt.executeUpdate(query);
+
+
+		logger.info("Table colors inserted with values");
+		System.out.println("Table colors inserted with values");
+				
+		conn.close();				
+	}	
+
 	@RequestMapping(value = "home", method = RequestMethod.POST)
 	public String getSignIn(HttpServletRequest request, HttpSession session, Model model) throws SQLException{		
 		session.setMaxInactiveInterval(300);
@@ -133,12 +180,26 @@ public class HomeController {
 	public String signUp(HttpServletRequest request) throws SQLException {		
 		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
 		User user = new User();
+		String topscoreChecked ;
+		
+		String topscoreCheckBoxValue = request.getParameter("topscore");
+		if (topscoreCheckBoxValue != null)
+			topscoreChecked = "true";
+		else
+			topscoreChecked = "false";
+		
+		
+		
 		
 		user.setUsername(request.getParameter("username"));
 		user.setPassword(request.getParameter("password"));
 		user.setFname(request.getParameter("fname"));
 		user.setLname(request.getParameter("lname"));
-		user.setBgcolor(request.getParameter("bgcolor"));
+		user.setBgcolor(request.getParameter("colors"));
+		user.setTopscoreChecked(topscoreChecked);
+		user.setFavgame(request.getParameter("favgame"));
+		
+		
 		String result = userDAO.register(user);
 		return result;
 	}

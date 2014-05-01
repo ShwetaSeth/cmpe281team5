@@ -6,6 +6,24 @@ public class User {
 	String fname;
 	String lname;
 	String bgcolor;
+	String topscoreChecked ;
+	String favgame;
+	
+	public String isTopscoreChecked() {
+		return topscoreChecked;
+	}
+	public void setTopscoreChecked(String topscoreChecked) {
+		this.topscoreChecked = topscoreChecked;
+	}
+	public String getFavgame() {
+		return favgame;
+	}
+	public void setFavgame(String favgame) {
+		this.favgame = favgame;
+	}
+	public String getTopscoreChecked() {
+		return topscoreChecked;
+	}
 	int game1_highscore;
 	int game2_highscore;
 	int game3_highscore;

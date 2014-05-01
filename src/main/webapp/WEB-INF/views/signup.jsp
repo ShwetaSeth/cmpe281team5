@@ -67,7 +67,17 @@ function validate(){
 
 function addColor(cell){
 	
-	document.getElementById("bgcolor").value = cell;	
+		
+	if(document.getElementById(cell).style.border == "+l")
+		{
+		document.getElementById(cell).style.border = "2px solid ##420101";
+		}
+	else
+		{
+		document.getElementById(cell).style.border = "2px solid #000000";
+		document.getElementById("bgcolor").value = cell;
+		}
+	
 }
 
 </script>
@@ -93,10 +103,74 @@ function addColor(cell){
 	<div class="form-row"><span class="label"><font size="3"> *Retype Password </font> </span><input size="30" style="position: absolute; left: 140px;" type="password" id="password1" name="password1" /></div><br>
 	<div class="form-row"><span class="label"><font size="3"> Background Color </font></span></div><br>
 	<div class="form-row"> 
-		<div class="colors" style="background-color:whitesmoke;border:2px solid #000000;margin-left:140px;margin-top:10px;" onclick="addColor('whitesmoke');"></div> 
-		<div class="colors" style="background-color:honeydew;border:2px solid ##420101;margin-left:20px;margin-top:10px;" onclick="addColor('honeydew');"></div>
-		<div class="colors" style="background-color:lightyellow;border:2px solid ##420101;margin-left:20px;margin-top:10px;" onclick="addColor('lightyellow');"></div>	
+		<table border="0">
+		<tr>
+              <td>
+              <table>
+				<td><input type="radio" name="colors" value="whitesmoke" onclick="addColor(whitesmoke)"/></td>
+				<td><div id = "whitesmoke" class="colors" style="background-color:whitesmoke;border:2px solid ##420101;"></div></td>
+				 </table>
+              </td>
+			
+			<td>
+              <table>	
+				<td><input type="radio" name="colors" value="honeydew" onclick="addColor(honeydew)"/></td>
+				<td><div id = "honeydew" class="colors" style="background-color:honeydew;border:2px solid ##420101;"></div></td>
+			  </table>
+			</td>
+				
+			<td>
+              <table>
+				<td><input type="radio" name="colors" value="lightyellow" onclick="addColor(lightyellow)"/></td>
+				<td><div id = "lightyellow" class="colors" style="background-color:lightyellow;border:2px solid ##420101;"></div></td>
+			  </table>
+			</td>
+			</tr>
+			</table>
 	</div>
+	
+	<br>
+	<div class="form-row">
+	<input size="30" type="checkbox" id="topscore" name="topscore" value= "topscore" />
+	<span class="label"><font size="3">See my highest score when playing game </font> </span></div><br>
+	
+	<div class="form-row"><span class="label"><font size="3">Select a game to start at log in </font> </span>
+	
+		<table border="0">
+		<tr>
+              <td>
+              <table>
+                <td><input type="radio" name="favgame" value="scramble" /></td>
+                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" /></div> </td>   
+              </table>
+              </td>
+            
+              <td>
+              <table>
+                <td><input type="radio" name="favgame" value="WhatsYourTech" /></td>
+                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:20px;" /></div> </td>   
+              </table>
+              </td>
+              
+             <td>
+              <table>
+                <td><input type="radio" name="favgame" value="profile" /></td>
+                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/memory.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" /></div> </td>   
+           </table>
+              </td>
+            
+             <td>
+              <table>
+                <td><input type="radio" name="favgame" value="Puzzler" /></td>
+                <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/Puzzler1.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" /></div> </td>   
+            </table>
+             </td>      
+        </table>
+
+     </div>
+	
+	
+	
 	<div class="form-row"><input class="submit" type="submit" value="Sign Up" style="position: absolute; left: 230px;" onclick = "return validate();"></div><br>
 </form>
 

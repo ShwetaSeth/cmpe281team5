@@ -41,7 +41,7 @@
 			<li>
 			<h3>Sign Out</h3>
 			<p>
-			<a href="signOut">Sign Out</a>
+			<a href="signout">Sign Out</a>
 			</p></li>
 	</ul>
 

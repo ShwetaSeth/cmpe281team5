@@ -46,13 +46,15 @@ public class UserDAOImpl implements UserDAO {
 				}
 			}
 			if(i==0){
-				query = "INSERT INTO users (username,password,fname,lname,bgcolor) values(?,?,?,?,?)";
+				query = "INSERT INTO users (username,password,fname,lname,bgcolor,top_score_wanted,favgame) values(?,?,?,?,?,?,?)";
 				pstmt = connection.prepareStatement(query);
 				pstmt.setString(1, user.getUsername());
 				pstmt.setString(2, user.getPassword());
 				pstmt.setString(3, user.getFname());
 				pstmt.setString(4, user.getLname());
 				pstmt.setString(5, user.getBgcolor());
+				pstmt.setString(6, user.getTopscoreChecked());
+				pstmt.setString(7, user.getFavgame());
 				pstmt.executeUpdate();
 				connection.close();
 				result= "Success:User Created with username '" + username + "'";
@@ -144,6 +146,8 @@ public class UserDAOImpl implements UserDAO {
 				user.setFname(rslt.getString("fname"));
 				user.setLname(rslt.getString("lname"));
 				user.setBgcolor(rslt.getString("bgcolor"));
+				user.setTopscoreChecked(rslt.getString("top_score_wanted"));
+				user.setFavgame(rslt.getString("favgame"));
 				user.setGame1_highscore(rslt.getInt("game1_highscore"));
 				user.setGame2_highscore(rslt.getInt("game2_highscore"));
 				user.setGame3_highscore(rslt.getInt("game3_highscore"));
