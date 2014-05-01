@@ -164,7 +164,7 @@ public class HomeController {
 	public String getSignUp(HttpServletRequest request, HttpSession session, Model model) throws SQLException {		
 		session.setMaxInactiveInterval(300);
 		HomeController con = (HomeController)appContext.getBean("homeController");
-		String message = con.signUp(request);				
+		String message = con.signUp(request,session,model);				
 		if(message.substring(0, 7).equals("Success")){
 			model.addAttribute("username", request.getParameter("username"));
 			uname = request.getParameter("username");
@@ -177,7 +177,7 @@ public class HomeController {
 		}							
 	}
 	
-	public String signUp(HttpServletRequest request) throws SQLException {		
+	public String signUp(HttpServletRequest request, HttpSession session,Model model) throws SQLException {		
 		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
 		User user = new User();
 		String topscoreChecked ;
@@ -201,6 +201,15 @@ public class HomeController {
 		
 		
 		String result = userDAO.register(user);
+		
+		String game = request.getParameter("game");
+		String color = request.getParameter("backgroundColor");
+		
+		System.out.println(game);
+		model.addAttribute("username",uname);
+		session.setAttribute("color",color);
+		//return "redirect:"+game;
+		
 		return result;
 	}
 	
