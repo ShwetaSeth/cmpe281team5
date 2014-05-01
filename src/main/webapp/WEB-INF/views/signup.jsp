@@ -66,18 +66,7 @@ function validate(){
 }
 
 function addColor(cell){
-	
-		
-	if(document.getElementById(cell).style.border == "+l")
-		{
-		document.getElementById(cell).style.border = "2px solid ##420101";
-		}
-	else
-		{
-		document.getElementById(cell).style.border = "2px solid #000000";
 		document.getElementById("bgcolor").value = cell;
-		}
-	
 }
 
 </script>

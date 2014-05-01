@@ -42,29 +42,27 @@ function submitForm(cell){
 <center>
 	<table style="margin-top:200px;">
             <tr>
-				<div>
+				
 					<c:if test ='<%=favgame.equalsIgnoreCase("scramble") %>'>
 					<td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('scramble');"/></div> </td>   
 					</c:if>
-				</div>
 				
-				<div>
+				
 					<c:if test ='<%=favgame.equalsIgnoreCase("WhatsYourTech") %>'>t>
 					<td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('WhatsYourTech');"/></div> </td>   
 					</c:if>
-				</div>
 				
-				<div>
+				
+				
 					<c:if test ='<%=favgame.equalsIgnoreCase("memory") %>'>t>
 					 <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/memory.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('memory');" /></div> </td>   
 					</c:if>
-				</div>
 				
-				<div>
+				
+			
 					<c:if test ='<%=favgame.equalsIgnoreCase("Puzzler") %>'>t>
 					<td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/Puzzler1.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('Puzzler');"/></div> </td>   
 					</c:if>
-				</div>
 			
 			</tr>
 	</table>

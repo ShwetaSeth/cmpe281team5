@@ -197,19 +197,17 @@ public class HomeController {
 		
 		String result = userDAO.register(user);
 		
-		if(result.contains("Success"))
-		{
+		
 			String favgame = request.getParameter("favgame");
-			String color = request.getParameter("backgroundColor");
+			String color = request.getParameter("colors");
 			uname = request.getParameter("username");
 			
-	
+			System.out.println(color);
 			session.setAttribute("username", uname);
 			session.setAttribute("color",color);
 			session.setAttribute("favgame", favgame);
 			session.setAttribute("topscoreChecked", topscoreChecked);
-		}
-		//return "redirect:"+game;
+		
 		
 		return result;
 	}

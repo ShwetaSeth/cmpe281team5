@@ -46,10 +46,6 @@ public class ScrambleController {
 		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
 		User user = new User();
 		
-		
-		
-		
-		
 		con.createScrambleTable();
 		con.createScrambleWords();
 		scrambleDAO.setGame();	
