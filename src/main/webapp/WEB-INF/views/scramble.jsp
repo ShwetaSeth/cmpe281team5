@@ -122,7 +122,7 @@ Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid 
 <hr>  
 <form action="results" name="formb" method="post">  
 <input type="hidden" value = "${score}" name = "score"/>
-<input type="submit" name="results" value="View Results" style="display:none;">   
+<input type="submit" name="results" value="View and Save Results" style="display:none;">   
 </form>  
 <script>  
 <!--  
