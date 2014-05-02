@@ -28,7 +28,7 @@
 			<li>
 			<h3>Edit Profile</h3>
 			<p>
-			<a href="editProfile.jsp">Edit Profile</a>
+			<a href="editProfile">Edit Profile</a>
 			</p></li>
 			
 			

@@ -46,7 +46,7 @@ public class UserDAOImpl implements UserDAO {
 				}
 			}
 			if(i==0){
-				query = "INSERT INTO users (username,password,fname,lname,bgcolor,top_score_wanted,favgame) values(?,?,?,?,?,?,?)";
+				query = "INSERT INTO users (username,password,fname,lname,bgcolor,topscoreChecked,favgame) values(?,?,?,?,?,?,?)";
 				pstmt = connection.prepareStatement(query);
 				pstmt.setString(1, user.getUsername());
 				pstmt.setString(2, user.getPassword());
@@ -148,7 +148,7 @@ public class UserDAOImpl implements UserDAO {
 				user.setFname(rslt.getString("fname"));
 				user.setLname(rslt.getString("lname"));
 				user.setBgcolor(rslt.getString("bgcolor"));
-				user.setTopscoreChecked(rslt.getString("top_score_wanted"));
+				user.setTopscoreChecked(rslt.getString("topscoreChecked"));
 				user.setFavgame(rslt.getString("favgame"));
 				user.setGame1_highscore(rslt.getInt("game1_highscore"));
 				user.setGame2_highscore(rslt.getInt("game2_highscore"));
@@ -200,4 +200,41 @@ public class UserDAOImpl implements UserDAO {
 	
 			return -1;
 		}
-}
+	
+	
+	public String[] getFeatures(User user)
+	{
+		String result = "";
+    	String username = (user.getUsername()).toLowerCase();
+    	String favgame,topscoreChecked,bgcolor;
+    	String[] features = new String[3];
+
+		try{
+			connection = dataSource.getConnection();
+			String query = "Select favgame, bgcolor, topscoreChecked from users where username = ?";
+			pstmt = connection.prepareStatement(query);
+			pstmt.setString(1, username);
+			rslt = pstmt.executeQuery();
+			rslt.next();
+			
+	
+			favgame = rslt.getString("favgame");
+			bgcolor = rslt.getString("bgcolor");
+			topscoreChecked = rslt.getString("topscoreChecked");
+			
+			features[0] = favgame;
+			features[1] = bgcolor;
+			features[2] = topscoreChecked;
+			
+			
+		
+			return features;
+			}catch(Exception e){
+				e.printStackTrace();
+			
+			}
+	
+			return null;
+		}
+	}
+

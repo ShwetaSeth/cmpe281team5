@@ -67,7 +67,7 @@ public class HomeController {
 						 		"fname VARCHAR(45) NOT NULL ," +
 						 		"lname VARCHAR(45) NULL ," +
 						 		"bgcolor VARCHAR(45) NULL DEFAULT 'whitesmoke'," +
-						 		"top_score_wanted VARCHAR(45) NOT NULL ," +
+						 		"topscoreChecked VARCHAR(45) NOT NULL ," +
 						 		"favgame VARCHAR(45) NOT NULL," +
 						 		"game1_highscore INT NULL DEFAULT 0 ," +					  
 						 		"game2_highscore INT NULL DEFAULT 0 ," +
@@ -129,11 +129,44 @@ public class HomeController {
 	public String getSignIn(HttpServletRequest request, HttpSession session, Model model) throws SQLException{		
 		session.setMaxInactiveInterval(300);
 		HomeController con = (HomeController)appContext.getBean("homeController");
-		String message = con.signIn(request);	
+		User user = new User();
+		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
+		
+	
+		
+		String message = con.signIn(request,session);	
 		if(message.substring(0, 7).equals("Success")){
+			
 			model.addAttribute("username", request.getParameter("username"));
 			uname = request.getParameter("username");			
+			
 			session.setAttribute("username", uname);
+			
+			user.setUsername(uname);
+			String[] features = userDAO.getFeatures(user);
+			
+			user.setFavgame(features[0]);
+			user.setBgcolor(features[1]);
+			user.setTopscoreChecked(features[2]);
+			
+			
+			session.setAttribute("color",user.getBgcolor());
+			session.setAttribute("favgame", user.getFavgame());
+			session.setAttribute("topscoreChecked", user.getTopscoreChecked());
+			
+			
+			
+			session.setAttribute("user", user);
+			
+			if(session.getAttribute("user")== null)
+				System.out.println("session user is null");
+			else
+				System.out.println("session user is not null");
+				
+			
+			
+			
+			
 			return "redirect:profile";
 		}
 		else{
@@ -143,14 +176,18 @@ public class HomeController {
 	}
 	
 	
-	public String signIn(HttpServletRequest request) throws SQLException {		
+	public String signIn(HttpServletRequest request,HttpSession session) throws SQLException {		
 		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
 		User user = new User();
 		
 		user.setUsername(request.getParameter("username"));
 		user.setPassword(request.getParameter("password"));
 		
+
+		
+		
 		String result = userDAO.logIn(user);
+		
 		return result;
 	}
 	
@@ -207,6 +244,8 @@ public class HomeController {
 			session.setAttribute("color",color);
 			session.setAttribute("favgame", favgame);
 			session.setAttribute("topscoreChecked", topscoreChecked);
+			
+			session.setAttribute("user", user);
 		
 		
 		return result;
@@ -253,4 +292,14 @@ public class HomeController {
 		return "redirect:"+game;
 	}
 		
+	@RequestMapping(value = "editProfile", method = RequestMethod.GET)
+	public String editProfile(HttpServletRequest request, HttpSession session, Model model) throws SQLException{	
+		
+		if(session.getAttribute("user")== null)
+			System.out.println("session user is null");
+		
+		model.addAttribute("user",session.getAttribute("user"));
+		
+		return "editProfile";
+	}
 }

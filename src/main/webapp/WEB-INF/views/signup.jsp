@@ -65,9 +65,6 @@ function validate(){
 	}
 }
 
-function addColor(cell){
-		document.getElementById("bgcolor").value = cell;
-}
 
 </script>
 
@@ -82,7 +79,6 @@ function addColor(cell){
 <div><font size="2" style="position: absolute; left: 440px; top: 190px">- Password must be between 6 and 16 characters and <br> must not have the special characters (!`~@#,$_%^&amp;*()+=-[]\/';{}|":&lt;&gt;?).</font></div>
 
 <form id="form1" method="post" action="signup">
-	<input type="hidden" name="bgcolor" id="bgcolor" value="whitesmoke"/>
 	
 	<div class="form-row"> <font color="red" size="2">${message}</font></div><br>
 	<div class="form-row"><span class="label"><font size="3"> *First name </font> </span><input size="30" style="position: absolute; left: 140px;" type="text" id="fname" name="fname" /></div><br>
@@ -96,21 +92,21 @@ function addColor(cell){
 		<tr>
               <td>
               <table>
-				<td><input type="radio" name="colors" value="whitesmoke" onclick="addColor(whitesmoke)"/></td>
+				<td><input type="radio" name="colors" value="whitesmoke" /></td>
 				<td><div id = "whitesmoke" class="colors" style="background-color:whitesmoke;border:2px solid ##420101;"></div></td>
 				 </table>
               </td>
 			
 			<td>
               <table>	
-				<td><input type="radio" name="colors" value="honeydew" onclick="addColor(honeydew)"/></td>
+				<td><input type="radio" name="colors" value="honeydew" /></td>
 				<td><div id = "honeydew" class="colors" style="background-color:honeydew;border:2px solid ##420101;"></div></td>
 			  </table>
 			</td>
 				
 			<td>
               <table>
-				<td><input type="radio" name="colors" value="lightyellow" onclick="addColor(lightyellow)"/></td>
+				<td><input type="radio" name="colors" value="lightyellow"/></td>
 				<td><div id = "lightyellow" class="colors" style="background-color:lightyellow;border:2px solid ##420101;"></div></td>
 			  </table>
 			</td>
