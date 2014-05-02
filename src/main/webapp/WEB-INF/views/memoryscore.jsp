@@ -7,7 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Memory Game Score</title>
 <link href="<c:url value="/resources/sample.css" />"  rel="stylesheet" type="text/css"  />
+<style>
 
+#bgpic{
+background:url(<c:url value="/resources/wood.jpg" />); 
+ background-size:100%;
+    }
+
+</style>
 <% 
 String mins = request.getParameter( "mins" ); 
 if( mins == null ) mins = "1";  
@@ -17,26 +24,34 @@ if( secs == null ) secs = "1";
 
 int result=0;
 String x = request.getParameter("submit");
-//out.println(x);
 if(x!=null && x.equals("Submit")) result = 1;
 %> 
  
 <script type="text/javascript">  
+
+window.addEventListener("keyup", hitenter, false);
   
-  //document.write("\n");--spacebar event
+function hitenter(e)
+  {
+	  //go to nextline is spacebar pressed
+	if (window.event.keyCode == "32") 
+	{
+      
+       document.getElementById('ans').value = document.getElementById('ans').value+"\n";
+      
+    }
+		   
+  } 
+  
   
 var mins = <%=mins%>; // write mins to javascript 
 var secs = <%=secs%>; // write secs to javascript
 var text = <%=result%>;
-//alert(text);
 if(text==1)
 {
-	//alert("here");
+	
 	alert(document.getElementById("ins").style.visibility);
-	//document.getElementById("ans").style.visibility = "hidden"; 
 	document.getElementById("ins").style.visibility = "hidden"; 
-	//document.memoryscore.style.visibility = 'hidden';
-	//document.memoryscore.style.visibility = 'hidden';
 }
 
 	
@@ -58,10 +73,11 @@ if( mins < 10 ) mins = "0" + parseInt( mins, 10 );
 document.memoryscore.mins.value = mins;   
 document.memoryscore.secs.value = secs;  
  
-//window.setTimeout( function(){document.getElementById('ans').style.display='none';}, 11000 );
+window.setTimeout( function(){document.getElementById('submit').disabled='disabled';}, 11000 );
 if(document.getElementById('secs').value == '00' && document.getElementById('mins').value == '00') // time over  
 {  
-	 
+	document.memoryscore.mins.disabled = true;   
+	document.memoryscore.secs.disabled = true;   
 }
 else // call timer() recursively every 1000 ms == 1 sec  
 {  
@@ -82,21 +98,21 @@ window.setTimeout( "timer()", 1000 );
 <input type="hidden" name="score" id="score" value="${score}"/>
 
 
-<fieldset style="width:50%;">
-<legend>
+<fieldset style="width:50%;" id="bgpic">
 
 <input  align="middle" type="text" name="mins" id="mins" size="1" style="border:0px solid black;text-align:right;font-size: 18pt;"/>:
 <input type="text" id="secs" name="secs" size="1" style="border:0px solid black;font-size: 18pt;"/>  
 
-</legend>
+
   
 <table>
-<tr><td><label style="font-size: 18pt;">${message}${score}</label></td></tr>
+<tr><td><label style="font-size: 18pt;color:#ffffff;">${message}${score}</label></td></tr>
 <tr id="ins">
-<td><label>Enter the words:</label></td>
-<td><textarea name="ans" id="ans" cols="20" rows="10" style="overflow:hidden;"></textarea></td>
+<td><label style="color:#ffffff;font-size: 14pt;">Enter the words:</label></td>
+<td><textarea name="ans" id="ans" cols="20" rows="10" style="overflow:hidden;"></textarea><br/></td>
 </tr>
-<tr id="ins"><td>&nbsp;&nbsp;</td><td><input id="submit" type="submit" name="submit" value="Submit"></td></tr>
+<tr id="ins">
+<td>&nbsp;&nbsp;</td><td><input id="submit" type="submit" name="submit" value="Submit"></td></tr>
 </table>
 <br/><br/>
 
