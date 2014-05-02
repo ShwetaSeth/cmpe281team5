@@ -127,6 +127,9 @@ public class WhatsYourTechController{
 			model.addAttribute("difficulty","none");
 			model.addAttribute("game_id",0);
 			
+			String highScore = request.getParameter("highScore");
+			model.addAttribute("highScore",highScore);
+			
 			return "WhatsYourTech";
 		}
 		
