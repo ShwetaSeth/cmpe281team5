@@ -133,6 +133,7 @@ public class HomeController {
 		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
 		
 		String message = con.signIn(request,session);	
+		
 		if(message.substring(0, 7).equals("Success")){
 			
 			model.addAttribute("username", request.getParameter("username"));
@@ -169,9 +170,6 @@ public class HomeController {
 		user.setUsername(request.getParameter("username"));
 		user.setPassword(request.getParameter("password"));
 		
-
-		
-		
 		String result = userDAO.logIn(user);
 		
 		return result;
@@ -189,6 +187,7 @@ public class HomeController {
 		HomeController con = (HomeController)appContext.getBean("homeController");
 		String message = con.signUp(request,session,model);				
 		if(message.substring(0, 7).equals("Success")){
+			
 			return "redirect:profile";
 		}
 		else{
@@ -217,23 +216,24 @@ public class HomeController {
 		user.setTopscoreChecked(topscoreChecked);
 		user.setFavgame(request.getParameter("favgame"));
 		
-		
 		String result = userDAO.register(user);
 		
-		
-			String favgame = request.getParameter("favgame");
-			String color = request.getParameter("colors");
-			uname = request.getParameter("username");
+		String favgame = request.getParameter("favgame");
+		String color = request.getParameter("colors");
+		uname = request.getParameter("username");
 			
-			System.out.println(color);
-			session.setAttribute("username", uname);
-			session.setAttribute("color",color);
-			session.setAttribute("favgame", favgame);
-			session.setAttribute("topscoreChecked", topscoreChecked);
-			
-			session.setAttribute("user", user);
+		System.out.println(color);
+		session.setAttribute("username", uname);
+		session.setAttribute("color",color);
+		session.setAttribute("favgame", favgame);
+		session.setAttribute("topscoreChecked", topscoreChecked);
+		session.setAttribute("game1_highscore", 0);
+		session.setAttribute("game2_highscore", 0);
+		session.setAttribute("game3_highscore", 0);
+		session.setAttribute("game4_highscore", 0);
 		
-		
+		session.setAttribute("user", user);
+				
 		return result;
 	}
 	
@@ -252,10 +252,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "profile", method = RequestMethod.GET)
-	public String getProfile(Model model) throws SQLException{		
+	public String getProfile(Model model, HttpSession session) throws SQLException{		
 		model.addAttribute("username",uname);
-		UserDAO users = (UserDAO)appContext.getBean("userDAOImpl");
-		User user = users.getUser(uname);
+		User user = (User)session.getAttribute("user");
 		model.addAttribute("color",user.getBgcolor());
 		return "profile";
 	}
@@ -264,22 +263,11 @@ public class HomeController {
 	public String play(HttpServletRequest request, HttpSession session, Model model) throws SQLException {	
 		
 		String game = request.getParameter("game");
-		/*UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
-		User user = new User();
-		//int highScore;
-		
-		String username = (String)session.getAttribute("username");
-		user.setUsername(username);
-		*/
-		/*System.out.println("High Score is : "+ highScore);
-		
-		model.addAttribute("highScore",highScore);*/
-		UserDAO users = (UserDAO)appContext.getBean("userDAOImpl");
 		
 		model.addAttribute("username",uname);
-		User user = users.getUser(uname);
-		model.addAttribute("color",user.getBgcolor());
-		
+
+		User user = (User)session.getAttribute("user");
+		model.addAttribute("color",user.getBgcolor());		
 		return "redirect:"+game;
 	}
 		
@@ -288,14 +276,10 @@ public class HomeController {
 		
 		User user = new User();
 		user = (User)session.getAttribute("user");
-		
 		if(user== null)
 			System.out.println("user is null");
-		
 		System.out.println("First name is :"+user.getFname());
-		
 		model.addAttribute("user",user);
-		
 		return "editProfile";
 	}
 	
@@ -305,9 +289,6 @@ public class HomeController {
 		User user = new User();
 		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
 		
-		user = (User)session.getAttribute("user");
-		
-		
 		String topscoreChecked ;
 	
 		String topscoreCheckBoxValue = request.getParameter("topscore");
@@ -316,7 +297,7 @@ public class HomeController {
 		else
 			topscoreChecked = "false";
 		
-		user.setUsername(request.getParameter("username"));
+		user.setUsername((String)session.getAttribute("username"));
 		user.setPassword(request.getParameter("password"));
 		user.setFname(request.getParameter("fname"));
 		user.setLname(request.getParameter("lname"));

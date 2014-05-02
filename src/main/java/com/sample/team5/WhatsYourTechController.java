@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import DAO.HintsDAO;
 import DAO.PlayersDAO;
-import DAO.UserDAO;
 import Entity.Hints;
 import Entity.Players;
 import Entity.User;
@@ -44,31 +43,32 @@ public class WhatsYourTechController{
 	
 	@RequestMapping(value = "WhatsYourTech", method = RequestMethod.GET)
 	public String getPage(HttpServletRequest request, HttpSession session, Model model) throws SQLException{		
-		String username = (String)session.getAttribute("username");
 		
 		WhatsYourTechController controller = (WhatsYourTechController)appContext.getBean("WhatsYourTech");		
-		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
-		User user = new User();
+
+		User user = (User)session.getAttribute("user");
 		
 		controller.createTablePlayers();
 		controller.createTableHints();
 		
-		model.addAttribute("username", username);
+		model.addAttribute("username", user.getUsername());
 		model.addAttribute("round", "none");
 		model.addAttribute("score", 0);
 		model.addAttribute("difficulty","none");
 		model.addAttribute("game_id",0);
+		model.addAttribute("highScore", user.getGame2_highscore());
 		
-		String game = (String) session.getAttribute("favgame");
-		user.setUsername(username);
-		int highScore= userDAO.getHighestScore(user, game);
-		session.setAttribute("highScore", highScore);
 		return "WhatsYourTech";
 	}
 	
 	@RequestMapping(value="WhatsYourTech", method = RequestMethod.POST)
 	public String play(HttpServletRequest request, HttpSession session, Model model) throws SQLException{
-		String username = (String)session.getAttribute("username");
+
+		User user = (User)session.getAttribute("user");
+
+		String username = user.getUsername();
+		int highScore = user.getGame2_highscore();
+
 		String difficulty = request.getParameter("difficulty");
 		String round = request.getParameter("round");
 		int score = 0;
@@ -116,12 +116,19 @@ public class WhatsYourTechController{
 			player.setGame_id(game_id);
 			player.setPlayer(username);
 			player.setTotal_score(score);
+			
 			players.updateScore(player);
+			
+			if(score > highScore){
+				session.setAttribute("game2_highscore", score);
+				highScore = score;
+			}		
 			
 			model.addAttribute("round","none");
 			model.addAttribute("score", 0);
 			model.addAttribute("difficulty","none");
 			model.addAttribute("game_id",0);
+			model.addAttribute("highScore",highScore);
 			
 			session.setAttribute("highScore", score);
 			
@@ -137,6 +144,7 @@ public class WhatsYourTechController{
 		model.addAttribute("hint1",hint.getHint1());
 		model.addAttribute("hint2",hint.getHint2());
 		model.addAttribute("hint3",hint.getHint3());
+		model.addAttribute("highScore",highScore);
 		
 		return "WhatsYourTech";
 	}

@@ -193,16 +193,15 @@ public class UserDAOImpl implements UserDAO {
 			try{
 				connection = dataSource.getConnection();
 		
-				String query ="UPDATE users SET username = ?,password=?,fname=?,lname=?,bgcolor=?,topscoreChecked=?,favgame=? WHERE username = ? ";
+				String query ="UPDATE users SET password=?,fname=?,lname=?,bgcolor=?,topscoreChecked=?,favgame=? WHERE username = ? ";
 				pstmt = connection.prepareStatement(query);
-				pstmt.setString(1, user.getUsername());
-				pstmt.setString(2, user.getPassword());
-				pstmt.setString(3, user.getFname());
-				pstmt.setString(4, user.getLname());
-				pstmt.setString(5, user.getBgcolor());
-				pstmt.setString(6, user.getTopscoreChecked());
-				pstmt.setString(7, user.getFavgame());
-				pstmt.setString(8, user.getUsername());
+				pstmt.setString(1, user.getPassword());
+				pstmt.setString(2, user.getFname());
+				pstmt.setString(3, user.getLname());
+				pstmt.setString(4, user.getBgcolor());
+				pstmt.setString(5, user.getTopscoreChecked());
+				pstmt.setString(6, user.getFavgame());
+				pstmt.setString(7, user.getUsername());
 			
 				pstmt.executeUpdate();
 				result = "success";

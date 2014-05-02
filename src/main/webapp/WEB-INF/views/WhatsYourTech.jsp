@@ -12,7 +12,6 @@ String myColor = (String)session.getAttribute("color");
 <html>
 <head>
 <title>What's Your Tech?</title>
-<link href="<c:url value="/resources/sample.css" />"  rel="stylesheet" type="text/css"  />
 
 <script language="javascript" type="text/javascript">
 
@@ -111,12 +110,12 @@ function load(){
 	
 	<div>
 		<c:if test="${topscoreChecked ne 'false' }">
-			<font size=3 style="position: absolute; left:30px; top:30px"> Highest Score: "${highScore}"  </font>
+			<font size=3 style="position: absolute; left:30px; top:30px"> HigScore: ${highScore}  </font>
 		</c:if>
 	</div>	
 	
 		
-	<font size=3 style="position: absolute; right:30px; top:30px"> Welcome <%=username %> | <a href = "signout"> Sign out</a> </font> <br>
+	<font size=3 style="position: absolute; right:30px; top:30px"> Welcome ${username} | <a href = "signout"> Sign out</a> </font> <br>
 	<font size=3 style="position: absolute; right:30px; top:50px"> <a href = "profile" id="back"> Back </a> </font>
 	
 	<div id="container" style="width:1300px;height:1000px;margin-top:50px;">
@@ -173,7 +172,7 @@ function load(){
 				<input type="button" id="startGame" value="New Game" style="font-size:18;width:150px;height:50px;margin-left:20px;" onclick="submitForm()"/>
 				<input type="button" id="next" value="Next Hint" style="font-size:18;width:150px;height:50px;margin-left:20px;" onclick="nextHint()" /> <br>
 				
-				<input size="35" style="font-size:18;height:50px;margin-top:30px;padding:10px;" type="text" id="guess" name="guess" /> <br> 
+				<input style="font:20px arial,helvetica,clean,sans-serif;height:50px;width:330px;margin-top:30px;padding:10px;" type="text" id="guess" name="guess" /> <br> 
 				<input type="button" id="skip" value="Skip" style="font-size:18;width:150px;height:50px;margin-top:20px;margin-left:20px;" onclick="checkRound();" />
 				<input type="button" id="submit" value="Submit" style="font-size:18;width:150px;height:50px;margin-left:20px;" onclick="checkAnswer();" />
 			</div>						

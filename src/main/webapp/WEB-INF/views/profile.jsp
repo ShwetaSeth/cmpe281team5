@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%String username = (String)session.getAttribute("username"); %>
+<%String favgame = (String)session.getAttribute("favgame"); %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -10,8 +11,6 @@
 <title>Welcome!</title>
 <link href="<c:url value="/resources/profile.css" />"  rel="stylesheet" type="text/css"  />
 <script language="javascript" type="text/javascript">
-
-<%String favgame = (String)session.getAttribute("favgame"); %>
 
 function submitForm(cell){
 	document.getElementById("game").value = cell;

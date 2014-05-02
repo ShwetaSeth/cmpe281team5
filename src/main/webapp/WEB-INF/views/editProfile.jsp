@@ -47,7 +47,6 @@ function validate(){
 	}
 }
 
-
 function load(){
 	document.getElementById("${user.bgcolor}").checked = true;
 	
@@ -75,10 +74,25 @@ function load(){
 <br>
 <form id="formEdit" method="post" action="editProfile">
 
-	<div class="form-row"><span class="label"><font size="3"> *First name </font> </span><input size="30" style="position: absolute; left: 140px;" value = "${user.fname}" type="text" id="fname" name="fname" /></div><br>
-	<div class="form-row"><span class="label"><font size="3"> *Last name </font> </span><input size="30" style="position: absolute; left: 140px;" value = "${user.lname}" type="text" id="lname" name="lname" /></div><br>
-	<div class="form-row"><span class="label"><font size="3"> *Password </font> </span><input size="30" style="position: absolute; left: 140px;" value = "${user.password}" type="password" id="password" name="password" /></div><br>
-	<div class="form-row"><span class="label"><font size="3"> *Retype Password </font> </span><input size="30" style="position: absolute; left: 140px;" value = "${user.password}" type="password" id="password1" name="password1" /></div><br>
+	<div class="form-row">
+		<span class="label"><font size="3"> *First name </font> </span>
+		<input size="30" style="position: absolute; left: 140px;" value = "${user.fname}" type="text" id="fname" name="fname" />
+	</div><br>
+	
+	<div class="form-row">
+		<span class="label"><font size="3"> *Last name </font> </span>
+		<input size="30" style="position: absolute; left: 140px;" value = "${user.lname}" type="text" id="lname" name="lname" />
+	</div><br>
+	
+	<div class="form-row">
+		<span class="label"><font size="3"> *Password </font> </span>
+		<input size="30" style="position: absolute; left: 140px;" value = "${user.password}" type="password" id="password" name="password" />
+	</div><br>
+	
+	<div class="form-row">
+		<span class="label"><font size="3"> *Retype Password </font> </span>
+		<input size="30" style="position: absolute; left: 140px;" value = "${user.password}" type="password" id="password1" name="password1" />
+	</div><br>
 
 	<div class="form-row"><span class="label"><font size="3"> Background Color </font></span></div><br>
 <br>
@@ -147,9 +161,12 @@ function load(){
               </tr></table>
              </td>      
         </table>
-
      </div>
-	<div class="form-row"><input class="submit" type="submit" value="Update" style="position: absolute; left: 230px;" ></div><br>
+     
+	<div class="form-row">
+		<input class="submit" type="submit" value="Update" style="margin-top:30px;margin-left:550px;background-color:#6E329D;border:1px solid #522675;border-radius:2px;width:200px;height:50px;font:20px arial,helvetica,clean,sans-serif;color:white;"
+					 		onclick = "return validate();">
+	</div>
 </form>
 </body>
 </html>
