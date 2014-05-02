@@ -14,6 +14,11 @@ background:url(<c:url value="/resources/wood.jpg" />);
  background-size:100%;
     }
 
+input[type="text"]
+{
+    background: transparent;
+    border: none;
+}
 </style>
 <% 
 String mins = request.getParameter( "mins" ); 
@@ -61,7 +66,7 @@ function timer()
 
 if( --secs == -1 )  
 {  
-secs = 10;  
+secs = 20;  
 mins;  
 }  
   //
@@ -73,7 +78,7 @@ if( mins < 10 ) mins = "0" + parseInt( mins, 10 );
 document.memoryscore.mins.value = mins;   
 document.memoryscore.secs.value = secs;  
  
-window.setTimeout( function(){document.getElementById('submit').disabled='disabled';}, 11000 );
+window.setTimeout( function(){document.getElementById('submit').disabled='disabled';}, 20000 );
 if(document.getElementById('secs').value == '00' && document.getElementById('mins').value == '00') // time over  
 {  
 	document.memoryscore.mins.disabled = true;   
@@ -98,14 +103,14 @@ window.setTimeout( "timer()", 1000 );
 <input type="hidden" name="score" id="score" value="${score}"/>
 
 
-<fieldset style="width:50%;" id="bgpic">
+<fieldset style="width:50%;height:500%;" id="bgpic">
 
-<input  align="middle" type="text" name="mins" id="mins" size="1" style="border:0px solid black;text-align:right;font-size: 18pt;"/>:
-<input type="text" id="secs" name="secs" size="1" style="border:0px solid black;font-size: 18pt;"/>  
+<input  align="middle" type="text" name="mins" id="mins" size="1" style="border:0px solid black;text-align:right;font-size: 22pt;color:red;"/><span style="color:red;font-size: 22pt;">:</span>
+<input type="text" id="secs" name="secs" size="1" style="border:0px solid black;font-size: 18pt;color:red;font-size: 22pt;"/>  
 
 
   
-<table>
+<table height=500px>
 <tr><td><label style="font-size: 18pt;color:#ffffff;">${message}${score}</label></td></tr>
 <tr id="ins">
 <td><label style="color:#ffffff;font-size: 14pt;">Enter the words:</label></td>
@@ -114,12 +119,6 @@ window.setTimeout( "timer()", 1000 );
 <tr id="ins">
 <td>&nbsp;&nbsp;</td><td><input id="submit" type="submit" name="submit" value="Submit"></td></tr>
 </table>
-<br/><br/>
-
-
-
-
-
 </fieldset>
 </form>
 
