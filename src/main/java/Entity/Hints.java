@@ -1,6 +1,8 @@
 package Entity;
 
-public class Hints {
+import java.io.Serializable;
+
+public class Hints implements Serializable{
 	
 	int hints_id;
 	String answer;

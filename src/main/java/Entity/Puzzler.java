@@ -1,6 +1,8 @@
 package Entity;
 
-public class Puzzler {
+import java.io.Serializable;
+
+public class Puzzler implements Serializable {
 //need to set my getters n setters
 	private String username;
 	private int Score;

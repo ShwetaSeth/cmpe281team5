@@ -1,6 +1,8 @@
 package Entity;
 
-public class Players {
+import java.io.Serializable;
+
+public class Players implements Serializable {
 	
 	int game_id;
 	String player;

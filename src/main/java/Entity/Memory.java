@@ -1,6 +1,8 @@
 package Entity;
 
-public class Memory {
+import java.io.Serializable;
+
+public class Memory implements Serializable {
 	private int Game_id;
 	private String Player_id;
 	private int Score;

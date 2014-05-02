@@ -1,6 +1,8 @@
 package Entity;
 
-public class Scramble {
+import java.io.Serializable;
+
+public class Scramble implements Serializable {
 
 	private String username;
 	private int prevScore;

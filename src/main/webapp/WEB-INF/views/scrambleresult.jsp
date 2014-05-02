@@ -23,6 +23,9 @@ String myColor = (String)session.getAttribute("color");
 <%  String prevScore = request.getParameter("prevScore"); %>
 
 <body bgcolor="<%=myColor %>">
+<br>
+<br>
+<br>
 <center>
 <div id = "content">
 <h1>Your Results are</h1>

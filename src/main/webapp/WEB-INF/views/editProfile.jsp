@@ -102,21 +102,21 @@ function load(){
               <td>
               <table><tr>
 				<td><input id = "whitesmoke" type="radio" name="colors" value="whitesmoke" /></td>
-				<td><div id = "whitesmoke" class="colors" style="background-color:whitesmoke;border:2px solid ##420101;"></div></td>
+				<td><div id = "whitesmoke" class="colors" style="background-color:whitesmoke;border:2px solid #420101;"></div></td>
 			  </tr></table>
               </td>
 			
 			<td>
               <table><tr>	
 				<td><input  id = "honeydew" type="radio" name="colors" value="honeydew" /></td>
-				<td><div id = "honeydew" class="colors" style="background-color:honeydew;border:2px solid ##420101;"></div></td>
+				<td><div id = "honeydew" class="colors" style="background-color:honeydew;border:2px solid #420101;"></div></td>
 			  </tr></table>
 			</td>
 				
 			<td>
               <table><tr>
 				<td><input id = "lightyellow" type="radio" name="colors" value="lightyellow"/></td>
-				<td><div id = "lightyellow" class="colors" style="background-color:lightyellow;border:2px solid ##420101;"></div></td>
+				<td><div id = "lightyellow" class="colors" style="background-color:lightyellow;border:2px solid #420101;"></div></td>
 			  </tr></table>
 			</td>
 			</tr>

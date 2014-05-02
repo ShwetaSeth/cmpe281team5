@@ -68,7 +68,7 @@ public class HomeController {
 						 		"lname VARCHAR(45) NULL ," +
 						 		"bgcolor VARCHAR(45) NULL DEFAULT 'whitesmoke'," +
 						 		"topscoreChecked VARCHAR(45) NOT NULL ," +
-						 		"favgame VARCHAR(45) NOT NULL," +
+						 		"favgame VARCHAR(45) NULL DEFAULT 'scramble'," +
 						 		"game1_highscore INT NULL DEFAULT 0 ," +					  
 						 		"game2_highscore INT NULL DEFAULT 0 ," +
 						 		"game3_highscore INT NULL DEFAULT 0 ," +
