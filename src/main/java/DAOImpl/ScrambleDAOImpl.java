@@ -157,8 +157,7 @@ public class ScrambleDAOImpl implements ScrambleDAO{
 				
 				
 				query = "SELECT game1_highscore FROM users WHERE username = '"+ username + "'";
-				pstmt = connection.prepareStatement(query);
-				pstmt.executeUpdate();
+				rslt = stmt.executeQuery(query);
 				rslt.next();
 				
 				int highScore = rslt.getInt("game1_highscore");

@@ -181,8 +181,7 @@ String query="CREATE TABLE IF NOT EXISTS `image`(`Id` INT NOT NULL AUTO_INCREMEN
 	}	
 		
 @RequestMapping(value = "memoryscore", method = RequestMethod.POST)
-	
-public String getScore(HttpServletRequest req, HttpSession session, Model model) 
+public String getScore(HttpServletRequest req, HttpSession session, Model model) throws SQLException 
 {	
 	   session.setMaxInactiveInterval(300);
 	   int score=0;
@@ -225,9 +224,12 @@ public String getScore(HttpServletRequest req, HttpSession session, Model model)
 		return "memoryscore";
 	}
 
-public int getGameScore(HttpServletRequest request,HttpSession session,int score,int picid) 
+public int getGameScore(HttpServletRequest request,HttpSession session,int score,int picid) throws SQLException 
 {		
 	MemoryDAO memoryDAO = (MemoryDAO)appContext.getBean("memoryDAOImpl");
+	UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
+	User user = new User();
+	
 	Memory memory  = new Memory();
 	//updating user table	
 	String username = (String) session.getAttribute("username");
@@ -236,6 +238,12 @@ public int getGameScore(HttpServletRequest request,HttpSession session,int score
 	memory.setScore(score);	
 	memory.setPicId(picid);
 	int currscore = memoryDAO.getScore(memory);
+	
+	
+	user = userDAO.getUser(username);
+	
+	session.setAttribute("user", user);
+	
 	System.out.println(currscore+"here");
 	return currscore;
 }
@@ -266,20 +274,60 @@ public int countWords(int picid,String wordlist) throws SQLException{
 		
 }	
 	
-	
-	
 	@RequestMapping(value = "memoryans", method = RequestMethod.POST)
 	public String enterWord(HttpServletRequest request, HttpSession session, Model model) {		
 		//MemoryController con = (MemoryController)appContext.getBean("memoryController");		
 		model.addAttribute("picid", request.getParameter("picid"));
+		
 		return "memoryscore";
-		
-		
-		
 	}
 	
-					
+	
+	
+@RequestMapping(value = "memoryresult", method = RequestMethod.POST)
+public String getResult(HttpServletRequest req, HttpSession session, Model model) throws SQLException 
+{	
+   session.setMaxInactiveInterval(300);
+   int score=0;
+	MemoryController con = (MemoryController)appContext.getBean("memoryController");
+	
+	model.addAttribute("picid", req.getParameter("picid"));
+	String picnum=req.getParameter("picid");
+	int picno=Integer.parseInt(picnum);
+			
+	String [] words=req.getParameter("ans").split("\n");
+	String picwords="";
+	for(int j=0;j<words.length;j++)
+	{
+		if(j==words.length-1)
+		{
+			picwords=picwords+"'"+words[j]+"'";
+		}
+		else
+		{
+			picwords=picwords+"'"+words[j]+"',";
+		}
+
 	}
+
+	try {
+		score = con.countWords(picno,picwords);
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+	int currscore = con.getGameScore(req,session,score,picno);
+	System.out.println(currscore);
+	model.addAttribute("score",currscore );
+	model.addAttribute("message", "Your score is: ");
+	
+	String highScore = req.getParameter("highScore");
+	model.addAttribute("highScore",highScore);
+	
+	return "memoryresult";
+  }
+	
+}
 	
 	
 	

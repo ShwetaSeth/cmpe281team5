@@ -76,7 +76,7 @@ public class ScrambleController {
 		else{
 			Statement stmt = conn.createStatement();
 			
-			String query = "CREATE TABLE scramble (username VARCHAR(15) NOT NULL, prevScore INT NULL, "+
+			String query = "CREATE TABLE scramble (username VARCHAR(15) NOT NULL, prevScore INT NULL DEFAULT 0, "+
 					"currScore INT NULL, lastWord CHAR(15) NULL, PRIMARY KEY (username), CONSTRAINT username " +
 					"FOREIGN KEY (username) REFERENCES users (username) ON DELETE CASCADE ON UPDATE CASCADE)";
 			
@@ -116,6 +116,24 @@ public class ScrambleController {
 		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('aws')";
 		stmt.executeUpdate(query);
 		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('dynamo')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('cloud')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('ibm')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('riak')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('google')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('oracle')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('server')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('lan')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('saas')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('load')";
 		stmt.executeUpdate(query);
 
 		logger.info("Table scrablewords inserted with values");

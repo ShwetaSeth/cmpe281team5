@@ -11,7 +11,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
 <% 
   
 String myColor = (String)session.getAttribute("color");  
@@ -22,8 +21,6 @@ String myColor = (String)session.getAttribute("color");
   
 %>  
    
-
-
 <%  
 String mins = request.getParameter( "mins" );  
 if( mins == null ) mins = "1";  
@@ -103,14 +100,15 @@ Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid 
 <center>
 <table class = "CSSTableGenerator" border = '1'>
 
-<tr><td>a</td><td>m</td><td>a</td><td>z</td><td>o</td><td>n</td><td>a</td><td>a</td></tr>
-<tr><td>a</td><td>w</td><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td></tr>
-<tr><td>a</td><td>a</td><td>s</td><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td></tr>
-<tr><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td></tr>
-<tr><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td><td>k</td></tr>
-<tr><td>d</td><td>y</td><td>n</td><td>a</td><td>m</td><td>o</td><td>a</td><td>a</td></tr>
-<tr><td>a</td><td>a</td><td>a</td><td>a</td><td>a</td><td>i</td><td>i</td><td>a</td></tr>
-<tr><td>a</td><td>a</td><td>a</td><td>a</td><td>r</td><td>r</td><td>a</td><td>a</td></tr>
+<tr><td>O</td><td>R</td><td>A</td><td>C</td><td>L</td><td>E</td><td>G</td><td>J</td><td>K</td><td>S</td></tr>
+<tr><td>B</td><td>I</td><td>B</td><td>M</td><td>L</td><td>O</td><td>A</td><td>D</td><td>D</td><td>E</td></tr>
+<tr><td>O</td><td>A</td><td>L</td><td>L</td><td>O</td><td>O</td><td>A</td><td>F</td><td>Y</td><td>R</td></tr>
+<tr><td>R</td><td>K</td><td>M</td><td>G</td><td>A</td><td>Z</td><td>U</td><td>G</td><td>N</td><td>V</td></tr>
+<tr><td>D</td><td>L</td><td>L</td><td>C</td><td>S</td><td>W</td><td>Y</td><td>G</td><td>A</td><td>E</td></tr>
+<tr><td>E</td><td>E</td><td>D</td><td>L</td><td>A</td><td>N</td><td>S</td><td>H</td><td>M</td><td>R</td></tr>
+<tr><td>S</td><td>A</td><td>M</td><td>I</td><td>A</td><td>M</td><td>A</td><td>Z</td><td>O</td><td>N</td></tr>
+<tr><td>P</td><td>Q</td><td>R</td><td>S</td><td>S</td><td>W</td><td>X</td><td>B</td><td>C</td><td>L</td></tr>
+<tr><td>T</td><td>U</td><td>R</td><td>I</td><td>A</td><td>K</td><td>V</td><td>D</td><td>E</td><td>M</td></tr>
 
 </table>
 </center>
@@ -122,7 +120,7 @@ Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid 
 <hr>  
 <form action="results" name="formb" method="post">  
 <input type="hidden" value = "${score}" name = "score"/>
-<input type="submit" name="results" value="View Results" style="display:none;">   
+<input type="submit" name="results" value="View and Save Results" style="display:none;">   
 </form>  
 <script>  
 <!--  
