@@ -85,7 +85,7 @@ Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid 
 
 <div>
 <c:if test="${topscoreChecked ne 'false' }">
-<label>Highest Score</label><input type="text" value = ${highScore} name = "highScore"/>
+<label>Highest Score</label><input type="text" value = "${highScore}" name = "highScore"/>
 </c:if>
 </div>	
 

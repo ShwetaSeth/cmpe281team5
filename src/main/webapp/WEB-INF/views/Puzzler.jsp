@@ -238,7 +238,7 @@ function FindColumn(left) {
             <br></br>
             
 <c:if test="${topscoreChecked ne 'false' }">
-<label>Highest Score</label><input type="text" value = ${highScore} name = "highScore"/>
+<label>Highest Score</label><input type="text" value = "${highScore}" name = "highScore"/>
 </c:if>
 </div>	
 

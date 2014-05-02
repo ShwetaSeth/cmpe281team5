@@ -14,7 +14,7 @@ String myColor = (String)session.getAttribute("color");
 	<title>What's Your Tech?</title>
 	<div>
 <c:if test="${topscoreChecked ne 'false' }">
-<label>Highest Score</label><input type="text" value = ${highScore} name = "highScore"/>
+<label>Highest Score</label><input type="text" value = "${highScore}" name = "highScore"/>
 </c:if>
 </div>	
 

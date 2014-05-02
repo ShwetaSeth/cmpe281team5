@@ -50,10 +50,8 @@ public class WhatsYourTechController{
 		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
 		User user = new User();
 		
-		
 		controller.createTablePlayers();
 		controller.createTableHints();
-		
 		
 		model.addAttribute("username", username);
 		model.addAttribute("round", "none");
@@ -61,12 +59,10 @@ public class WhatsYourTechController{
 		model.addAttribute("difficulty","none");
 		model.addAttribute("game_id",0);
 		
-		
 		String game = (String) session.getAttribute("favgame");
 		user.setUsername(username);
 		int highScore= userDAO.getHighestScore(user, game);
-		model.addAttribute("highScore",highScore);
-		
+		session.setAttribute("highScore", highScore);
 		return "WhatsYourTech";
 	}
 	
@@ -127,6 +123,8 @@ public class WhatsYourTechController{
 			model.addAttribute("difficulty","none");
 			model.addAttribute("game_id",0);
 			
+			session.setAttribute("highScore", score);
+			
 			return "WhatsYourTech";
 		}
 		
@@ -139,9 +137,6 @@ public class WhatsYourTechController{
 		model.addAttribute("hint1",hint.getHint1());
 		model.addAttribute("hint2",hint.getHint2());
 		model.addAttribute("hint3",hint.getHint3());
-		
-		String highScore = request.getParameter("highScore");
-		model.addAttribute("highScore",highScore);
 		
 		return "WhatsYourTech";
 	}
