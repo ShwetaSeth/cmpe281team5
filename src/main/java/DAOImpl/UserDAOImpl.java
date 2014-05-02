@@ -167,6 +167,7 @@ public class UserDAOImpl implements UserDAO {
 	
 	public int getHighestScore(User user,String game)
 	{
+		String result = "";
     	String username = (user.getUsername()).toLowerCase();
     	int highScore = -1;
 

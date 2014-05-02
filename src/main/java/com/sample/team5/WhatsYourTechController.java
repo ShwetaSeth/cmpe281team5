@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import DAO.HintsDAO;
 import DAO.PlayersDAO;
+import DAO.UserDAO;
 import Entity.Hints;
 import Entity.Players;
+import Entity.User;
 
 @Controller
 public class WhatsYourTechController{
@@ -45,18 +47,22 @@ public class WhatsYourTechController{
 		String username = (String)session.getAttribute("username");
 		
 		WhatsYourTechController controller = (WhatsYourTechController)appContext.getBean("WhatsYourTech");		
+		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
+		User user = new User();
 		
 		controller.createTablePlayers();
 		controller.createTableHints();
-		
-		int highScore = (Integer)session.getAttribute("game2_highscore");
 		
 		model.addAttribute("username", username);
 		model.addAttribute("round", "none");
 		model.addAttribute("score", 0);
 		model.addAttribute("difficulty","none");
 		model.addAttribute("game_id",0);
-		model.addAttribute("highScore",highScore);
+		
+		String game = (String) session.getAttribute("favgame");
+		user.setUsername(username);
+		int highScore= userDAO.getHighestScore(user, game);
+		session.setAttribute("highScore", highScore);
 		return "WhatsYourTech";
 	}
 	
@@ -68,8 +74,6 @@ public class WhatsYourTechController{
 		int score = 0;
 		int game_id = 0;
 		
-		int highScore = (Integer)session.getAttribute("game2_highscore");
-
 		try{
 			score = Integer.parseInt(request.getParameter("score"));
 			game_id = Integer.parseInt(request.getParameter("game_id"));
@@ -111,23 +115,15 @@ public class WhatsYourTechController{
 			Players player = new Players();
 			player.setGame_id(game_id);
 			player.setPlayer(username);
-			player.setTotal_score(score);			
-			
-			//---------------------------------------Updating highscore in users table and in session!
+			player.setTotal_score(score);
 			players.updateScore(player);
-
-			if(score > highScore){
-				session.setAttribute("game2_highscore", score);
-				highScore = score;
-			}		
-						
-			//-------------------------------------------------------------------------------------
 			
 			model.addAttribute("round","none");
 			model.addAttribute("score", 0);
 			model.addAttribute("difficulty","none");
 			model.addAttribute("game_id",0);
-			model.addAttribute("highScore",highScore);
+			
+			session.setAttribute("highScore", score);
 			
 			return "WhatsYourTech";
 		}
@@ -136,7 +132,7 @@ public class WhatsYourTechController{
 		model.addAttribute("score", score);
 		model.addAttribute("difficulty",difficulty);
 		model.addAttribute("game_id", game_id);
-		model.addAttribute("highScore",highScore);
+		
 		model.addAttribute("answer",hint.getAnswer());
 		model.addAttribute("hint1",hint.getHint1());
 		model.addAttribute("hint2",hint.getHint2());

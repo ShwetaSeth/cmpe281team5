@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import DAO.MemoryDAO;
+import DAO.UserDAO;
 import Entity.Memory;
 import Entity.User;
 
@@ -50,6 +51,7 @@ public class MemoryController {
 	
 	public String memory(HttpServletRequest request, HttpSession session, Model model) throws SQLException {		
 		MemoryController con = (MemoryController)appContext.getBean("memoryController");
+		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
 		User user = new User();
 		
 		int num=con.selectGamePic();
@@ -57,9 +59,9 @@ public class MemoryController {
 		model.addAttribute("pic",pic );
 		model.addAttribute("picid",num );
 		String username = (String) session.getAttribute("username");
+		String game = (String) session.getAttribute("favgame");
 		user.setUsername(username);
-
-		int highScore = (Integer)session.getAttribute("game3_highscore");
+		int highScore= userDAO.getHighestScore(user, game);
 		model.addAttribute("highScore",highScore);
 		
 		return "memory";
@@ -264,11 +266,16 @@ public int countWords(int picid,String wordlist) throws SQLException{
 		
 }	
 	
+	
+	
 	@RequestMapping(value = "memoryans", method = RequestMethod.POST)
 	public String enterWord(HttpServletRequest request, HttpSession session, Model model) {		
 		//MemoryController con = (MemoryController)appContext.getBean("memoryController");		
 		model.addAttribute("picid", request.getParameter("picid"));
 		return "memoryscore";
+		
+		
+		
 	}
 	
 					
