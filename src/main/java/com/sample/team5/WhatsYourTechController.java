@@ -140,6 +140,9 @@ public class WhatsYourTechController{
 		model.addAttribute("hint2",hint.getHint2());
 		model.addAttribute("hint3",hint.getHint3());
 		
+		String highScore = request.getParameter("highScore");
+		model.addAttribute("highScore",highScore);
+		
 		return "WhatsYourTech";
 	}
 		

@@ -27,17 +27,24 @@ public class ScrambleDAOImpl implements ScrambleDAO{
 
 	
     	
-	public void setGame()
+	public void setGame(String username)
 	{
 		Connection connection;
 		try{
 			connection = dataSource.getConnection();
-			String query ="UPDATE scramble SET currScore=0";
+			String query ="INSERT IGNORE INTO scramble(username) VALUES (?)";
+			pstmt = connection.prepareStatement(query);
+			pstmt.setString(1, username);
+			pstmt.executeUpdate();
+			
+			query ="UPDATE scramble SET currScore=0";
 			pstmt = connection.prepareStatement(query);
 			pstmt.executeUpdate();
 			query ="UPDATE scramblewords SET guess=0";
 			pstmt = connection.prepareStatement(query);
 			pstmt.executeUpdate();
+			
+			
 			connection.close();
 		}
 		catch(Exception e){
@@ -127,7 +134,7 @@ public class ScrambleDAOImpl implements ScrambleDAO{
 	}
 	
 	public int getResult(Scramble scramble)
- {
+	{
 		String username = scramble.getUsername();
 
 		Connection connection;
@@ -142,27 +149,40 @@ public class ScrambleDAOImpl implements ScrambleDAO{
 			while (rslt.next()) {
 				int prevScore = rslt.getInt("prevScore");
 				System.out.println("prevScore is" + rslt.getInt("prevScore"));
+				
+				
 				query = "UPDATE scramble SET prevScore= "+currScore+" where username = '"+ username + "'";
 				pstmt = connection.prepareStatement(query);
 				pstmt.executeUpdate();
+				
+				
+				query = "SELECT game1_highscore FROM users WHERE username = '"+ username + "'";
+				pstmt = connection.prepareStatement(query);
+				pstmt.executeUpdate();
+				rslt.next();
+				
+				int highScore = rslt.getInt("game1_highscore");
+				
+				if(currScore>highScore)
+				{
+					query = "UPDATE users SET game1_highscore = "+currScore+" where username = '"+ username + "'";
+					pstmt = connection.prepareStatement(query);
+					pstmt.executeUpdate();
+					
+				}
 				connection.close();
 				return prevScore;
 				
 			}
 			
-			
-			
-			
-
 		} catch (Exception e) {
 			e.printStackTrace();
 
 		}
-
 		return -1;
-		
 	}
-
 	
-
+	
+	
+	
 }

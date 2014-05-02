@@ -264,7 +264,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "play", method = RequestMethod.GET)
-	public String play(HttpServletRequest request, HttpSession session, Model model) {	
+	public String play(HttpServletRequest request, HttpSession session, Model model) throws SQLException {	
 		
 		String game = request.getParameter("game");
 		/*UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
@@ -277,6 +277,11 @@ public class HomeController {
 		/*System.out.println("High Score is : "+ highScore);
 		
 		model.addAttribute("highScore",highScore);*/
+		UserDAO users = (UserDAO)appContext.getBean("userDAOImpl");
+		
+		model.addAttribute("username",uname);
+		User user = users.getUser(uname);
+		model.addAttribute("color",user.getBgcolor());
 		
 		return "redirect:"+game;
 	}

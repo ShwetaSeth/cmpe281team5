@@ -101,6 +101,9 @@ public class PuzzlerController {
 		puzzler.setMoves(Integer.parseInt(moves));
 		PuzzlerDAO puzzlerDAO = (PuzzlerDAO)appContext.getBean("puzzlerDAOImpl");
 		puzzlerDAO.setGameScore(puzzler);
+		String highScore = request.getParameter("highScore");
+		model.addAttribute("highScore",highScore);
+		
 		//System.out.println("action" + action);
 		return "Puzzler";	
 				

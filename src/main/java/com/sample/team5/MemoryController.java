@@ -219,6 +219,9 @@ public String getScore(HttpServletRequest req, HttpSession session, Model model)
 		model.addAttribute("score",currscore );
 		model.addAttribute("message", "Your score is: ");
 		
+		String highScore = req.getParameter("highScore");
+		model.addAttribute("highScore",highScore);
+		
 		return "memoryscore";
 	}
 

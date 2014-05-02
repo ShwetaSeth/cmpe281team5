@@ -19,6 +19,7 @@ String myColor = (String)session.getAttribute("color");
 	myColor = "red";
   }
   
+  
 %>  
    
 
@@ -107,7 +108,7 @@ Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid 
 <label>Score</label><input type="text" value = ${score} name = "word"/>
 
 
-</form>
+</form>	
 <hr>  
 <form action="results" name="formb" method="post">  
 <input type="hidden" value = ${score} name = "score"/>

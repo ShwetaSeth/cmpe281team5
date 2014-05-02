@@ -48,7 +48,7 @@ public class ScrambleController {
 		
 		con.createScrambleTable();
 		con.createScrambleWords();
-		scrambleDAO.setGame();	
+		scrambleDAO.setGame((String)session.getAttribute("username"));	
 		
 		
 		model.addAttribute("score", "0");
@@ -132,8 +132,11 @@ public class ScrambleController {
 		ScrambleController con = (ScrambleController)appContext.getBean("scrambleController");		
 		int score = con.enterWord(request,session);	
 		
+		String highScore = request.getParameter("highScore");
+		model.addAttribute("highScore",highScore);
 		//String message = con.getJSP();
 		model.addAttribute("score", score);
+		
 		return "scramble";
 	}
 	
@@ -153,7 +156,7 @@ public class ScrambleController {
 		
 		int score = scrambleDAO.enterWord(scramble);
 		
-		System.out.println("after increment"+scramble.getCurrScore());
+		System.out.println("after increment score is "+score);
 		return score;
 	}
 	

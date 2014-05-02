@@ -8,7 +8,7 @@ public interface ScrambleDAO {
 
 	public int getCurrentScore(Scramble scramble);
 
-	public void setGame();
+	public void setGame(String username);
 
 	public int getResult(Scramble scramble);
 }
