@@ -40,7 +40,7 @@ var mins = <%=mins%>; // write mins to javascript
 var secs = <%=secs%>; // write secs to javascript  
 function timer()  
 {  
-  
+	document.getElementById('timer').style.visibility='visible';  
 if( --secs == -1 )  
 {  
 secs = 59;  
@@ -87,7 +87,8 @@ window.setTimeout( "timer()", 1000 );
 
 
 <form  name="forma" method="post" action="scramble">
-Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid black;text-align:right">:<input type="text" name="secs" size="1" style="border:0px solid black">  
+<input type="button" id="start" name="start" value="Start Game" onclick="timer();" style="height:50px;width:100px;"/>
+<div id="timer" style="visibility:hidden;">Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid black;text-align:right">:<input type="text" name="secs" size="1" style="border:0px solid black"></div>  
 
 
 <div>
@@ -124,7 +125,7 @@ Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid 
 </form>  
 <script>  
 <!--  
-timer(); // call timer() after page is loaded  
+/*timer();*/ // call timer() after page is loaded  
 //-->  
 </script>  
 <!-- <hr>
