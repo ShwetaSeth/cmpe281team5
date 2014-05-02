@@ -33,12 +33,6 @@
 			
 			
 			<li>
-			<h3>Game Selection</h3>
-			<p>
-			<a href="profile">Search Flights</a>
-			</p></li>
-			
-			<li>
 			<h3>Sign Out</h3>
 			<p>
 			<a href="signout">Sign Out</a>
