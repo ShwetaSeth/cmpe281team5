@@ -232,10 +232,6 @@ public class HomeController {
 		session.setAttribute("color",color);
 		session.setAttribute("favgame", favgame);
 		session.setAttribute("topscoreChecked", topscoreChecked);
-		session.setAttribute("game1_highscore", 0);
-		session.setAttribute("game2_highscore", 0);
-		session.setAttribute("game3_highscore", 0);
-		session.setAttribute("game4_highscore", 1000);
 		
 		session.setAttribute("user", user);
 				
@@ -302,6 +298,8 @@ public class HomeController {
 		else
 			topscoreChecked = "false";
 		
+		User userold = (User)session.getAttribute("user");
+		
 		user.setUsername((String)session.getAttribute("username"));
 		user.setPassword(request.getParameter("password"));
 		user.setFname(request.getParameter("fname"));
@@ -309,12 +307,16 @@ public class HomeController {
 		user.setBgcolor(request.getParameter("colors"));
 		user.setTopscoreChecked(topscoreChecked);
 		user.setFavgame(request.getParameter("favgame"));
+		user.setGame1_highscore(userold.getGame1_highscore());
+		user.setGame2_highscore(userold.getGame2_highscore());
+		user.setGame3_highscore(userold.getGame3_highscore());
+		user.setGame4_highscore(userold.getGame4_highscore());
 		
 		userDAO.update(user);
 		
 		String favgame = request.getParameter("favgame");
 		String color = request.getParameter("colors");
-		uname = request.getParameter("username");
+		uname = (String) session.getAttribute("username");
 		
 		System.out.println(color);
 		session.setAttribute("username", uname);

@@ -76,7 +76,7 @@ public class ScrambleController {
 		else{
 			Statement stmt = conn.createStatement();
 			
-			String query = "CREATE TABLE scramble (username VARCHAR(15) NOT NULL, prevScore INT NULL, "+
+			String query = "CREATE TABLE scramble (username VARCHAR(15) NOT NULL, prevScore INT NULL DEFAULT 0, "+
 					"currScore INT NULL, lastWord CHAR(15) NULL, PRIMARY KEY (username), CONSTRAINT username " +
 					"FOREIGN KEY (username) REFERENCES users (username) ON DELETE CASCADE ON UPDATE CASCADE)";
 			
