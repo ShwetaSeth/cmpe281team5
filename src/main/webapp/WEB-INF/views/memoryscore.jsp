@@ -11,7 +11,7 @@
 
 #bgpic{
 background:url(<c:url value="/resources/wood.jpg" />); 
- background-size:100%;
+ /*background-size:100%;*/
     }
 
 input[type="text"]

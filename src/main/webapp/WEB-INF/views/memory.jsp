@@ -12,7 +12,7 @@
 
 #bgpic{
 background:url(<c:url value="/resources/wood.jpg" />); 
- background-size:100%;
+ /*background-size:100%;*/
     }
     
  input[type="text"]
@@ -88,7 +88,7 @@ window.setTimeout( "timer()", 1000 );
 
 <body bgcolor="<%=myColor %>">
 
-<div>
+<div align="center">
 	
 
 
@@ -106,11 +106,13 @@ window.setTimeout( "timer()", 1000 );
 <fieldset  id="bgpic" style="width:50%;height:500%;">
 
 
-<input  align="middle" type="text" readonly="readonly" name="mins" id="mins" size="1" style="border:0px solid black;text-align:right;font-size: 22pt;color:red;"><span style="color:red;font-size: 22pt;">:</span>
+<input  align="middle" type="text" readonly="readonly" name="mins" id="mins" size="1" style="border:0px solid black;text-align:right;font-size: 22pt;color:red;">
+<span style="color:red;font-size: 22pt;">:</span>
 <input  type="text" id="secs" readonly="readonly" name="secs" size="1" style="border:0px solid black;font-size: 22pt;color:red;">  
 
 
 <p><span style="font-size:24px;font-weight:bold;color:#ffffff;">Instructions:</span>&nbsp;<span style="color:#ffffff;font-size:18px;"> Memorize the words in the picture in a time of 10 seconds!Test your memory by remembering all the words.</span> </p>
+<br/>
 <div align='center' id='wcloud'>
 <img src="<c:url value="/resources/${pic}" />" alt="wordcloud" height="300" width="500" border="1"/>
 </div>
@@ -119,10 +121,9 @@ window.setTimeout( "timer()", 1000 );
 </div>
 <br/><br/>
 <div align='center' id='answer'>
-
 <input id="submit" type="submit" name="Submit" value="Recollect!!" disabled="disabled">
-
 </div>
+<br/>
 </fieldset>
 
 </form>

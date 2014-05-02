@@ -74,7 +74,7 @@ public class MemoryController {
 		
 		//Selecting a random picture
 		int pic=0;
-		int picnum []={1,2,3,4,5,6,7,8,9,10};
+		int picnum []={1,2,3,4,5,6,8,9,10};
 		Random random = new Random();
 		pic= picnum[random.nextInt(picnum.length)];
 		

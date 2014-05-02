@@ -86,12 +86,13 @@ public class MemoryDAOImpl implements MemoryDAO{
 				{
 					highscore = rslt.getInt("Score");
 				}	
-				System.out.println(highscore);
+				if(outcome=="W")
+				{
 				String query3 = "UPDATE users SET game3_highscore='"+highscore+"' where username='"+player+"'";
 				System.out.println(query3);
 				PreparedStatement statement2 = connection.prepareStatement(query3); 
 				statement2.executeUpdate();
-				
+				}
 			connection.close();
 		}catch(Exception e){
 			e.printStackTrace();
