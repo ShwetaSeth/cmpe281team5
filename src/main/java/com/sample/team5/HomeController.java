@@ -138,23 +138,15 @@ public class HomeController {
 		if(message.substring(0, 7).equals("Success")){
 			
 			model.addAttribute("username", request.getParameter("username"));
-			uname = request.getParameter("username");			
-			
+			uname = request.getParameter("username");	
+
 			session.setAttribute("username", uname);
-			
-			user.setUsername(uname);
-			String[] features = userDAO.getFeatures(user);
-			
-			user.setFavgame(features[0]);
-			user.setBgcolor(features[1]);
-			user.setTopscoreChecked(features[2]);
-			
+			user = userDAO.getUser(uname);
 			
 			session.setAttribute("color",user.getBgcolor());
 			session.setAttribute("favgame", user.getFavgame());
 			session.setAttribute("topscoreChecked", user.getTopscoreChecked());
-			
-			
+	
 			
 			session.setAttribute("user", user);
 			
@@ -162,9 +154,6 @@ public class HomeController {
 				System.out.println("session user is null");
 			else
 				System.out.println("session user is not null");
-				
-			
-			
 			
 			
 			return "redirect:profile";
@@ -295,11 +284,63 @@ public class HomeController {
 	@RequestMapping(value = "editProfile", method = RequestMethod.GET)
 	public String editProfile(HttpServletRequest request, HttpSession session, Model model) throws SQLException{	
 		
-		if(session.getAttribute("user")== null)
-			System.out.println("session user is null");
+		User user = new User();
 		
-		model.addAttribute("user",session.getAttribute("user"));
+		
+		user = (User)session.getAttribute("user");
+		
+		if(user== null)
+			System.out.println("user is null");
+		
+		System.out.println("First name is :"+user.getFname());
+		
+		model.addAttribute("user",user);
 		
 		return "editProfile";
+	}
+	
+	@RequestMapping(value = "editProfile", method = RequestMethod.POST)
+	public String updateProfile(HttpServletRequest request, HttpSession session, Model model) throws SQLException{	
+		
+		User user = new User();
+		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
+		
+		user = (User)session.getAttribute("user");
+		
+		
+		String topscoreChecked ;
+	
+		String topscoreCheckBoxValue = request.getParameter("topscore");
+		if (topscoreCheckBoxValue != null)
+			topscoreChecked = "true";
+		else
+			topscoreChecked = "false";
+		
+		user.setUsername(request.getParameter("username"));
+		user.setPassword(request.getParameter("password"));
+		user.setFname(request.getParameter("fname"));
+		user.setLname(request.getParameter("lname"));
+		user.setBgcolor(request.getParameter("colors"));
+		user.setTopscoreChecked(topscoreChecked);
+		user.setFavgame(request.getParameter("favgame"));
+		
+		
+		String result = userDAO.update(user);
+		
+		
+			String favgame = request.getParameter("favgame");
+			String color = request.getParameter("colors");
+			uname = request.getParameter("username");
+			
+			System.out.println(color);
+			session.setAttribute("username", uname);
+			session.setAttribute("color",color);
+			session.setAttribute("favgame", favgame);
+			session.setAttribute("topscoreChecked", topscoreChecked);
+			
+			session.setAttribute("user", user);
+		
+		
+			return "redirect:profile";
 	}
 }

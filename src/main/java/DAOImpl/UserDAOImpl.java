@@ -201,40 +201,34 @@ public class UserDAOImpl implements UserDAO {
 			return -1;
 		}
 	
-	
-	public String[] getFeatures(User user)
+	public String update(User user)
 	{
-		String result = "";
-    	String username = (user.getUsername()).toLowerCase();
-    	String favgame,topscoreChecked,bgcolor;
-    	String[] features = new String[3];
-
+		Connection connection;
 		try{
 			connection = dataSource.getConnection();
-			String query = "Select favgame, bgcolor, topscoreChecked from users where username = ?";
-			pstmt = connection.prepareStatement(query);
-			pstmt.setString(1, username);
-			rslt = pstmt.executeQuery();
-			rslt.next();
-			
-	
-			favgame = rslt.getString("favgame");
-			bgcolor = rslt.getString("bgcolor");
-			topscoreChecked = rslt.getString("topscoreChecked");
-			
-			features[0] = favgame;
-			features[1] = bgcolor;
-			features[2] = topscoreChecked;
-			
-			
 		
-			return features;
-			}catch(Exception e){
-				e.printStackTrace();
+			String query ="UPDATE users SET username = ?,password=?,fname=?,lname=?,bgcolor=?,topscoreChecked=?,favgame=? WHERE username = ? ";
+			pstmt = connection.prepareStatement(query);
+			pstmt.setString(1, user.getUsername());
+			pstmt.setString(2, user.getPassword());
+			pstmt.setString(3, user.getFname());
+			pstmt.setString(4, user.getLname());
+			pstmt.setString(5, user.getBgcolor());
+			pstmt.setString(6, user.getTopscoreChecked());
+			pstmt.setString(7, user.getFavgame());
+			pstmt.setString(7, user.getUsername());
 			
-			}
-	
-			return null;
+			pstmt.executeUpdate();
+			connection.close();
+			return "success";
 		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return "failure";
+		
+	}
+	
 	}
 
