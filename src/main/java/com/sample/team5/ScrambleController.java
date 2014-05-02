@@ -117,6 +117,24 @@ public class ScrambleController {
 		stmt.executeUpdate(query);
 		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('dynamo')";
 		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('cloud')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('ibm')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('riak')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('google')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('oracle')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('server')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('lan')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('saas')";
+		stmt.executeUpdate(query);
+		query = "INSERT IGNORE INTO scramblewords (word) VALUES ('load')";
+		stmt.executeUpdate(query);
 
 		logger.info("Table scrablewords inserted with values");
 		System.out.println("Table scramblewords inserted with values");

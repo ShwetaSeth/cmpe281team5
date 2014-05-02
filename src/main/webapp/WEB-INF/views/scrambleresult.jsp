@@ -23,7 +23,7 @@ String myColor = (String)session.getAttribute("color");
 <%  String prevScore = request.getParameter("prevScore"); %>
 
 <body bgcolor="<%=myColor %>">
-
+<center>
 <div id = "content">
 <h1>Your Results are</h1>
 
@@ -34,5 +34,6 @@ String myColor = (String)session.getAttribute("color");
 <input type = "submit" value = "Play again !!"/>
 </form>
 </div>
+</center>
 </body>
 </html>

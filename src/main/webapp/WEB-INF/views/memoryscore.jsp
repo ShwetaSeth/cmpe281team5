@@ -11,7 +11,7 @@
 
 #bgpic{
 background:url(<c:url value="/resources/wood.jpg" />); 
- /*background-size:100%;*/
+ background-size:100%;
     }
 
 input[type="text"]
@@ -100,7 +100,7 @@ window.setTimeout( "timer()", 1000 );
 </div>
 
  <div align="center">
-<form name="memoryscore" method="get" action="memory">
+<form name="memoryscore" method="post" action="memoryscore">
 
 
 <input type="hidden" name="picid" id="picid" value="${picid}"/>
@@ -122,7 +122,7 @@ window.setTimeout( "timer()", 1000 );
 <td><textarea name="ans" id="ans" cols="20" rows="10" style="overflow:hidden;"></textarea><br/></td>
 </tr>
 <tr id="ins">
-<td>&nbsp;&nbsp;</td><td><input id="submit" type="submit" name="submit" value="Play Again"></td></tr>
+<td>&nbsp;&nbsp;</td><td><input id="submit" type="submit" name="submit" value="Submit"></td></tr>
 </table>
 </fieldset>
 </form>

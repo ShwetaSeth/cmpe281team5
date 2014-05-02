@@ -69,8 +69,6 @@ function validate(){
 <div><font size="2" style="position: absolute; left: 440px; top: 190px">- Password must be between 6 and 16 characters and <br> must not have the special characters (!`~@#,$_%^&amp;*()+=-[]\/';{}|":&lt;&gt;?).</font></div>
 
 <form id="form1" method="post" action="signup">
-	
-	<div class="form-row"> <font color="red" size="2">${message}</font></div><br>
 	<div class="form-row"><span class="label"><font size="3"> *First name </font> </span><input size="30" style="position: absolute; left: 150px;" type="text" id="fname" name="fname" /></div><br>
 	<div class="form-row"><span class="label"><font size="3"> *Last name </font> </span><input size="30" style="position: absolute; left: 150px;" type="text" id="lname" name="lname" /></div><br>
 	<div class="form-row"><span class="label"><font size="3"> *Username </font> </span><input size="30" style="position: absolute; left: 150px;" type="text" id="username" name="username" /></div><br>

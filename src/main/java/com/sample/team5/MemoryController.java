@@ -181,7 +181,6 @@ String query="CREATE TABLE IF NOT EXISTS `image`(`Id` INT NOT NULL AUTO_INCREMEN
 	}	
 		
 @RequestMapping(value = "memoryscore", method = RequestMethod.POST)
-	
 public String getScore(HttpServletRequest req, HttpSession session, Model model) 
 {	
 	   session.setMaxInactiveInterval(300);
@@ -272,10 +271,8 @@ public int countWords(int picid,String wordlist) throws SQLException{
 	public String enterWord(HttpServletRequest request, HttpSession session, Model model) {		
 		//MemoryController con = (MemoryController)appContext.getBean("memoryController");		
 		model.addAttribute("picid", request.getParameter("picid"));
+		
 		return "memoryscore";
-		
-		
-		
 	}
 	
 					
