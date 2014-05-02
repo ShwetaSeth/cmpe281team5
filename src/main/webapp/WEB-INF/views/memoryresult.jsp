@@ -100,7 +100,7 @@ window.setTimeout( "timer()", 1000 );
 </div>
 
  <div align="center">
-<form name="memoryscore" method="post" action="memoryresult">
+<form  method="get" action="memory">
 
 
 <input type="hidden" name="picid" id="picid" value="${picid}"/>
@@ -112,17 +112,11 @@ window.setTimeout( "timer()", 1000 );
 
 <!-- <input  align="middle" type="text" name="mins" id="mins" size="1" style="border:0px solid black;text-align:right;font-size: 22pt;color:red;"/><span style="color:red;font-size: 22pt;">:</span>
 <input type="text" id="secs" name="secs" size="1" style="border:0px solid black;font-size: 18pt;color:red;font-size: 22pt;"/>   -->
-
-
   
 <table height=500px>
 <tr><td><label style="font-size: 18pt;color:#ffffff;">${message}${score}</label></td></tr>
 <tr id="ins">
-<td><label style="color:#ffffff;font-size: 14pt;">Enter the words:</label></td>
-<td><textarea name="ans" id="ans" cols="20" rows="10" style="overflow:hidden;"></textarea><br/></td>
-</tr>
-<tr id="ins">
-<td>&nbsp;&nbsp;</td><td><input id="submit" type="submit" name="submit" value="Submit"></td></tr>
+<td>&nbsp;&nbsp;</td><td><input id="submit" type="submit" name="submit" value="Play Again"></td></tr>
 </table>
 </fieldset>
 </form>
