@@ -19,6 +19,11 @@ input[type="text"]
     background: transparent;
     border: none;
 }
+
+.timer{
+color:red;
+font-size: 22pt;
+}
 </style>
 <% 
 String mins = request.getParameter( "mins" ); 
@@ -48,15 +53,15 @@ function hitenter(e)
 		   
   } 
   
-  
+<!--   
 var mins = <%=mins%>; // write mins to javascript 
 var secs = <%=secs%>; // write secs to javascript
 var text = <%=result%>;
 if(text==1)
 {
-	
-	alert(document.getElementById("ins").style.visibility);
-	document.getElementById("ins").style.visibility = "hidden"; 
+	//alert("here");
+	document.memoryscore.mins.value = "00";   
+	document.memoryscore.secs.value = "00";  
 }
 
 	
@@ -67,7 +72,7 @@ function timer()
 if( --secs == -1 )  
 {  
 secs = 20;  
-mins;  
+--mins;  
 }  
   //
 // leading zero? formatting  
@@ -105,8 +110,9 @@ window.setTimeout( "timer()", 1000 );
 
 <fieldset style="width:50%;height:500%;" id="bgpic">
 
-<input  align="middle" type="text" name="mins" id="mins" size="1" style="border:0px solid black;text-align:right;font-size: 22pt;color:red;"/><span style="color:red;font-size: 22pt;">:</span>
-<input type="text" id="secs" name="secs" size="1" style="border:0px solid black;font-size: 18pt;color:red;font-size: 22pt;"/>  
+<input class="timer" align="middle" type="text" name="mins" id="mins" size="1" style="border:0px solid black;text-align:right;"/>
+<span class="timer">:</span>
+<input class="timer" type="text" id="secs" name="secs" size="1" style="border:0px solid black;"/>  
 
 
   
