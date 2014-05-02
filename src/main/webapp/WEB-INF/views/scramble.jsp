@@ -15,7 +15,7 @@
   
 String myColor = (String)session.getAttribute("color");  
   if (myColor == null || myColor == ""){  
-	myColor = "red";
+    myColor = "red";
   }
   
   
@@ -40,7 +40,7 @@ var mins = <%=mins%>; // write mins to javascript
 var secs = <%=secs%>; // write secs to javascript  
 function timer()  
 {  
-	document.getElementById('timer').style.visibility='visible';  
+    document.getElementById('timer').style.visibility='visible';  
 if( --secs == -1 )  
 {  
 secs = 59;  
@@ -73,12 +73,12 @@ window.setTimeout( "timer()", 1000 );
 //-->  
 </script></head>  
 <div id="navbar">
-				<jsp:include page="navbar.jsp"></jsp:include>
-				
+                <jsp:include page="navbar.jsp"></jsp:include>
+                
 </div>
  <center>
-				<font size="4" color="darkblue" ><b>Welcome, ${user.fname}</b> </font> <br>
-				<font size="3" color="darkblue" >Scramble</font>
+                <font size="4" color="darkblue" ><b>Welcome, ${user.fname}</b> </font> <br>
+                <font size="3" color="darkblue" >Scramble</font>
 </center>
 
 <body bgcolor="<%=myColor %>">
@@ -95,7 +95,7 @@ window.setTimeout( "timer()", 1000 );
 <c:if test="${topscoreChecked ne 'false' }">
 <label>Highest Score :</label><input type="text" value = "${highScore}" name = "highScore"/>
 </c:if>
-</div>	
+</div>    
 
 
 <center>
@@ -117,7 +117,7 @@ window.setTimeout( "timer()", 1000 );
 <label>Score</label><input type="text" value = "${score}" name = "word"/>
 
 
-</form>	
+</form>    
 <hr>  
 <form action="results" name="formb" method="post">  
 <input type="hidden" value = "${score}" name = "score"/>
