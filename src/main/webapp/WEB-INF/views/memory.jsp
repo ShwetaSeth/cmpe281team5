@@ -105,6 +105,7 @@ window.setTimeout( "timer()", 1000 );
 	</c:if>
 </div>
 
+
 <input type="hidden" name="pic" id="pic" value="${pic}"/>
 
 <input type="hidden" name="picid" id="picid" value="${picid}"/>
