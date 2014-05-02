@@ -43,17 +43,11 @@ public class PuzzlerController {
 	@RequestMapping(value = "Puzzler", method = RequestMethod.GET)
 	public String Puzzler(HttpServletRequest request, HttpSession session, Model model) throws SQLException {	
 		PuzzlerController con = (PuzzlerController)appContext.getBean("puzzlerController");		
-		PuzzlerDAO puzzlerDAO = (PuzzlerDAO)appContext.getBean("puzzlerDAOImpl");
-		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
-		User user = new User();
-
-		String username = (String) session.getAttribute("username");
-		String game = (String) session.getAttribute("favgame");
-		user.setUsername(username);
-		int highScore= userDAO.getHighestScore(user, game);
-		model.addAttribute("highScore",highScore);
-
 		con.createPuzzlerTable();
+		
+		int highScore = (Integer)session.getAttribute("game4_highscore");
+		model.addAttribute("highScore",highScore);		
+
 		return "Puzzler";
 		}
 	
@@ -101,7 +95,9 @@ public class PuzzlerController {
 		puzzler.setMoves(Integer.parseInt(moves));
 		PuzzlerDAO puzzlerDAO = (PuzzlerDAO)appContext.getBean("puzzlerDAOImpl");
 		puzzlerDAO.setGameScore(puzzler);
-		String highScore = request.getParameter("highScore");
+		
+		//
+		int highScore = (Integer)session.getAttribute("game4_highscore");
 		model.addAttribute("highScore",highScore);
 		
 		//System.out.println("action" + action);
