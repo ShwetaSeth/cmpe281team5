@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import org.omg.PortableInterceptor.USER_EXCEPTION;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -44,6 +45,7 @@ public class PuzzlerController {
 	public String Puzzler(HttpServletRequest request, HttpSession session, Model model) throws SQLException {	
 		PuzzlerController con = (PuzzlerController)appContext.getBean("puzzlerController");		
 		PuzzlerDAO puzzlerDAO = (PuzzlerDAO)appContext.getBean("puzzlerDAOImpl");
+		
 		User user = new User();
 
 		user = (User)session.getAttribute("user");
@@ -95,7 +97,7 @@ public class PuzzlerController {
 
 
 	@RequestMapping(value = "shuffle", method = RequestMethod.POST)
-	public String getGameScore (HttpServletRequest request, HttpSession session, Model model) {		
+	public String getGameScore (HttpServletRequest request, HttpSession session, Model model) throws SQLException {		
 		
 		PuzzlerController con = (PuzzlerController)appContext.getBean("puzzlerController");	
 		Puzzler puzzler = new Puzzler();
@@ -109,11 +111,27 @@ public class PuzzlerController {
 		String moves = request.getParameter("moves");
 		puzzler.setMoves(Integer.parseInt(moves));
 		PuzzlerDAO puzzlerDAO = (PuzzlerDAO)appContext.getBean("puzzlerDAOImpl");
+		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
+		
 		puzzlerDAO.setGameScore(puzzler);
+		
+		User user = new User();
+		user = (User)session.getAttribute("user");
+		int highScore= user.getGame4_highscore();
+
+		int currScore = Integer.parseInt(moves);
+		
+		if(currScore<highScore)
+		{
+			puzzlerDAO.updateHighestScore(puzzler);
+			user = userDAO.getUser(user.getUsername());
+			session.setAttribute("user", user);
+		}
+		
 		
 		session.setAttribute("highScore", moves);
 		System.out.println("Moves::" + moves);
-		String highScore = request.getParameter("highScore");
+		
 		System.out.println("Highscore" + highScore);
 		model.addAttribute("highScore",highScore);
 		

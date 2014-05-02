@@ -44,6 +44,7 @@ public class PuzzlerDAOImpl implements PuzzlerDAO {
 			connection = dataSource.getConnection();
 			stmt = connection.createStatement();
 			
+					
 			String query = "INSERT INTO puzzler ( username,Score, Time, Moves ) VALUES (?,?,?,?)";
 			pstmt= connection.prepareStatement(query);
 			pstmt.setString(1, username);
@@ -54,33 +55,12 @@ public class PuzzlerDAOImpl implements PuzzlerDAO {
 			
 			System.out.println("inserted");
 			
-			//new
-			String query1 = "SELECT game4_highscore FROM users WHERE username = '"+ username + "'";
-			pstmt = connection.prepareStatement(query1);
-			pstmt.executeUpdate();
-			
-			
-			int highScore = rslt.getInt("game4_highscore");
-			System.out.println("highscore in db"+highScore);
-			
-			String query2 = "SELECT MIN(Moves) FROM puzzler"; // WHERE username = '"+ username + "'";
-			pstmt = connection.prepareStatement(query2);
-			pstmt.executeUpdate();
-			
-			
-			
-			if(score>highScore)
-			{
-			String	query3 = "UPDATE users SET game4_highscore = "+score+" where username = '"+ username + "'";
-				pstmt = connection.prepareStatement(query3);
-				pstmt.executeUpdate();
-				
-			}
-			
-		}
+					
+	}
 		catch(Exception e){
 			e.printStackTrace();
 		
+			
 		}finally{
 			try {
 				connection.close();
@@ -109,7 +89,7 @@ public class PuzzlerDAOImpl implements PuzzlerDAO {
 			rslt = stmt.executeQuery(query);
 			
 			//System.out.println("1."+ rslt.getInt(0));
-			while (rslt.next()) {//not sure if i need this
+			while (rslt.next()) {
 			System.out.println("Score is"+ rslt.getInt("Score"));
 	
 			connection.close();
@@ -129,4 +109,32 @@ public class PuzzlerDAOImpl implements PuzzlerDAO {
 		
 	}
 	
-}
+	
+	
+	public void updateHighestScore(Puzzler puzzler)
+	{
+		String username = puzzler.getUsername();
+		Connection connection;
+	
+        int score = puzzler.getMoves();
+          
+		try{
+			connection = dataSource.getConnection();
+			stmt = connection.createStatement();
+			
+			String query = "UPDATE users SET game4_highscore = "+score+" where username = '"+ username + "'";
+			pstmt = connection.prepareStatement(query);
+			pstmt.executeUpdate();
+			
+			
+			connection.close();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		
+		}
+		
+	}
+	}
+	
+
