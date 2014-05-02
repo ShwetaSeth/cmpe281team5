@@ -235,7 +235,7 @@ public class HomeController {
 		session.setAttribute("game1_highscore", 0);
 		session.setAttribute("game2_highscore", 0);
 		session.setAttribute("game3_highscore", 0);
-		session.setAttribute("game4_highscore", 0);
+		session.setAttribute("game4_highscore", 1000);
 		
 		session.setAttribute("user", user);
 				
