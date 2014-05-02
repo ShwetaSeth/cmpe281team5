@@ -8,18 +8,11 @@ String myColor = (String)session.getAttribute("color");
 	myColor = "red";
   }  
 %> 
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>What's Your Tech?</title>
-	<div>
-<c:if test="${topscoreChecked ne 'false' }">
-<label>Highest Score</label><input type="text" value = "${highScore}" name = "highScore"/>
-</c:if>
-</div>	
-
-	
-	<link href="<c:url value="/resources/sample.css" />"  rel="stylesheet" type="text/css"  />
+<title>What's Your Tech?</title>
+<link href="<c:url value="/resources/sample.css" />"  rel="stylesheet" type="text/css"  />
 
 <script language="javascript" type="text/javascript">
 
@@ -116,6 +109,13 @@ function load(){
 </head>
 <body onload="load()">
 	
+	<div>
+		<c:if test="${topscoreChecked ne 'false' }">
+			<font size=3 style="position: absolute; left:30px; top:30px"> Highest Score: "${highScore}"  </font>
+		</c:if>
+	</div>	
+	
+		
 	<font size=3 style="position: absolute; right:30px; top:30px"> Welcome <%=username %> | <a href = "signout"> Sign out</a> </font> <br>
 	<font size=3 style="position: absolute; right:30px; top:50px"> <a href = "profile" id="back"> Back </a> </font>
 	

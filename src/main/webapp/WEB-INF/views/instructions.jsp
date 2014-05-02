@@ -1,7 +1,9 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="US-ASCII">
 
 <title>Instructions</title> 
 <style>
@@ -63,8 +65,6 @@ margin:1px;
 }
 </style>
 
-
-</html>
 <body>
 <form >
 
@@ -107,15 +107,12 @@ margin:1px;
 </div>
 </div>
 
-</div> <!--main end-->
 <br>
 <div>
 <input type="button" 	value="Shuffle" id="shuffle" style ="width:300px;font-family:copper black;font-size:20px " />
 </div>
-</div>
-<div>
 
-<p>Tips -></p>
+<p>Tips -&gt; </p>
 <ul>
 <li>Start with the first row so that you get numbers 1, 2, 3 in order.</li>
 <li>Work on rows two and three simultaneously to complete the puzzle.</li>
@@ -124,6 +121,4 @@ margin:1px;
 
 </body>
 
-</html>
-</body>
 </html>

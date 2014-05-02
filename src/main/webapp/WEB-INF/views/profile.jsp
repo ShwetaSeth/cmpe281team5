@@ -19,57 +19,45 @@ function submitForm(cell){
 }
 
 </script>
-
 </head>
 
 <body>
-<div class="container">
-<div class = "content">
+	<div class="container">
+			<div id="navbar">
+				<jsp:include page="navbar.jsp"></jsp:include>
+			</div>
 
-
-<div id="navbar">
-		<jsp:include page="navbar.jsp"></jsp:include>
-</div>
-<h1> Welcome <%=username %></h1>
-
-<form id="form" method="get" action="play">
-
-	<input type="hidden" name="username" id="username" value="<%=username %>"/>	
-	<input type="hidden" name="game" id="game" />
-	
-<h1>Click on game to play game with customized preferences: </h1>
-
-<center>
-	<table style="margin-top:200px;">
-            <tr>
-				
+		<form id="form" method="get" action="play">
+			<input type="hidden" name="username" id="username" value="<%=username %>"/>	
+			<input type="hidden" name="game" id="game" />
+			<br>	
+			<center>
+				<font size="4" color="darkblue" ><b>Welcome <%=username %></b> </font> <br>
+				<font size="3" color="darkblue" >Click on the icon to play the game</font>
+			</center>
+			
+			<center>
+				<table style="margin-top:20px;text-align:center;">
+            	<tr>
 					<c:if test ='<%=favgame.equalsIgnoreCase("scramble") %>'>
-					<td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/scramble.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('scramble');"/></div> </td>   
+						<td width="450px" height="450px"> <div class="image">  <img src="<c:url value="/resources/scramble.png" />" alt="" height="400" width="400" style="border-radius:20px;" onclick="submitForm('scramble');"/></div> </td>   
 					</c:if>
 				
-				
-					<c:if test ='<%=favgame.equalsIgnoreCase("WhatsYourTech") %>'>t>
-					<td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/icon.png" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('WhatsYourTech');"/></div> </td>   
+					<c:if test ='<%=favgame.equalsIgnoreCase("WhatsYourTech") %>'>
+						<td width="450px" height="450px"> <div class="image">  <img src="<c:url value="/resources/icon.png" />" alt="" height="400" width="400" style="border-radius:20px;" onclick="submitForm('WhatsYourTech');"/></div> </td>   
 					</c:if>
 				
-				
-				
-					<c:if test ='<%=favgame.equalsIgnoreCase("memory") %>'>t>
-					 <td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/memory.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('memory');" /></div> </td>   
-					</c:if>
-				
-				
-			
-					<c:if test ='<%=favgame.equalsIgnoreCase("Puzzler") %>'>t>
-					<td width="250px" height="250px"> <div class="image">  <img src="<c:url value="/resources/Puzzler1.jpg" />" alt="" height="200" width="200" style="border-radius:20px;" onclick="submitForm('Puzzler');"/></div> </td>   
+					<c:if test ='<%=favgame.equalsIgnoreCase("memory") %>'>
+						 <td width="450px" height="450px"> <div class="image">  <img src="<c:url value="/resources/memory.jpg" />" alt="" height="400" width="400" style="border-radius:20px;" onclick="submitForm('memory');" /></div> </td>   
 					</c:if>
 			
-			</tr>
-	</table>
-	</center>
-
-</form>
-</div>
-</div>
+					<c:if test ='<%=favgame.equalsIgnoreCase("Puzzler") %>'>
+						<td width="450px" height="450px"> <div class="image">  <img src="<c:url value="/resources/Puzzler1.jpg" />" alt="" height="400" width="400" style="border-radius:20px;" onclick="submitForm('Puzzler');"/></div> </td>   
+					</c:if>
+				</tr>
+				</table>
+			</center>
+		</form>
+	</div>
 </body>
 </html>

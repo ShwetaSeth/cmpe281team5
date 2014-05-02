@@ -1,49 +1,40 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <html>
 <head>
 	<title>Home</title>
 	<link href="<c:url value="/resources/sample.css" />"  rel="stylesheet" type="text/css"  />
+	
+	<script language="javascript" type="text/javascript">
+		function signup(){
+			document.location.href("signup");
+		}
+	</script>
+
 </head>
 
 <body>
 	<form  class="box login" id="form1" method="post" action="home">
 		
-		<h1>CMPE 281 Team 5 </h1>
-	
-		<fieldset class="boxBody">
-			<label>Username</label> <input type="text" tabindex="1"
-				placeholder="Enter Username"  name="username">
-			<!-- <label><a href="#" class="rLink" tabindex="5">Forget your password?</a>Password</label> -->
-			<label>Password</label>
-			<input type="password" placeholder="Enter Password" tabindex="2" name="password">
+		<fieldset class="boxBody" style="position:relative;top:40px;margin:0 auto;width:300px;height:400px;text-align:center;">
+			<legend style="text-align:left;Font">
+				CMPE 281 Team 5
+			</legend>
+			
+			<input type="text" style="margin-top:30px;height:40px;width:250px;padding:10px;" tabindex="1" placeholder="Enter Username"  name="username" id="username" />
+			<input type="password" style="margin-top:20px;height:40px;width:250px;padding:10px;" tabindex="2" placeholder="Enter Password" name="password" id="password" />
+			<div style="margin-top:20px;position:relative;right:30px;text-align:right;">
+				<font color="red" size="2">${message}</font>
+			</div>
+			<input type="submit" class="submit" style="margin-top:30px;background-color:#6E329D;border:1px solid #522675;border-radius:2px;width:200px;height:50px;font:20px arial,helvetica,clean,sans-serif;color:white;" value="Login" tabindex="3" />
+			<br>
+			<div style="margin:0 auto;height:1px;background-color:black;margin-top:30px;width:250px;">
+				<span style="background-color:white;position:relative;top:-0.6em;"> OR </span> 
+			</div>
+			<a href="signup"><input type="button" class="button" style="margin-top:30px;background-color:#0B70BE;border:1px solid #0b5fa2;border-radius: 2px;width:200px;height:50px;font:20px arial,helvetica,clean,sans-serif;color:white;" value="Create New Account" tabindex="4" /></a>							
 		</fieldset>
-		
-		<footer>
-			<label>New User?</label> <a href = "signup"><label>Register,</label></a>
-			<!-- <label><input type="checkbox" tabindex="3">Keep me logged in</label>-->
-			<input type="submit" class="btnLogin" value="Login" tabindex="3">
 			
-			
-		</footer>
 	</form>
 	<footer id="main"> </footer>
 </body>
-
-
-
-
-
-<%-- <body>
-<div><b><font size="8"> CmpE281 </font></b></div>
-<div><b><font size="4">Team5</font></b></div>
-<div><b><font size="4" style="position: absolute; right: 50px; top: 150px">Sign In</font></b></div><br>
-<form id="form1" method="post" action="home">
-	<div class="form-row"> <font color="red" size="2" style="position: absolute; right: 50px; top: 180px">${message}</font></div><br><br>
-	<div class="form-row"><span class="label"><font size="3" style="position: absolute; right: 230px; top:203px"> Username </font> </span><input style="position: absolute; right: 50px; top: 200px" type="text" name="username" /></div><br>
-	<div class="form-row"><span class="label"><font size="3" style="position: absolute; right: 230px; top: 233px"> Password </font> </span><input style="position: absolute; right: 50px; top: 230px" type="password" name="password" /></div><br>
-	<div class="form-row"><font size="2" style="position: absolute; right: 120px; top: 265px"> New User? <a href = "signup">Register</a> </font> <input class="submit" type="submit" value="Sign In" style="position: absolute; right: 50px; top: 260px"></div><br>
-</form>
-</body> --%>
 
 </html>

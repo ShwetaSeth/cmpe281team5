@@ -78,12 +78,13 @@ window.setTimeout( "timer()", 1000 );
 <div>
 	
 
-<div align="center">
 
 <form name="memform" method="post" action="memoryans">
-<c:if test="${topscoreChecked ne 'false' }">
-<label>Highest Score</label><input type="text" value = "${highScore}" name = "highScore"/>
-</c:if>
+	
+<div align="center">
+	<c:if test="${topscoreChecked ne 'false' }">
+	<label>Highest Score</label><input type="text" value = "${highScore}" name = "highScore"/>
+	</c:if>
 </div>
 
 <input type="hidden" name="pic" id="pic" value="${pic}"/>

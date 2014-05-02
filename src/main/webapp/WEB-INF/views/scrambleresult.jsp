@@ -28,9 +28,9 @@ String myColor = (String)session.getAttribute("color");
 <h1>Your Results are</h1>
 
 <form name="formc" method="get" action="scramble">
-<label>Current Score</label><input type="text" readonly="readonly" value = ${currScore} name = "currScore"/>
+<label>Current Score</label><input type="text" readonly="readonly" value = "${currScore}" name = "currScore"/>
 <br>
-<label>Previous Score</label><input type="text" readonly="readonly" value = ${prevScore} name = "prevScore"/>
+<label>Previous Score</label><input type="text" readonly="readonly" value = "${prevScore}" name = "prevScore"/>
 <input type = "submit" value = "Play again !!"/>
 </form>
 </div>

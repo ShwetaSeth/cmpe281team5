@@ -105,13 +105,13 @@ Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid 
 </table>
 </center>
 <label>Enter the words</label><input type="text" id = "word" name = "word"><button name="Submit" value="Submit"  onclick="load()">Submit</button>
-<label>Score</label><input type="text" value = ${score} name = "word"/>
+<label>Score</label><input type="text" value = "${score}" name = "word"/>
 
 
 </form>	
 <hr>  
 <form action="results" name="formb" method="post">  
-<input type="hidden" value = ${score} name = "score"/>
+<input type="hidden" value = "${score}" name = "score"/>
 <input type="submit" name="results" value="View Results" style="display:none;">   
 </form>  
 <script>  

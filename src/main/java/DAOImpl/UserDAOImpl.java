@@ -62,11 +62,7 @@ public class UserDAOImpl implements UserDAO {
 			else{
 				result="Error:::Username '" + username + "' already taken.";
 			}
-		}catch(Exception e){
-			e.printStackTrace();
-		
-		}
-		finally{
+		}finally{
 			connection.close();
 		}
 		return result;
@@ -125,10 +121,7 @@ public class UserDAOImpl implements UserDAO {
 					result = "Error:::User does not exist";
 				}
 			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		finally{
+		}finally{
 			connection.close();
 		}
     	return result;
@@ -155,8 +148,6 @@ public class UserDAOImpl implements UserDAO {
 				user.setGame3_highscore(rslt.getInt("game3_highscore"));
 				user.setGame4_highscore(rslt.getInt("game4_highscore"));
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		finally{
 			connection.close();
@@ -165,9 +156,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	
-	public int getHighestScore(User user,String game)
-	{
-		String result = "";
+	public int getHighestScore(User user,String game) throws SQLException {
     	String username = (user.getUsername()).toLowerCase();
     	int highScore = -1;
 
@@ -193,42 +182,35 @@ public class UserDAOImpl implements UserDAO {
 			
 		
 			return highScore;
-			}catch(Exception e){
-				e.printStackTrace();
-			
-			}
-	
-			return -1;
 		}
-	
-	public String update(User user)
-	{
-		Connection connection;
-		try{
-			connection = dataSource.getConnection();
-		
-			String query ="UPDATE users SET username = ?,password=?,fname=?,lname=?,bgcolor=?,topscoreChecked=?,favgame=? WHERE username = ? ";
-			pstmt = connection.prepareStatement(query);
-			pstmt.setString(1, user.getUsername());
-			pstmt.setString(2, user.getPassword());
-			pstmt.setString(3, user.getFname());
-			pstmt.setString(4, user.getLname());
-			pstmt.setString(5, user.getBgcolor());
-			pstmt.setString(6, user.getTopscoreChecked());
-			pstmt.setString(7, user.getFavgame());
-			pstmt.setString(7, user.getUsername());
-			
-			pstmt.executeUpdate();
+		finally{
 			connection.close();
-			return "success";
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		return "failure";
-		
+		}				
 	}
 	
+		public String update(User user) throws SQLException {
+			String result = "failure";
+			try{
+				connection = dataSource.getConnection();
+		
+				String query ="UPDATE users SET username = ?,password=?,fname=?,lname=?,bgcolor=?,topscoreChecked=?,favgame=? WHERE username = ? ";
+				pstmt = connection.prepareStatement(query);
+				pstmt.setString(1, user.getUsername());
+				pstmt.setString(2, user.getPassword());
+				pstmt.setString(3, user.getFname());
+				pstmt.setString(4, user.getLname());
+				pstmt.setString(5, user.getBgcolor());
+				pstmt.setString(6, user.getTopscoreChecked());
+				pstmt.setString(7, user.getFavgame());
+				pstmt.setString(8, user.getUsername());
+			
+				pstmt.executeUpdate();
+				result = "success";
+				return result;
+			}
+			finally{
+				connection.close();
+			}		
 	}
-
+	
+}

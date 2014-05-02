@@ -267,7 +267,6 @@ function FindColumn(left) {
 				<div id="empty" class="boxes" style="top: 200px; left: 300px"></div>
 			</div>
 			
-		</div>
 		<div>
 		<input type="button" value="Start" id="shuffle" />
 			<!--  <input type="hidden" value="Start" name="action" />-->

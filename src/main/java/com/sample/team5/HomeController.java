@@ -132,8 +132,6 @@ public class HomeController {
 		User user = new User();
 		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
 		
-	
-		
 		String message = con.signIn(request,session);	
 		if(message.substring(0, 7).equals("Success")){
 			
@@ -146,7 +144,6 @@ public class HomeController {
 			session.setAttribute("color",user.getBgcolor());
 			session.setAttribute("favgame", user.getFavgame());
 			session.setAttribute("topscoreChecked", user.getTopscoreChecked());
-	
 			
 			session.setAttribute("user", user);
 			
@@ -290,8 +287,6 @@ public class HomeController {
 	public String editProfile(HttpServletRequest request, HttpSession session, Model model) throws SQLException{	
 		
 		User user = new User();
-		
-		
 		user = (User)session.getAttribute("user");
 		
 		if(user== null)
@@ -329,23 +324,20 @@ public class HomeController {
 		user.setTopscoreChecked(topscoreChecked);
 		user.setFavgame(request.getParameter("favgame"));
 		
+		userDAO.update(user);
 		
-		String result = userDAO.update(user);
+		String favgame = request.getParameter("favgame");
+		String color = request.getParameter("colors");
+		uname = request.getParameter("username");
 		
+		System.out.println(color);
+		session.setAttribute("username", uname);
+		session.setAttribute("color",color);
+		session.setAttribute("favgame", favgame);
+		session.setAttribute("topscoreChecked", topscoreChecked);
 		
-			String favgame = request.getParameter("favgame");
-			String color = request.getParameter("colors");
-			uname = request.getParameter("username");
+		session.setAttribute("user", user);
 			
-			System.out.println(color);
-			session.setAttribute("username", uname);
-			session.setAttribute("color",color);
-			session.setAttribute("favgame", favgame);
-			session.setAttribute("topscoreChecked", topscoreChecked);
-			
-			session.setAttribute("user", user);
-		
-		
-			return "redirect:profile";
+		return "redirect:profile";
 	}
 }
