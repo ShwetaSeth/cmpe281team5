@@ -27,21 +27,24 @@ public class PuzzlerDAOImpl implements PuzzlerDAO {
 		this.dataSource = dataSource;
 	}
 
-
-	public void setGameScore(Puzzler puzzler) {
+    
+	
+    public void setGameScore(Puzzler puzzler) {
+    	System.out.println("entering setgame" );
 		String username = puzzler.getUsername();
-		username = "abc";
+		System.out.println("user:" + username);
+		//username = "abc";
 		Connection connection = null;
 		
 		//int score = puzzler.getScore();
           int score = puzzler.getMoves();
+          System.out.println("score" + score);
           
 		try{
 			connection = dataSource.getConnection();
 			stmt = connection.createStatement();
 			
-			
-			String query = "INSERT INTO puzzler ( username,Score, Time, Moves ) VALUES (?,?,?,?)";// is this right?
+			String query = "INSERT INTO puzzler ( username,Score, Time, Moves ) VALUES (?,?,?,?)";
 			pstmt= connection.prepareStatement(query);
 			pstmt.setString(1, username);
 			pstmt.setInt(2, 3);
@@ -49,7 +52,31 @@ public class PuzzlerDAOImpl implements PuzzlerDAO {
 			pstmt.setInt(4, puzzler.getMoves());
 			pstmt.executeUpdate();
 			
-		
+			System.out.println("inserted");
+			
+			//new
+			String query1 = "SELECT game4_highscore FROM users WHERE username = '"+ username + "'";
+			pstmt = connection.prepareStatement(query1);
+			pstmt.executeUpdate();
+			
+			
+			int highScore = rslt.getInt("game4_highscore");
+			System.out.println("highscore in db"+highScore);
+			
+			String query2 = "SELECT MIN(Moves) FROM puzzler"; // WHERE username = '"+ username + "'";
+			pstmt = connection.prepareStatement(query2);
+			pstmt.executeUpdate();
+			
+			
+			
+			if(score>highScore)
+			{
+			String	query3 = "UPDATE users SET game4_highscore = "+score+" where username = '"+ username + "'";
+				pstmt = connection.prepareStatement(query3);
+				pstmt.executeUpdate();
+				
+			}
+			
 		}
 		catch(Exception e){
 			e.printStackTrace();

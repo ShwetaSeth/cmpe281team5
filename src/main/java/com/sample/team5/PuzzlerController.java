@@ -74,7 +74,15 @@ public class PuzzlerController {
 		else{
 			Statement stmt = conn.createStatement();
 			
-			String query = "CREATE TABLE puzzler (userid INT NULL, username VARCHAR(15) NOT NULL, Score INT NULL, "+
+			/*String query = "CREATE TABLE puzzler (userid INT NULL AUTO_INCREMENT, username VARCHAR(15) NOT NULL, Score INT NULL, "+
+					" Time INT NULL, Moves INT NULL, PRIMARY KEY (userid), CONSTRAINT CONS_USERNAME " +
+					"FOREIGN KEY (username) REFERENCES users (username) ON DELETE CASCADE ON UPDATE CASCADE)";*/
+			
+			/*String query = "CREATE TABLE puzzler (username VARCHAR(15) NOT NULL, Score INT NULL, "+
+					" Time INT NULL, Moves INT NULL, PRIMARY KEY (username), CONSTRAINT CONS_USERNAME " +
+					"FOREIGN KEY (username) REFERENCES users (username) ON DELETE CASCADE ON UPDATE CASCADE)";*/
+			
+			String query = "CREATE TABLE puzzler (userid INT NOT NULL AUTO_INCREMENT,username VARCHAR(15) NOT NULL, Score INT NULL, "+
 					" Time INT NULL, Moves INT NULL, PRIMARY KEY (userid), CONSTRAINT CONS_USERNAME " +
 					"FOREIGN KEY (username) REFERENCES users (username) ON DELETE CASCADE ON UPDATE CASCADE)";
 			
@@ -94,14 +102,22 @@ public class PuzzlerController {
 		
 		PuzzlerController con = (PuzzlerController)appContext.getBean("puzzlerController");	
 		Puzzler puzzler = new Puzzler();
-				
+		//new--
+		String username = (String) session.getAttribute("username");
+		System.out.println("user:" + username);
+		puzzler.setUsername(username);
+		//end of new--
 		//String action = request.getParameter("action");
-		String time = request.getParameter("time");
+		//String time = request.getParameter("time");
 		String moves = request.getParameter("moves");
 		puzzler.setMoves(Integer.parseInt(moves));
 		PuzzlerDAO puzzlerDAO = (PuzzlerDAO)appContext.getBean("puzzlerDAOImpl");
 		puzzlerDAO.setGameScore(puzzler);
+		
+		session.setAttribute("highScore", moves);
+		System.out.println("Moves::" + moves);
 		String highScore = request.getParameter("highScore");
+		System.out.println("Highscore" + highScore);
 		model.addAttribute("highScore",highScore);
 		
 		//System.out.println("action" + action);
@@ -113,9 +129,11 @@ public class PuzzlerController {
 		PuzzlerDAO puzzlerDAO = (PuzzlerDAO)appContext.getBean("puzzlerDAOImpl");
 		Puzzler puzzler = new Puzzler();
 		//System.out.println(request.getParameter("User"));
-		puzzler.setMoves(Integer.parseInt(request.getParameter("User")));
-	
+		//new----
 		
+	    //old--
+		puzzler.setMoves(Integer.parseInt(request.getParameter("User")));
+			
 		int Score=puzzler.getMoves();
 		
 		return Score;
