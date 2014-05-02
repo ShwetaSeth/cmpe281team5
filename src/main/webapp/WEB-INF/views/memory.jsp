@@ -76,14 +76,15 @@ window.setTimeout( "timer()", 1000 );
 <body bgcolor="<%=myColor %>">
 
 <div>
-<c:if test="${topscoreChecked ne 'false' }">
-<label>Highest Score</label><input type="text" value = ${highScore} name = "highScore"/>
-</c:if>
-</div>	
+	
 
 <div align="center">
 
 <form name="memform" method="post" action="memoryans">
+<c:if test="${topscoreChecked ne 'false' }">
+<label>Highest Score</label><input type="text" value = "${highScore}" name = "highScore"/>
+</c:if>
+</div>
 
 <input type="hidden" name="pic" id="pic" value="${pic}"/>
 
@@ -109,6 +110,7 @@ window.setTimeout( "timer()", 1000 );
 
 </div>
 </fieldset>
+
 </form>
 </div>
 
