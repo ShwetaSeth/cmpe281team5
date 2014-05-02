@@ -50,7 +50,11 @@ public class PuzzlerController {
 
 		user = (User)session.getAttribute("user");
 		int highScore= user.getGame4_highscore();
-		model.addAttribute("highScore",highScore);
+		if(highScore == 1000)
+			model.addAttribute("highScore","high score not available");
+		
+		else
+			model.addAttribute("highScore",highScore);
 
 		con.createPuzzlerTable();
 		return "Puzzler";

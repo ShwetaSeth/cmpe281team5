@@ -158,7 +158,7 @@ public class ScrambleController {
 	}
 	
 	@RequestMapping(value = "results", method = RequestMethod.POST)
-	public String getResult(HttpServletRequest request, HttpSession session, Model model) {		
+	public String getResult(HttpServletRequest request, HttpSession session, Model model) throws SQLException {		
 		ScrambleController con = (ScrambleController)appContext.getBean("scrambleController");		
 		int prevScore = con.getResult(request,session);	
 		String score = request.getParameter("score");
@@ -169,8 +169,10 @@ public class ScrambleController {
 		return "scrambleresult";
 	}
 	
-	public int getResult(HttpServletRequest request, HttpSession session) {
+	public int getResult(HttpServletRequest request, HttpSession session) throws SQLException {
 		ScrambleDAO scrambleDAO = (ScrambleDAO)appContext.getBean("scrambleDAOImpl");
+		UserDAO userDAO = (UserDAO)appContext.getBean("userDAOImpl");
+		User user = new User();
 		Scramble scramble = new Scramble();
 		
 		String username = (String) session.getAttribute("username");
@@ -180,6 +182,10 @@ public class ScrambleController {
 		
 		
 		int prevScore = scrambleDAO.getResult(scramble);
+		user = userDAO.getUser(username);
+		
+		session.setAttribute("user", user);
+		
 		
 		
 		return prevScore;
