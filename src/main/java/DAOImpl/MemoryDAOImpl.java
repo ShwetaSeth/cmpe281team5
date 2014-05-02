@@ -16,6 +16,7 @@ public class MemoryDAOImpl implements MemoryDAO{
 	PreparedStatement pstmt = null;
     Statement stmt = null;
     ResultSet rslt = null;
+    int rs=0;
 
 	public DataSource getDataSource() {
 		return dataSource;
@@ -29,6 +30,7 @@ public class MemoryDAOImpl implements MemoryDAO{
 	public int getScore(Memory memory) {
 		
 		int result = 0;
+		ResultSet rs = null;
 		String player = memory.getPlayerId();
 		int curr=memory.getScore();
 		int finalscore=memory.getScore();
@@ -40,6 +42,7 @@ public class MemoryDAOImpl implements MemoryDAO{
 		    Statement stmt = null;
 		    ResultSet rslt = null;
 		    int prevmax=0;
+		    int highscore=0;
 			connection = dataSource.getConnection();
 			stmt = connection.createStatement();
 			String query  = "SELECT MAX(Score) as max from memscore where Player_id='"+player+"'" ;
@@ -73,7 +76,22 @@ public class MemoryDAOImpl implements MemoryDAO{
 				pstmt.setInt(4, memory.getPicId());
 				pstmt.executeUpdate();
 				System.out.println(query);
-			
+				
+				String query2 = "SELECT Score FROM memscore where Outcome='W' and Player_id='"+player+"' order by Game_id desc";
+				System.out.println(query2);
+				PreparedStatement statement = connection.prepareStatement(query2); 
+				//statement.setMaxRows(1); 
+				rslt = statement.executeQuery();
+				if(rslt.next())
+				{
+					highscore = rslt.getInt("Score");
+				}	
+				System.out.println(highscore);
+				String query3 = "UPDATE users SET game3_highscore='"+highscore+"' where username='"+player+"'";
+				System.out.println(query3);
+				PreparedStatement statement2 = connection.prepareStatement(query3); 
+				statement2.executeUpdate();
+				
 			connection.close();
 		}catch(Exception e){
 			e.printStackTrace();

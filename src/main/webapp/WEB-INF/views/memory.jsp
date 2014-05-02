@@ -14,6 +14,12 @@
 background:url(<c:url value="/resources/wood.jpg" />); 
  background-size:100%;
     }
+    
+ input[type="text"]
+{
+    background: transparent;
+    border: none;
+}   
 
 </style>
 <%  
@@ -88,11 +94,11 @@ window.setTimeout( "timer()", 1000 );
 <input type="hidden" name="pic" id="pic" value="${pic}"/>
 
 <input type="hidden" name="picid" id="picid" value="${picid}"/>
-<fieldset  id="bgpic" style="width:50%;">
+<fieldset  id="bgpic" style="width:50%;height:500%;">
 
 
-<input  align="middle" type="text" readonly="readonly" name="mins" id="mins" size="1" style="border:0px solid black;text-align:right;font-size: 18pt;"><span style="color:#ffffff;font-size: 18pt;">:</span>
-<input type="text" id="secs" readonly="readonly" name="secs" size="1" style="border:0px solid black;font-size: 18pt;">  
+<input  align="middle" type="text" readonly="readonly" name="mins" id="mins" size="1" style="border:0px solid black;text-align:right;font-size: 22pt;color:red;"><span style="color:red;font-size: 22pt;">:</span>
+<input  type="text" id="secs" readonly="readonly" name="secs" size="1" style="border:0px solid black;font-size: 22pt;color:red;">  
 
 
 <p><span style="font-size:24px;font-weight:bold;color:#ffffff;">Instructions:</span>&nbsp;<span style="color:#ffffff;font-size:18px;"> Memorize the words in the picture in a time of 10 seconds!Test your memory by remembering all the words.</span> </p>
