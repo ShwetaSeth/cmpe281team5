@@ -76,7 +76,14 @@ window.setTimeout( "timer()", 1000 );
 
 }  
 //-->  
-</script></head>  
+</script></head> 
+<div id="navbar">
+				<jsp:include page="navbar.jsp"></jsp:include>
+</div> 
+ <center>
+				<font size="4" color="darkblue" ><b>Welcome, ${user.fname}</b> </font> <br>
+				<font size="3" color="darkblue" >Memory Game</font>
+</center>
  
 
 <body bgcolor="<%=myColor %>">

@@ -138,13 +138,18 @@ public class HomeController {
 			
 			model.addAttribute("username", request.getParameter("username"));
 			uname = request.getParameter("username");	
-
+			
 			session.setAttribute("username", uname);
 			user = userDAO.getUser(uname);
 			
 			session.setAttribute("color",user.getBgcolor());
 			session.setAttribute("favgame", user.getFavgame());
 			session.setAttribute("topscoreChecked", user.getTopscoreChecked());
+			session.setAttribute("game1_highscore", user.getGame1_highscore());
+			session.setAttribute("game2_highscore", user.getGame2_highscore());
+			session.setAttribute("game3_highscore", user.getGame3_highscore());
+			session.setAttribute("game4_highscore", user.getGame4_highscore());
+			
 			
 			session.setAttribute("user", user);
 			

@@ -53,11 +53,8 @@ public class ScrambleController {
 		
 		model.addAttribute("score", "0");
 		
-	
-		String username = (String) session.getAttribute("username");
-		String game = (String) session.getAttribute("favgame");
-		user.setUsername(username);
-		int highScore= userDAO.getHighestScore(user, game);
+		user = (User)session.getAttribute("user");
+		int highScore= user.getGame1_highscore();
 		model.addAttribute("highScore",highScore);
 		
 		

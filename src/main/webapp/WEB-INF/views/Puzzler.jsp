@@ -228,7 +228,14 @@ function FindColumn(left) {
 
 </script>
 </head>
+<div id="navbar">
+				<jsp:include page="navbar.jsp"></jsp:include>
+</div>
 
+ <center>
+				<font size="4" color="darkblue" ><b>Welcome, ${user.fname}</b> </font> <br>
+				<font size="3" color="darkblue" >Puzzler</font>
+</center>
 <body bgcolor="<%=myColor %>" >
 
 

@@ -106,6 +106,9 @@ function load(){
 </script>
 
 </head>
+<div id="navbar">
+				<jsp:include page="navbar.jsp"></jsp:include>
+</div>
 <body onload="load()">
 	
 	<div>

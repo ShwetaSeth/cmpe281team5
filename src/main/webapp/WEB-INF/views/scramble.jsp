@@ -75,9 +75,19 @@ window.setTimeout( "timer()", 1000 );
 }  
 //-->  
 </script></head>  
- 
+<div id="navbar">
+				<jsp:include page="navbar.jsp"></jsp:include>
+				
+</div>
+ <center>
+				<font size="4" color="darkblue" ><b>Welcome, ${user.fname}</b> </font> <br>
+				<font size="3" color="darkblue" >Scramble</font>
+</center>
 
 <body bgcolor="<%=myColor %>">
+<div id = "content">
+<h3>Enter any cloud related words seen in the grid - hortizonally, vertically, or backwards !! Have fun !!</h3>
+
 
 <form  name="forma" method="post" action="scramble">
 Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid black;text-align:right">:<input type="text" name="secs" size="1" style="border:0px solid black">  
@@ -85,7 +95,7 @@ Time Remaining: <input type="text" name="mins" size="1" style="border:0px solid 
 
 <div>
 <c:if test="${topscoreChecked ne 'false' }">
-<label>Highest Score</label><input type="text" value = "${highScore}" name = "highScore"/>
+<label>Highest Score :</label><input type="text" value = "${highScore}" name = "highScore"/>
 </c:if>
 </div>	
 
@@ -124,6 +134,6 @@ timer(); // call timer() after page is loaded
 <input type="submit" name="results" value="show results" style="display:none;">   
 </form>  
  -->
- 
+ </div>
 </body>
 </html>

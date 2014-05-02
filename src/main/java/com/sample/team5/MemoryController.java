@@ -58,10 +58,10 @@ public class MemoryController {
 		String pic="wc"+num+".jpg"; 
 		model.addAttribute("pic",pic );
 		model.addAttribute("picid",num );
-		String username = (String) session.getAttribute("username");
-		String game = (String) session.getAttribute("favgame");
-		user.setUsername(username);
-		int highScore= userDAO.getHighestScore(user, game);
+		
+		user = (User)session.getAttribute("user");
+		
+		int highScore= user.getGame3_highscore();
 		model.addAttribute("highScore",highScore);
 		
 		return "memory";

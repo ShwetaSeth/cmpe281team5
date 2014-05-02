@@ -31,7 +31,7 @@ function submitForm(cell){
 			<input type="hidden" name="game" id="game" />
 			<br>	
 			<center>
-				<font size="4" color="darkblue" ><b>Welcome <%=username %></b> </font> <br>
+				<font size="4" color="darkblue" ><b>Welcome, ${user.fname}</b> </font> <br>
 				<font size="3" color="darkblue" >Click on the icon to play the game</font>
 			</center>
 			
