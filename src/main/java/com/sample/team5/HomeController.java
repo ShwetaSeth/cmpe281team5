@@ -72,7 +72,7 @@ public class HomeController {
 						 		"game1_highscore INT NULL DEFAULT 0 ," +					  
 						 		"game2_highscore INT NULL DEFAULT 0 ," +
 						 		"game3_highscore INT NULL DEFAULT 0 ," +
-						 		"game4_highscore INT NULL DEFAULT 0 ," +
+						 		"game4_highscore INT NULL DEFAULT 1000 ," +
 						 		"PRIMARY KEY (username) ," +
 						 		"UNIQUE INDEX username_UNIQUE (username ASC) )";
 				stmt.executeUpdate(query);
